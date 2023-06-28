@@ -4,7 +4,7 @@ from src.services.get.getPredios import getPredios
 
 main = Blueprint('index_blueprint', __name__)
 
-@main.route('/')
+@main.route('/getPredios')
 def principal():
     try:
         predios = getPredios()
