@@ -6,43 +6,6 @@
     font-family: 'Open Sans', sans-serif;
 }
 
-.boton_acciones {
-    background-color: #007bff;
-    /* Color de fondo azul genérico */
-    color: white;
-    /* Color del texto */
-    padding: 7px 30px;
-    /* Espaciado interno */
-    font-size: 14px;
-    /* Tamaño de fuente */
-    border: none;
-    /* Sin borde */
-    cursor: pointer;
-    /* Cursor estilo puntero */
-    margin-bottom: 10px;
-    /* Margen inferior*/
-    width: 250px; /* Ancho del botón */
-}
-
-.boton_acciones:hover {
-    background-color: #0069d9;
-    /* Color de fondo al pasar el cursor */
-}
-
-.boton_acciones:active {
-    background-color: #0056b3;
-    /* Color de fondo al hacer clic */
-}
-
-.aviso-predio {
-    font-size: 1.25rem;
-    margin: 0.2rem;
-}
-
-.aviso-cajachica {
-    font-size: 1.25rem;
-    margin: 0.2rem;
-}
 
 /*X buscador */
 .close-btn {
@@ -53,106 +16,6 @@
     cursor: pointer;
 }
 
-section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    background-color: #e9e9e9;
-    background-position: center;
-    background-size: cover;
-}
-
-.section0 {
-    width: 95%;
-    /*ANCHO*/
-}
-
-.section1 {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    min-height: 25vh;
-    /*ALTURA*/
-    background-color: var(--color-fondo);
-    border: 1px solid var(--blue-navy-clrclr);
-    border-radius: 5px;
-}
-
-.section2 {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    min-height: 10vh;
-    background-color: var(--color-fondo);
-    border: 1px solid var(--blue-navy-clrclr);
-    border-radius: 5px;
-}
-
-.section3 {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    min-height: 10vh;
-    background-color: var(--color-fondo);
-    border: 1px solid var(--blue-navy-clrclr);
-    border-radius: 5px;
-}
-
-.flexy {
-    display: flex;
-}
-
-.w1 {
-    width: 100px;
-}
-
-.w2 {
-    width: 200px;
-}
-
-.w3 {
-    width: 300px;
-}
-
-.w4 {
-    width: 400px;
-}
-
-.w5 {
-    width: 500px;
-}
-
-.text-0 {
-    font-size: 1.4rem;
-    padding-left: 0;
-    margin: 0.7rem;
-}
-
-.text-1 {
-    font-size: 1.25rem;
-    margin: 0.2rem;
-
-}
-
-.text-2 {
-    font-size: 1.10rem;
-    margin: 0.2rem;
-}
-
-.text-3 {
-    font-size: 0.95rem;
-    margin: 0.2rem;
-}
-
-.tab-1 {
-    margin-left: 1rem;
-}
-
-.tab-2 {
-    margin-left: 2rem;
-}
-
-.tab-3 {
-    margin-left: 3rem;
-}
 
 .wrapper {
     width: 260px;
@@ -250,12 +113,6 @@ li.selected {
     background: #f2f2f2;
 }
 
-.text-estilo-principal {
-    display: flex;
-    height: 60px;
-    width: 250px;
-    align-items: center;
-}
 
 .wrapper1 {
     width: 260px;
@@ -336,3 +193,107 @@ li.selected {
 li.selected {
     background: #f2f2f2;
 }
+
+
+/*TEXTO*/
+
+.texto-contenedor-principal {
+    display: flex;
+    height: 60px;
+    width: 250px;
+    align-items: center;
+}
+
+.tabulador-izq {
+    margin-left: 1rem;
+}
+
+/*AVISO*/
+.aviso-predio {
+    font-size: 1.25rem;
+    margin: 0.2rem;
+}
+
+
+/*SECCION SUPERIOR*/
+.seccion-superior-borde {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    min-height: 25vh;
+    /*ALTURA*/
+    background-color: var(--color-fondo);
+    border: 1px solid var(--blue-navy-clrclr);
+    border-radius: 5px;
+    width: 95%;
+}
+
+/*SECCIÓN DE LA TABLA Y TABLA*/
+
+/*INCLUYE TODA LA SECCIÓN Y LA TABLA INTERNA*/
+.seccion-tabla-borde {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    min-height: 50vh;
+    /*TAMAÑO MIN DE LA SECCION*/
+    background-color: rgb(244, 244, 244);
+    border: 1px solid var(--blue-navy-clrclr);
+    border-radius: 5px;
+    width: 95%;
+    /*% DEL ANCHO*/
+
+    display: flex;
+    flex-direction: column;
+    /*Establece la dirección principal del contenedor a vertical, para que los elementos se apilen uno encima del otro.*/
+    justify-content: flex-start;
+    /*VERTICAL Alinea los elementos, de este contenedor,
+     en el eje principal (vertical) hacia la parte superior del contenedor.*/
+    align-items: center;
+    /*HORIZONTAL Centra los elementos, de este contenedor, 
+    en el eje transversal (horizontal) dentro del contenedor.*/
+
+}
+
+.container-tabla {
+    display: flex;
+    justify-content: center;
+}
+
+.tabla-principal {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.tabla-principal table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabla-principal th,
+.tabla-principal td {
+    padding: 8px;
+    text-align: center;
+    /* Cambio a centrado */
+    border-bottom: 1px solid #ddd;
+}
+
+.tabla-principal th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.tabla-principal tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.cuadrado-registro-casa {
+    width: 20px;
+    height: 20px;
+    background-color: #717171;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+/**/

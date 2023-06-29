@@ -1,0 +1,10 @@
+.seccion-registrarpredio-borde {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  min-height: 50vh;
+  /*ALTURA*/
+  background-color: var(--color-fondo);
+  border: 1px solid var(--blue-navy-clrclr);
+  border-radius: 5px;
+  width: 95%;
+}

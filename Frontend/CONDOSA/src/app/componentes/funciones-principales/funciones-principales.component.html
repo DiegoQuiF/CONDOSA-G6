@@ -1,0 +1,132 @@
+<div class="seccion-principal-fondo">
+  <div class="seccion-superior-borde">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-xs-4 col-sm-4 col-md-4">
+          <div style="display: flex;">
+            <div class="texto-contenedor-principal">
+              <p class="textoPricipal tabulador-izq">
+                <b>Predio</b>
+              </p>
+            </div>
+            <div>
+              <div class="wrapper" [ngClass]="{'active': isActivePredios}">
+                <div class="select-btn" (click)="toggleActivePredios()">
+                  <span>{{selectedItemPredios}}</span>
+                  <i class="uil uil-angle-down"></i>
+                </div>
+                <div class="content">
+                  <div class="search">
+                    <i class="uil uil-search"></i>
+                    <input type="text" placeholder="Buscar" [(ngModel)]="searchValuePredios"
+                      (keyup)="filterItemsPredios()">
+                    <span class="close-btn" (click)="closeComboboxPredios()">&times;</span>
+                  </div>
+                  <ul class="options">
+                    <li *ngFor="let item of filteredItemsPredios" (click)="selectItemPredios(item)"
+                      [ngClass]="{'selected': item === selectedItemPredios}">
+                      {{item}}
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="display: flex;">
+            <div class="texto-contenedor-principal">
+              <p class="textoPricipal tabulador-izq"><b>Periodo</b></p>
+            </div>
+            <div>
+              <div class="wrapper1" [ngClass]="{'active': isActiveMeses}">
+                <div class="select-btn1" (click)="toggleActiveMeses()">
+                  <span>{{selectedItemMeses}}</span>
+                  <i class="uil uil-angle-down"></i>
+                </div>
+                <div class="content1">
+                  <div class="search">
+                    <i class="uil uil-search"></i>
+                    <input type="text" placeholder="Periodo de la cuota" [(ngModel)]="searchValueMeses"
+                      (keyup)="filterItemsMeses()">
+                    <span class="close-btn" (click)="closeComboboxMeses()">&times;</span>
+                  </div>
+                  <ul class="options1">
+                    <li *ngFor="let item of filteredItemsMeses" (click)="selectItemMeses(item)"
+                      [ngClass]="{'selected': item === selectedItemMeses}">
+                      {{item}}
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="display: flex;">
+            <div class="texto-contenedor-principal">
+              <p class="textoPricipal tabulador-izq"><b>Presidente predio</b></p>
+            </div>
+            <div class="texto-contenedor-principal">
+              <p style="margin: 0 0 0 10px;">{{presidente}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <p class="textoPricipal text-center"><b>Gastos del Predio no registrados!</b></p>
+        </div>
+        <div class="col-xs-2 col-sm-2 col-md-2">
+          <div>
+            <div class="texto-contenedor-principal">
+              <p class="textoPricipal"><b>Acciones</b></p>
+            </div>
+            <button type="submit" class="btn btn-primary" (click)="mostrarRegistrarGPredios = true"
+              style="width: 250px; height: 40px;">Registrar gastos de predio</button>
+            <br>
+            <br>
+            <button type="submit" class="btn btn-primary" style="width: 250px; height: 40px;">
+              Registrar gastos de casa</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="seccion-principal-fondo">
+  <div class="seccion-tabla-borde">
+    <div class="container-tabla">
+      <div class="tabla-principal">
+        <table>
+          <thead>
+            <tr>
+              <th>Nro. Casa/habitación</th>
+              <th>Bloque</th>
+              <th>Propietario</th>
+              <th>Categoría</th>
+              <th>Área casa(m2)</th>
+              <th>Cochera1(m2)</th>
+              <th>Área total</th>
+              <th>% Participación</th>
+              <th>Estado</th> <!-- Nueva columna -->
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let dato of datosTabla">
+              <td>{{ dato.nroCasa }}</td>
+              <td>{{ dato.bloque }}</td>
+              <td>{{ dato.propietario }}</td>
+              <td>{{ dato.categoria }}</td>
+              <td>{{ dato.areaCasa }}</td>
+              <td>{{ dato.cochera1 }}</td>
+              <td>{{ dato.areaTotal }}</td>
+              <td>{{ dato.participacion }}</td>
+              <td>
+                <div class="cuadrado-registro-casa" [style.backgroundColor]="cuadradoColor"></div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="mostrarRegistrarGPredios">
+  <app-registrar-gasto-predio></app-registrar-gasto-predio>
+</div>

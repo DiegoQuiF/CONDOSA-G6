@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { PredioService } from './services/predio.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { FuncionesPrincipalesComponent } from './funciones-principales/funciones-principales.component';
+import { FuncionesPrincipalesComponent } from './componentes/funciones-principales/funciones-principales.component';
+import { RegistrarGastoPredioComponent } from './componentes/registrar-gasto-predio/registrar-gasto-predio.component';
 
 @NgModule({
-  declarations: [	
+  declarations: [		
     AppComponent,
-      FuncionesPrincipalesComponent
+      FuncionesPrincipalesComponent,
+      RegistrarGastoPredioComponent
    ],
   imports: [
     BrowserModule,
