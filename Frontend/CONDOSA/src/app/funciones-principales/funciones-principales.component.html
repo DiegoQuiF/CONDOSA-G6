@@ -1,0 +1,92 @@
+<section>
+  <div class="section0">
+    <div class="section1">
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-xs-4 col-sm-4 col-md-4">
+            <div class="flexy">
+        
+              <div class="text-estilo-principal">
+                <p class="text-1 tab-1">
+                  <b>Predio</b></p>
+              </div>
+              <div>
+                <div class="wrapper" [ngClass]="{'active': isActivePredios}">
+                  <div class="select-btn" (click)="toggleActivePredios()">
+                    <span>{{selectedItemPredios}}</span>
+                    <i class="uil uil-angle-down"></i>
+                  </div>
+                  <div class="content">
+                    <div class="search">
+                      <i class="uil uil-search"></i>
+                      <input type="text" placeholder="Buscar" [(ngModel)]="searchValuePredios" (keyup)="filterItemsPredios()">
+                      <span class="close-btn" (click)="closeComboboxPredios()">&times;</span>
+                    </div>
+                    <ul class="options">
+                      <li *ngFor="let item of filteredItemsPredios" (click)="selectItemPredios(item)"
+                        [ngClass]="{'selected': item === selectedItemPredios}">
+                        {{item}}
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flexy">
+              <div class="text-estilo-principal">
+                <p class="text-1 tab-1"><b>Periodo</b></p>
+              </div>
+              <div>
+                <div class="wrapper1" [ngClass]="{'active': isActiveMeses}">
+                  <div class="select-btn1" (click)="toggleActiveMeses()">
+                    <span>{{selectedItemMeses}}</span>
+                    <i class="uil uil-angle-down"></i>
+                  </div>
+                  <div class="content1">
+                    <div class="search">
+                      <i class="uil uil-search"></i>
+                      <input type="text" placeholder="Periodo de la cuota" [(ngModel)]="searchValueMeses" (keyup)="filterItemsMeses()">
+                      <span class="close-btn" (click)="closeComboboxMeses()">&times;</span>
+                    </div>
+                    <ul class="options1">
+                      <li *ngFor="let item of filteredItemsMeses" (click)="selectItemMeses(item)"
+                        [ngClass]="{'selected': item === selectedItemMeses}">
+                        {{item}}
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flexy">
+              <div class="text-estilo-principal">
+                <p class="text-1 tab-1"><b>Presidente predio</b></p>
+              </div>
+              <div class="text-estilo-principal">
+                <p style="margin: 0 0 0 10px;">{{presidente}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-6 col-sm-6 col-md-6">
+              <p class="text-1 tab-1 text-center"><b>Gastos del Predio no registrados!</b></p>
+          </div>
+          <div class="col-xs-2 col-sm-2 col-md-2">
+            <div>
+              <div class="text-estilo-principal">
+                <p class="text-1"><b>Acciones</b></p>
+              </div>
+              <button type="submit" class="btn boton_acciones">Registrar gastos de predio</button>
+              <br>
+              
+              <br>
+              <button type="submit" class="btn boton_acciones">Registrar gastos de casa</button>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      
+    </div>
+  </div>
+</section>

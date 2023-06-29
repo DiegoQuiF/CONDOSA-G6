@@ -1,1 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+:root { 
+    --blue-navy: rgb(0, 0, 128);
+    --blue-navy-clr: rgba(0, 0, 128, 0.8); 
+    --blue-navy-clrclr: rgba(0, 0, 128, 0.6); 
+  
+    --color-fondo: rgb(244, 244, 244);; 
+  } 
