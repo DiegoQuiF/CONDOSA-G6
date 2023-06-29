@@ -20,13 +20,7 @@ export class FuncionesPrincipalesComponent implements OnInit {
   //ATRIBUTOS PARA EL BUSCADOR DE TEXTO DE PREDIOS Y PERIODOS. 
 
   predios = [
-    "Residencial Los Alamos",
     "Condominio Las Rosas",
-    "Residencial Parque del Sol",
-    "Residencial Villa Esperanza",
-    "Condominio Jardines de la Montaña",
-    "Condominio Riviera del Lago",
-    "Residencial El Bosque Encantado",
     "Mirador del Valle",
     "Paseo del Río",
     "Brisas del Mar",

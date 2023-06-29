@@ -1,3 +1,11 @@
+<!-- BARRA DE NAVEGACIÓN -->
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--ICONS-->
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">  
+  <!--BOOTSTRAP-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
 <div class="seccion-principal-fondo">
   <div class="seccion-superior-borde">
     <div class="col-md-12">
@@ -10,19 +18,19 @@
               </p>
             </div>
             <div>
-              <div class="wrapper" [ngClass]="{'active': isActivePredios}">
+              <div class="envoltura" [ngClass]="{'active': isActivePredios}">
                 <div class="select-btn" (click)="toggleActivePredios()">
                   <span>{{selectedItemPredios}}</span>
                   <i class="uil uil-angle-down"></i>
                 </div>
-                <div class="content">
-                  <div class="search">
+                <div class="combobox-recuadro">
+                  <div class="buscar">
                     <i class="uil uil-search"></i>
-                    <input type="text" placeholder="Buscar" [(ngModel)]="searchValuePredios"
+                    <input type="text" placeholder="Buscar Predio" [(ngModel)]="searchValuePredios"
                       (keyup)="filterItemsPredios()">
-                    <span class="close-btn" (click)="closeComboboxPredios()">&times;</span>
+                    <span class="buscador-cerrar" (click)="closeComboboxPredios()">&times;</span>
                   </div>
-                  <ul class="options">
+                  <ul class="opciones">
                     <li *ngFor="let item of filteredItemsPredios" (click)="selectItemPredios(item)"
                       [ngClass]="{'selected': item === selectedItemPredios}">
                       {{item}}
@@ -37,19 +45,19 @@
               <p class="textoPricipal tabulador-izq"><b>Periodo</b></p>
             </div>
             <div>
-              <div class="wrapper1" [ngClass]="{'active': isActiveMeses}">
-                <div class="select-btn1" (click)="toggleActiveMeses()">
+              <div class="envoltura1" [ngClass]="{'active': isActiveMeses}">
+                <div class="combobox-cuerpo1" (click)="toggleActiveMeses()">
                   <span>{{selectedItemMeses}}</span>
                   <i class="uil uil-angle-down"></i>
                 </div>
-                <div class="content1">
-                  <div class="search">
+                <div class="combobox-recuadro1">
+                  <div class="buscar">
                     <i class="uil uil-search"></i>
                     <input type="text" placeholder="Periodo de la cuota" [(ngModel)]="searchValueMeses"
                       (keyup)="filterItemsMeses()">
-                    <span class="close-btn" (click)="closeComboboxMeses()">&times;</span>
+                    <span class="buscador-cerrar" (click)="closeComboboxMeses()">&times;</span>
                   </div>
-                  <ul class="options1">
+                  <ul class="opciones1">
                     <li *ngFor="let item of filteredItemsMeses" (click)="selectItemMeses(item)"
                       [ngClass]="{'selected': item === selectedItemMeses}">
                       {{item}}

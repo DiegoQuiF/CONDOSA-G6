@@ -7,8 +7,8 @@
 }
 
 
-/*X buscador */
-.close-btn {
+/*Buscador */
+.buscador-cerrar {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -17,13 +17,13 @@
 }
 
 
-.wrapper {
+.envoltura {
     width: 260px;
     margin: 10px;
 }
 
 .select-btn,
-.options li {
+.opciones li {
     display: flex;
     cursor: pointer;
     align-items: center;
@@ -41,11 +41,11 @@
     transition: transform 0.1s linear;
 }
 
-.wrapper.active .select-btn i {
+.envoltura.active .select-btn i {
     transform: rotate(-180deg);
 }
 
-.content {
+.combobox-recuadro {
     position: absolute;
     display: none;
     margin-top: 10px;
@@ -54,22 +54,22 @@
     background: #fff;
 }
 
-.wrapper.active .content {
+.envoltura.active .combobox-recuadro {
     display: block;
 }
 
-.content .search {
+.combobox-recuadro .buscar {
     position: relative;
 }
 
-.search i {
+.buscar i {
     left: 12px;
     line-height: 38px;
     pointer-events: none;
     position: absolute;
 }
 
-.search input {
+.buscar input {
     height: 40px;
     width: 100%;
     outline: none;
@@ -78,7 +78,7 @@
     border: 1px solid #b3b3b3;
 }
 
-.content .options {
+.combobox-recuadro .opciones {
     padding: 0;
     margin: 0;
     margin-top: 10px;
@@ -87,46 +87,46 @@
     overflow-y: auto;
 }
 
-.options::-webkit-scrollbar {
+.opciones::-webkit-scrollbar {
     width: 7px;
 }
 
-.options::-webkit-scrollbar-track {
+.opciones::-webkit-scrollbar-track {
     background: #f1f1f1;
     border-radius: 25px;
 }
 
-.options::-webkit-scrollbar-thumb {
+.opciones::-webkit-scrollbar-thumb {
     background: #8f8f8f;
     border-radius: 25px;
 }
 
-.options li {
+.opciones li {
     height: 40px;
     width: 97%;
     padding: 0px 10px;
     border-radius: 5px;
 }
 
-.options li:hover,
+.opciones li:hover,
 li.selected {
     background: #f2f2f2;
 }
 
 
-.wrapper1 {
+.envoltura1 {
     width: 260px;
     margin: 10px;
 }
 
-.select-btn1,
-.options1 li {
+.combobox-cuerpo1,
+.opciones1 li {
     display: flex;
     cursor: pointer;
     align-items: center;
 }
 
-.select-btn1 {
+.combobox-cuerpo1 {
     height: 40px;
     padding: 0 20px;
     border-radius: 7px;
@@ -134,15 +134,15 @@ li.selected {
     justify-content: space-between;
 }
 
-.select-btn1 i {
+.combobox-cuerpo1 i {
     transition: transform 0.1s linear;
 }
 
-.wrapper1.active .select-btn1 i {
+.envoltura1.active .combobox-cuerpo1 i {
     transform: rotate(-180deg);
 }
 
-.content1 {
+.combobox-recuadro1 {
     position: absolute;
     display: none;
     margin-top: 10px;
@@ -151,15 +151,15 @@ li.selected {
     background: #fff;
 }
 
-.wrapper1.active .content1 {
+.envoltura1.active .combobox-recuadro1 {
     display: block;
 }
 
-.content1 .search {
+.combobox-recuadro1 .buscar {
     position: relative;
 }
 
-.content1 .options1 {
+.combobox-recuadro1 .opciones1 {
     padding: 0;
     margin: 0;
     margin-top: 10px;
@@ -168,28 +168,28 @@ li.selected {
     overflow-y: auto;
 }
 
-.options1::-webkit-scrollbar {
+.opciones1::-webkit-scrollbar {
     width: 7px;
 }
 
-.options1::-webkit-scrollbar-track {
+.opciones1::-webkit-scrollbar-track {
     background: #f1f1f1;
     border-radius: 25px;
 }
 
-.options1::-webkit-scrollbar-thumb {
+.opciones1::-webkit-scrollbar-thumb {
     background: #8f8f8f;
     border-radius: 25px;
 }
 
-.options1 li {
+.opciones1 li {
     height: 40px;
     width: 97%;
     padding: 0px 10px;
     border-radius: 5px;
 }
 
-.options1 li:hover,
+.opciones1 li:hover,
 li.selected {
     background: #f2f2f2;
 }
