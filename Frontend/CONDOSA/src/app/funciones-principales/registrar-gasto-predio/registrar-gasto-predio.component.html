@@ -1,0 +1,98 @@
+<div class="seccion-principal-fondo">
+  <!-- UNICA FILA PRINCIPAL, Ambos forman una CELDA-->
+  <div class="seccion-registrarpredio-borde">
+    <div class="col">
+      <div class="row">
+        <div class="row" style="height: 60vh;">
+          <div class="col" style="width: 50%;">
+            <div class="row " style="height: 10vh; display: flex; align-items: center;">
+              <p class="textoPricipal tabulador-elementosIzq"><b>GASTOS PREDIO</b></p>
+            </div>
+            <div class="row" style="height: 10vh; display: flex; align-items: center;">
+              <div class="col" style="width: 50%;">
+                <p class="textoPricipal tabulador-elementosIzq">Tipo de gasto</p>
+              </div>
+              <div class="col" style="width: 50%;">
+                BUSCADOR
+              </div>
+            </div>
+            <div class="row" style="height: 10vh; display: flex; align-items: center;">
+              <div class="col" style="width: 50%;">
+                <p class="textoPricipal tabulador-elementosIzq">Descripción</p>
+              </div>
+              <div class="col" style="width: 50%;">
+                BUSCADOR
+              </div>
+            </div>
+            <div class="row" style="height: 10vh; display: flex; align-items: center;">
+              <div class="col" style="width: 50%;">
+                <p class="textoPricipal tabulador-elementosIzq">Monto total</p>
+              </div>
+              <div class="col" style="width: 50%;">
+                <input type="number" name="monto_predio" id="monto_predio" placeholder="S/." class="form-control"
+                  style="width: 175px;">
+              </div>
+            </div>
+            <div class="row tabulador-elementosIzq" style="height: 10vh; display: flex; align-items: center;">
+              <button type="submit" class="btn btn-primary" style="width: 150px; height: 40px;">
+                Registrar
+              </button>
+            </div>
+            <div class="row tabulador-elementosIzq" style="height: 10vh; display: flex; align-items: center;">
+              <button type="submit" class="btn btn-primary" style="width: 220px; height: 40px;">
+                Asignar del mes anterior
+              </button>
+            </div>
+          </div>
+          <div class="col" style="width: 50%;">
+            <div class="row" style="height: 15vh; display: flex; align-items: center;">
+              <div class="col-9">
+                <p class="textoPricipal tabulador-elementosDerc">Gastos de predio registrados</p>
+            </div>
+            <div class="col-3">
+                <!-- Utilizamos un contenedor adicional para controlar la alineación del botón -->
+                <div style="display: flex; margin-left: 100px;">
+                    <!--BOTON DE CERRAR -->
+                    <button type="button" class="btn btn-outline-danger">
+                        <span class="bi bi-x" (click)="mostrarRegistroPred(false)">X</span>
+                    </button>
+                </div>
+            </div>
+            </div>
+            <div class="row" style="height: 45vh; display: flex; align-items: center;">
+              <div class="contenedor-tabla">
+                <div class="tabla-gastos">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Tipo Gasto</th>
+                        <th>Monto</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let gasto of gatosRegistrados">
+                        <td>{{ gasto.TipoGasto}}</td>
+                        <td>{{ gasto.Monto }}</td>
+                        <td>
+                          <button type="submit" class="btn btn-primary">
+                            Editar
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="row" style="height: 10vh; display: flex; justify-content: center; align-items: center;">
+            <button type="submit" class="btn btn-primary" style="width: 250px; height: 60px;">
+              Finalizar registro de predio
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

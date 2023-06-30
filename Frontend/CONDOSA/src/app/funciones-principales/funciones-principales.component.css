@@ -252,15 +252,19 @@ li.selected {
     en el eje transversal (horizontal) dentro del contenedor.*/
 
 }
+/* TABLA */
 
-.container-tabla {
+.contenedor-tabla {
     display: flex;
     justify-content: center;
+    height: 300px; /* Altura fija del contenedor */
+    overflow-y: auto; /* Barra de desplazamiento vertical */
 }
 
 .tabla-principal {
+    /*
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 4px;*/
     padding: 10px;
     margin-top: 20px;
 }
@@ -274,8 +278,13 @@ li.selected {
 .tabla-principal td {
     padding: 8px;
     text-align: center;
-    /* Cambio a centrado */
     border-bottom: 1px solid #ddd;
+    border-right: 1px solid #ddd; /* Agregar línea vertical */
+}
+
+.tabla-principal th:last-child,
+.tabla-principal td:last-child {
+    border-right: none; /* Eliminar línea vertical en la última columna */
 }
 
 .tabla-principal th {
@@ -286,6 +295,7 @@ li.selected {
 .tabla-principal tbody tr:last-child td {
     border-bottom: none;
 }
+/**/
 
 .cuadrado-registro-casa {
     width: 20px;

@@ -1,0 +1,92 @@
+.seccion-registrarpredio-borde {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  min-height: 70vh;
+  /*ALTURA*/
+  background-color: var(--color-fondo);
+  border: 1px solid var(--blue-navy-clrclr);
+  border-radius: 5px;
+  width: 95%;
+}
+.boton-finalizar-ubicacion {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.tabulador-elementosIzq {
+  margin-left: 10rem;
+}
+.tabulador-elementosDerc {
+  margin-left: 10rem;
+}
+
+
+/*TABLA*/
+.boton-pequenio{
+  width: 50px;
+  height: 25px;
+  font-size: 12px;
+  line-height: 25px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.contenedor-tabla {
+  display: flex;
+  justify-content: center;
+  height: 400px; /* Altura fija del contenedor */
+  overflow-y: auto; /* Barra de desplazamiento vertical */
+  margin-left: auto;
+  margin-right: auto;
+  width: 60%;
+}
+.tabla-gastos {
+  padding: 10px;
+  margin-top: 20px;
+}
+
+.tabla-gastos table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabla-gastos th,
+.tabla-gastos td {
+  padding: 8px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+  border-right: 1px solid #ddd; /* Agregar línea vertical */
+}
+
+.tabla-gastos th:last-child,
+.tabla-gastos td:last-child {
+  border-right: none; /* Eliminar línea vertical en la última columna */
+}
+.tabla-gastos th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.tabla-gastos tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/*Boton X*/
+.x-button {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.x-input {
+  background-color: transparent;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  outline: none;
+  margin-right: 200px; /* Ajusta la separación a 10px desde el borde derecho */
+}
