@@ -8,12 +8,14 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { FuncionesPrincipalesComponent } from './funciones-principales/funciones-principales.component';
 import { RegistrarGastoPredioComponent } from './funciones-principales/registrar-gasto-predio/registrar-gasto-predio.component';
+import { RegistrarGastoCasaComponent } from './funciones-principales/registrar-gasto-casa/registrar-gasto-casa.component';
 
 @NgModule({
   declarations: [		
     AppComponent,
       FuncionesPrincipalesComponent,
-      RegistrarGastoPredioComponent
+      RegistrarGastoPredioComponent,
+      RegistrarGastoCasaComponent
    ],
   imports: [
     BrowserModule,

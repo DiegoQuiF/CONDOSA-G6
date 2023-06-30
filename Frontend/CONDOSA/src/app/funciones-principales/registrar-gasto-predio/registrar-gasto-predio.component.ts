@@ -9,7 +9,7 @@ export class RegistrarGastoPredioComponent implements OnInit {
 
 
   @Output() mostrarRegistroPredio=new EventEmitter<boolean>();
-  @Output() estadoRegistroPredioSelected=new EventEmitter<string>();
+  @Output() estadoRegistroPredio=new EventEmitter<string>();
   
   constructor() { }
   gatosRegistrados: any[] = [
@@ -48,6 +48,6 @@ export class RegistrarGastoPredioComponent implements OnInit {
 
   finalizarRegistro(){
     //Aca iria el metodo para modificar la tabla ESTADO_REGISTRO_PREDIO de l BD
-    this.estadoRegistroPredioSelected.emit('finalizado');
+    this.estadoRegistroPredio.emit('finalizado');
   }
 }   

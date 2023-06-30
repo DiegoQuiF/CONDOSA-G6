@@ -75,11 +75,17 @@ export class FuncionesPrincipalesComponent implements OnInit {
   presidente ="Ávalos Cuadros, Juan Carlos";
 
   //ATRIBUTOS Funcionalidades
+
   //REGISTRAR GASTOS PREDIOS 
   mostrarRegistrarGPredios: boolean = false;
+
+  //REGISTRAR GASTOS PREDIOS 
+  mostrarRegistrarGCasa: boolean = false;
   //ATRIBUTOS PARA EL SEMAFORO DE CASA
   cuadradoColor: string = 'red';
   //
+
+
 
   constructor() { }
 
@@ -133,15 +139,24 @@ export class FuncionesPrincipalesComponent implements OnInit {
   cambiarColorCuadrado() {
     this.cuadradoColor = 'green';
   }
-  //Ocular o Mostrarel registro para predios true mostrar, y false ocultar
+  //Ocular o Mostrar el registro para predios true mostrar, y false ocultar
   cambiarEstadoRegistroPredio(item:boolean){
     console.log("se cambia a "+ item + "desde el principal");
     this.mostrarRegistrarGPredios=item;
   }
   //Metodo para indicar que ya se termino de regitrar 
-  finalizarRegistro(){
+  finalizarRegistroPredio(){
     this.estadoRegistroPredioSelected='finalizado';
-    //Aca iria el metodo para modificar la tabla ESTADO_REGISTRO_PREDIO de l BD
+    //Aca iria el metodo para modificar la tabla ESTADO_REGISTRO_PREDIO de la BD
     console.log("Se finaliza el registro del predio desde el principal");
+  }
+
+  // true mostrar, y false ocultar
+  cambiarEstadoRegistroCasa(item:boolean){
+    this.mostrarRegistrarGCasa=item;
+  }
+  //Metodo para indicar que ya se termino de regitrar 
+  finalizarRegistroCasa(num_casa:string){
+    //Aca iria el metodo para modificar la tabla ESTADO_REGISTRO_CASA de la BD, usando el num_casa
   }
 }

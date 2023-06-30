@@ -93,7 +93,8 @@
             <br>
             <div class="row">
               <div class="col d-flex justify-content-center">
-                <button type="submit" class="btn btn-primary" style="width: 250px; height: 40px;">
+                <button type="submit" class="btn btn-primary" (click)="cambiarEstadoRegistroCasa(true)"
+                style="width: 250px; height: 40px;">
                   Registrar gastos de casa</button>
               </div>
             </div>
@@ -144,6 +145,10 @@
 
 <div *ngIf="mostrarRegistrarGPredios">
   <app-registrar-gasto-predio (mostrarRegistroPredio)="cambiarEstadoRegistroPredio($event)"
-  (estadoRegistroPredioSelected)="finalizarRegistro()"
+  (estadoRegistroPredio)="finalizarRegistroPredio()"
   ></app-registrar-gasto-predio>
+</div>
+<div *ngIf="mostrarRegistrarGCasa">
+  <app-registrar-gasto-casa (mostrarRegistroCasa)="cambiarEstadoRegistroPredio($event)">
+  </app-registrar-gasto-casa>
 </div>
