@@ -2,7 +2,7 @@
   <div class="seccion-registrarpredio-borde">
     <div class="col">
       <div class="row">
-         <!-- UNICA FILA PRINCIPAL, Ambos forman una CELDA-->
+        <!-- UNICA FILA PRINCIPAL, Ambos forman una CELDA-->
         <div class="row" style="height: 60vh;">
           <div class="col" style="width: 50%;">
             <div class="row " style="height: 10vh; display: flex; align-items: center;">
@@ -57,17 +57,17 @@
           <div class="col" style="width: 50%;">
             <div class="row" style="height: 15vh; display: flex; align-items: center;">
               <div class="col-9">
-                <p class="textoPricipal tabulador-elementosDerc">Gastos de predio registrados</p>
-            </div>
-            <div class="col-3">
+                <p class="textoPricipal tabulador-elementosDerc">Gastos registrados del predio</p>
+              </div>
+              <div class="col-3">
                 <!-- Utilizamos un contenedor adicional para controlar la alineación del botón -->
                 <div style="display: flex; margin-left: 100px;">
-                    <!--BOTON DE CERRAR -->
-                    <button type="button" class="btn btn-outline-danger" (click)="mostrarRegistroPred(false)">
-                        <span class="bi bi-x" >X</span>
-                    </button>
+                  <!--BOTON DE CERRAR -->
+                  <button type="button" class="btn btn-outline-danger" (click)="set_mostrarRegistroPredio(false)">
+                    <span class="bi bi-x">X</span>
+                  </button>
                 </div>
-            </div>
+              </div>
             </div>
             <div class="row" style="height: 45vh; display: flex; align-items: center;">
               <div class="contenedor-tabla">
@@ -98,7 +98,8 @@
           </div>
         </div>
         <div class="row" style="height: 10vh; display: flex; justify-content: center; align-items: center;">
-          <button type="submit" class="btn btn-primary" style="width: 250px; height: 60px;" (click)="finalizarRegistro()">
+          <button type="submit" class="btn btn-primary" style="width: 250px; height: 60px;"
+            (click)="finalizarRegistroPredio()">
             Finalizar registro de predio
           </button>
         </div>

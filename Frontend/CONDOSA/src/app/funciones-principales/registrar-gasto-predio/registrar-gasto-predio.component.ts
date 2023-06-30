@@ -8,8 +8,8 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 export class RegistrarGastoPredioComponent implements OnInit {
 
 
-  @Output() mostrarRegistroPredio=new EventEmitter<boolean>();
-  @Output() estadoRegistroPredio=new EventEmitter<string>();
+  @Output() mostrarRegistroPredio_OUT=new EventEmitter<boolean>();
+  @Output() estadoRegistroPredio_OUT=new EventEmitter<string>();
   
   constructor() { }
   gatosRegistrados: any[] = [
@@ -41,13 +41,13 @@ export class RegistrarGastoPredioComponent implements OnInit {
   ngOnInit() {
   }
 
-  mostrarRegistroPred(item:boolean){
+  set_mostrarRegistroPredio(item:boolean){
     console.log("se cambia a "+ item + "desde el registrar predios");
-    this.mostrarRegistroPredio.emit(item);
+    this.mostrarRegistroPredio_OUT.emit(item);
   }
 
-  finalizarRegistro(){
+  finalizarRegistroPredio(){
     //Aca iria el metodo para modificar la tabla ESTADO_REGISTRO_PREDIO de l BD
-    this.estadoRegistroPredio.emit('finalizado');
+    this.estadoRegistroPredio_OUT.emit('finalizado');
   }
 }   

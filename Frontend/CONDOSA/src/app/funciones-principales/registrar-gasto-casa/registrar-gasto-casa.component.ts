@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Registro_Casa } from 'src/app/models/registro_casa';
 
 @Component({
   selector: 'app-registrar-gasto-casa',
@@ -7,11 +8,26 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 })
 export class RegistrarGastoCasaComponent implements OnInit {
 
-  @Output() mostrarRegistroCasa=new EventEmitter<boolean>();
-  @Output() estadoRegistroCasa=new EventEmitter<string>();
+  @Output() mostrarRegistroCasa_OUT=new EventEmitter<boolean>();
+  @Output() estadoRegistroNum_Casa=new EventEmitter<string>();
+
+  //DATOS DE LA CASA
+  num_casa:string='5';
+  
+  
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  set_mostrarRegistroCasa(item:boolean){
+    this.mostrarRegistroCasa_OUT.emit(item);
+  }
+  
+  finalizarRegistroCasa(num_casa:string){
+    //Aca iria el metodo para modificar la tabla ESTADO_REGISTRO_PREDIO de l BD
+    this.estadoRegistroNum_Casa.emit(num_casa);
+  }
+  
 }

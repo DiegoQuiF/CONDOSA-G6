@@ -3,15 +3,62 @@
     <div class="col">
       <div class="row">
         <div class="row" style="height: 60vh;">
-          <div class="col" style="width: 33%;">
-            COLUMN1</div>
-          <div class="col" style="width: 33%;">
-            COLUMN2</div>
-          <div class="col" style="width: 33%;">
-            COLUMN3</div>
+          <div class="col" style="width: 33.33%;">
+            <div class="row" style="height: 10vh;">
+              <p>FILA1</p>
+            </div>
+            <div class="row" style="height: 5vh;">
+              <p>FILA2</p>
+            </div>
+            <div class="row" style="height: 45vh;">
+              <p>FILA3</p>
+            </div>
+          </div>
+          <div class="col" style="width: 33.33%;">
+            <div class="row" style="height: 10vh;">
+              <p>FILA1</p>
+            </div>
+            <div class="row" style="height: 10vh;">
+              <p>FILA2</p>
+            </div>
+            <div class="row" style="height: 10vh;">
+              <p>FILA3</p>
+            </div>
+            <div class="row" style="height: 10vh;">
+              <p>FILA4</p>
+            </div>
+            <div class="row" style="height: 10vh;">
+              <p>FILA5</p>
+            </div>
+            <div class="row" style="height: 10vh;">
+              <p>FILA6</p>
+            </div>
+          </div>
+          <div class="col" style="width: 33.33%;">
+            <div class="row" style="height: 15vh; display: flex; align-items: center;">
+              <div class="col-9">
+                <p class="textoPricipal tabulador-elementosDerc">Gastos registrados de la casa</p>
+              </div>
+              <div class="col-3">
+                <!-- Utilizamos un contenedor adicional para controlar la alineación del botón -->
+                <div style="display: flex; margin-left: 100px;">
+                  <!--BOTON DE CERRAR -->
+                  <button type="button" class="btn btn-outline-danger" (click)="set_mostrarRegistroCasa(false)">
+                    <span class="bi bi-x">X</span>  
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="row" style="height: 45vh; display: flex; align-items: center;">
+              <p>FILA2</p>
+            </div>
+          </div>
         </div>
-        <div class="row" style="height: 10vh;">
-          BOTONES
+        <div class="row" style="height: 10vh; display: flex; justify-content: center; align-items: center;">
+          <button type="submit" class="btn btn-primary" style="width: 240px; height: 50px;"
+            (click)="finalizarRegistroCasa('10')">
+            Finalizar registro de predio
+          </button>
         </div>
       </div>
     </div>

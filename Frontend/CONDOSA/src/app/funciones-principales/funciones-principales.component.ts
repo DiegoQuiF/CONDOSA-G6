@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Registro_Casa } from '../models/registro_casa';
 
 @Component({
   selector: 'app-funciones-principales',
@@ -8,29 +9,28 @@ import { Component, OnInit } from '@angular/core';
 export class FuncionesPrincipalesComponent implements OnInit {
 
 
-  datosTabla: any[] = [
-    { nroCasa: '1', bloque: 'A', propietario: 'Juan Pérez', categoria: 'Residencial', areaCasa: '120', cochera1: '20', areaTotal: '140', participacion: '12%' },
-    { nroCasa: '2', bloque: 'B', propietario: 'María Gómez', categoria: 'Comercial', areaCasa: '80', cochera1: '10', areaTotal: '90', participacion: '8%' },
-    { nroCasa: '3', bloque: 'A', propietario: 'Carlos López', categoria: 'Residencial', areaCasa: '150', cochera1: '30', areaTotal: '180', participacion: '15%' },
-    { nroCasa: '4', bloque: 'C', propietario: 'Laura Ramírez', categoria: 'Residencial', areaCasa: '100', cochera1: '15', areaTotal: '115', participacion: '10%' },
-    { nroCasa: '5', bloque: 'B', propietario: 'Pedro Martínez', categoria: 'Comercial', areaCasa: '90', cochera1: '12', areaTotal: '102', participacion: '9%' },
-    { nroCasa: '1', bloque: 'A', propietario: 'Juan Pérez', categoria: 'Residencial', areaCasa: '120', cochera1: '20', areaTotal: '140', participacion: '12%' },
-    { nroCasa: '2', bloque: 'B', propietario: 'María Gómez', categoria: 'Comercial', areaCasa: '80', cochera1: '10', areaTotal: '90', participacion: '8%' },
-    { nroCasa: '3', bloque: 'A', propietario: 'Carlos López', categoria: 'Residencial', areaCasa: '150', cochera1: '30', areaTotal: '180', participacion: '15%' },
-    { nroCasa: '4', bloque: 'C', propietario: 'Laura Ramírez', categoria: 'Residencial', areaCasa: '100', cochera1: '15', areaTotal: '115', participacion: '10%' },
-    { nroCasa: '5', bloque: 'B', propietario: 'Pedro Martínez', categoria: 'Comercial', areaCasa: '90', cochera1: '12', areaTotal: '102', participacion: '9%' },
-    { nroCasa: '1', bloque: 'A', propietario: 'Juan Pérez', categoria: 'Residencial', areaCasa: '120', cochera1: '20', areaTotal: '140', participacion: '12%' },
-    { nroCasa: '2', bloque: 'B', propietario: 'María Gómez', categoria: 'Comercial', areaCasa: '80', cochera1: '10', areaTotal: '90', participacion: '8%' },
-    { nroCasa: '3', bloque: 'A', propietario: 'Carlos López', categoria: 'Residencial', areaCasa: '150', cochera1: '30', areaTotal: '180', participacion: '15%' },
-    { nroCasa: '4', bloque: 'C', propietario: 'Laura Ramírez', categoria: 'Residencial', areaCasa: '100', cochera1: '15', areaTotal: '115', participacion: '10%' },
-    { nroCasa: '5', bloque: 'B', propietario: 'Pedro Martínez', categoria: 'Comercial', areaCasa: '90', cochera1: '12', areaTotal: '102', participacion: '9%' },
-    { nroCasa: '1', bloque: 'A', propietario: 'Juan Pérez', categoria: 'Residencial', areaCasa: '120', cochera1: '20', areaTotal: '140', participacion: '12%' },
-    { nroCasa: '2', bloque: 'B', propietario: 'María Gómez', categoria: 'Comercial', areaCasa: '80', cochera1: '10', areaTotal: '90', participacion: '8%' },
-    { nroCasa: '3', bloque: 'A', propietario: 'Carlos López', categoria: 'Residencial', areaCasa: '150', cochera1: '30', areaTotal: '180', participacion: '15%' },
-    { nroCasa: '4', bloque: 'C', propietario: 'Laura Ramírez', categoria: 'Residencial', areaCasa: '100', cochera1: '15', areaTotal: '115', participacion: '10%' },
-    { nroCasa: '5', bloque: 'B', propietario: 'Pedro Martínez', categoria: 'Comercial', areaCasa: '90', cochera1: '12', areaTotal: '102', participacion: '9%' }
-  ];
-
+  datosTabla: Array<Registro_Casa> = new Array<Registro_Casa>(
+    new Registro_Casa('1', 'A', 'Juan Pérez', 'Residencial', '120', '20', '140', '12%', 'no finalizado', '5'),
+    new Registro_Casa('2', 'B', 'María Gómez', 'Comercial', '80', '10', '90', '8%', 'no finalizado', '5'),
+    new Registro_Casa('3', 'A', 'Carlos López', 'Residencial', '150', '30', '180', '15%', 'no finalizado', '5'),
+    new Registro_Casa('4', 'C', 'Laura Ramírez', 'Residencial', '100', '15', '115', '10%', 'no finalizado', '5'),
+    new Registro_Casa('5', 'B', 'Pedro Martínez', 'Comercial', '90', '12', '102', '9%', 'no finalizado', '5'),
+    new Registro_Casa('6', 'A', 'Juan Pérez', 'Residencial', '120', '20', '140', '12%', 'no finalizado', '5'),
+    new Registro_Casa('7', 'B', 'María Gómez', 'Comercial', '80', '10', '90', '8%', 'no finalizado', '5'),
+    new Registro_Casa('8', 'A', 'Carlos López', 'Residencial', '150', '30', '180', '15%', 'no finalizado', '5'),
+    new Registro_Casa('9', 'C', 'Laura Ramírez', 'Residencial', '100', '15', '115', '10%', 'no finalizado', '5'),
+    new Registro_Casa('10', 'B', 'Pedro Martínez', 'Comercial', '90', '12', '102', '9%', 'no finalizado', '5'),
+    new Registro_Casa('11', 'A', 'Juan Pérez', 'Residencial', '120', '20', '140', '12%', 'no finalizado', '5'),
+    new Registro_Casa('12', 'B', 'María Gómez', 'Comercial', '80', '10', '90', '8%', 'no finalizado', '5'),
+    new Registro_Casa('13', 'A', 'Carlos López', 'Residencial', '150', '30', '180', '15%', 'no finalizado', '5'),
+    new Registro_Casa('14', 'C', 'Laura Ramírez', 'Residencial', '100', '15', '115', '10%', 'no finalizado', '5'),
+    new Registro_Casa('15', 'B', 'Pedro Martínez', 'Comercial', '90', '12', '102', '9%', 'no finalizado', '5'),
+    new Registro_Casa('16', 'A', 'Juan Pérez', 'Residencial', '120', '20', '140', '12%', 'no finalizado', '5'),
+    new Registro_Casa('17', 'B', 'María Gómez', 'Comercial', '80', '10', '90', '8%', 'no finalizado', '5'),
+    new Registro_Casa('18', 'A', 'Carlos López', 'Residencial', '150', '30', '180', '15%', 'no finalizado', '5'),
+    new Registro_Casa('19', 'C', 'Laura Ramírez', 'Residencial', '100', '15', '115', '10%', 'no finalizado', '5'),
+    new Registro_Casa('20', 'B', 'Pedro Martínez', 'Comercial', '90', '12', '102', '9%', 'no finalizado', '5')
+  );
 
   //ATRIBUTOS PARA EL BUSCADOR DE TEXTO DE PREDIOS Y PERIODOS. 
 
@@ -158,5 +158,12 @@ export class FuncionesPrincipalesComponent implements OnInit {
   //Metodo para indicar que ya se termino de regitrar 
   finalizarRegistroCasa(num_casa:string){
     //Aca iria el metodo para modificar la tabla ESTADO_REGISTRO_CASA de la BD, usando el num_casa
+    console.log("Se finaliza de la casa: "+  num_casa)
+    for (let i = 0; i < this.datosTabla.length; i++) {
+      if (this.datosTabla[i].num_casa === num_casa) {
+        this.datosTabla[i].estado = 'finalizado';
+        break;
+      }
+    }
   }
 }

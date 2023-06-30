@@ -13,3 +13,9 @@
     justify-content: center;
     align-items: center;
   }
+  .tabulador-elementosIzq {
+    margin-left: 4rem;
+  }
+  .tabulador-elementosDerc {
+    margin-left: 4rem;
+  }

@@ -124,16 +124,16 @@
           </thead>
           <tbody>
             <tr *ngFor="let dato of datosTabla">
-              <td>{{ dato.nroCasa }}</td>
+              <td>{{ dato.num_casa}}</td>
               <td>{{ dato.bloque }}</td>
               <td>{{ dato.propietario }}</td>
               <td>{{ dato.categoria }}</td>
-              <td>{{ dato.areaCasa }}</td>
-              <td>{{ dato.cochera1 }}</td>
-              <td>{{ dato.areaTotal }}</td>
+              <td>{{ dato.area_casa }}</td>
+              <td>{{ dato.cochera }}</td>
+              <td>{{ dato.area_total }}</td>
               <td>{{ dato.participacion }}</td>
               <td>
-                <div class="cuadrado-registro-casa" [style.backgroundColor]="cuadradoColor"></div>
+                <div class="cuadrado-registro-casa" [ngStyle]="{'background-color': dato.estado === 'finalizado' ? 'green' : 'red'}"></div>
               </td>
             </tr>
           </tbody>
@@ -144,11 +144,13 @@
 </div>
 
 <div *ngIf="mostrarRegistrarGPredios">
-  <app-registrar-gasto-predio (mostrarRegistroPredio)="cambiarEstadoRegistroPredio($event)"
-  (estadoRegistroPredio)="finalizarRegistroPredio()"
+  <app-registrar-gasto-predio (mostrarRegistroPredio_OUT)="cambiarEstadoRegistroPredio($event)"
+  (estadoRegistroPredio_OUT)="finalizarRegistroPredio()"
   ></app-registrar-gasto-predio>
 </div>
 <div *ngIf="mostrarRegistrarGCasa">
-  <app-registrar-gasto-casa (mostrarRegistroCasa)="cambiarEstadoRegistroPredio($event)">
+  <app-registrar-gasto-casa (mostrarRegistroCasa_OUT)="cambiarEstadoRegistroCasa($event)"
+  (estadoRegistroNum_Casa)="finalizarRegistroCasa($event)"
+  >
   </app-registrar-gasto-casa>
 </div>
