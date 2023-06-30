@@ -13,7 +13,12 @@
                 <p class="textoPricipal tabulador-elementosIzq">Tipo de gasto</p>
               </div>
               <div class="col" style="width: 50%;">
-                BUSCADOR
+                <select name="tipogasto" class="form-select" style="width: 70%;">
+                  <option>--seleccione--</option>
+                  <option *ngFor="let gasto of listaTipoGasto">
+                    {{gasto}}
+                  </option>
+                </select>
               </div>
             </div>
             <div class="row" style="height: 10vh; display: flex; align-items: center;">
@@ -21,7 +26,12 @@
                 <p class="textoPricipal tabulador-elementosIzq">Descripción</p>
               </div>
               <div class="col" style="width: 50%;">
-                BUSCADOR
+                <select name="tipogasto" class="form-select" style="width: 100%;">
+                  <option>--seleccione--</option>
+                  <option *ngFor="let desc of listaDescripcion">
+                    {{desc}}
+                  </option>
+                </select>
               </div>
             </div>
             <div class="row" style="height: 10vh; display: flex; align-items: center;">
@@ -88,7 +98,7 @@
             </div>
           </div>
           <div class="row" style="height: 10vh; display: flex; justify-content: center; align-items: center;">
-            <button type="submit" class="btn btn-primary" style="width: 250px; height: 60px;">
+            <button type="submit" class="btn btn-primary" style="width: 250px; height: 60px;" (click)="finalizarRegistro()">
               Finalizar registro de predio
             </button>
           </div>

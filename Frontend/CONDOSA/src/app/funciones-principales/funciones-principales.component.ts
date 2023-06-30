@@ -64,13 +64,18 @@ export class FuncionesPrincipalesComponent implements OnInit {
   isActivePredios: boolean = false;
   isActiveMeses: boolean = false;
 
- 
-  //
+  //Atributos de este espacio del predio 
+  idPredioSeleccionado:string='4';
+  estadoRegistroPredioSelected:string='no finalizado';
 
-  //OTROS DATOS
+  //solo hay 2 estados, no finalizado y finalizado. 
+
+
+  //Datos del predio
   presidente ="Ávalos Cuadros, Juan Carlos";
 
-  //ATRIBUTOS REGISTRAR GASTOS PREDIOS 
+  //ATRIBUTOS Funcionalidades
+  //REGISTRAR GASTOS PREDIOS 
   mostrarRegistrarGPredios: boolean = false;
   //ATRIBUTOS PARA EL SEMAFORO DE CASA
   cuadradoColor: string = 'red';
@@ -132,5 +137,11 @@ export class FuncionesPrincipalesComponent implements OnInit {
   cambiarEstadoRegistroPredio(item:boolean){
     console.log("se cambia a "+ item + "desde el principal");
     this.mostrarRegistrarGPredios=item;
+  }
+  //Metodo para indicar que ya se termino de regitrar 
+  finalizarRegistro(){
+    this.estadoRegistroPredioSelected='finalizado';
+    //Aca iria el metodo para modificar la tabla ESTADO_REGISTRO_PREDIO de l BD
+    console.log("Se finaliza el registro del predio desde el principal");
   }
 }

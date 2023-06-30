@@ -69,20 +69,34 @@
             </div>
           </div>
         </div>
-        <div class="col-xs-6 col-sm-6 col-md-6">
-          <p class="textoPricipal text-center">Gastos del Predio no registrados!</p>
+        <div class="col-xs-5 col-sm-5 col-md-5 d-flex align-items-center justify-content-center">
+          <p class="textoPricipal text-center" [ngStyle]="{ color: estadoRegistroPredioSelected === 'finalizado' ? 'green' : 'red' }">
+            {{ estadoRegistroPredioSelected === 'finalizado' ? 'Gastos del Predio registrados!' : 'Gastos del Predio no registrados!' }}
+          </p>
         </div>
-        <div class="col-xs-2 col-sm-2 col-md-2">
+        <div class="col-xs-3 col-sm-3 col-md-3">
           <div>
-            <div class="texto-contenedor-principal">
-              <p class="textoPricipal">Acciones</p>
+            <div class="row">
+              <div class="col d-flex justify-content-end align-items-center">
+                <div class="texto-contenedor-principal" style="justify-content: center">
+                  <p class="textoPricipal">Acciones</p>
+                </div>
+              </div>
             </div>
-            <button type="submit" class="btn btn-primary" (click)="cambiarEstadoRegistroPredio(true)"
-              style="width: 250px; height: 40px;">Registrar gastos de predio</button>
+            <div class="row">
+              <div class="col d-flex justify-content-center">
+                <button type="submit" class="btn btn-primary" (click)="cambiarEstadoRegistroPredio(true)"
+                        style="width: 250px; height: 40px;">Registrar gastos de predio</button>
+              </div>
+            </div>
             <br>
             <br>
-            <button type="submit" class="btn btn-primary" style="width: 250px; height: 40px;">
-              Registrar gastos de casa</button>
+            <div class="row">
+              <div class="col d-flex justify-content-center">
+                <button type="submit" class="btn btn-primary" style="width: 250px; height: 40px;">
+                  Registrar gastos de casa</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -129,5 +143,7 @@
 </div>
 
 <div *ngIf="mostrarRegistrarGPredios">
-  <app-registrar-gasto-predio (mostrarRegistroPredio)="cambiarEstadoRegistroPredio($event)"></app-registrar-gasto-predio>
+  <app-registrar-gasto-predio (mostrarRegistroPredio)="cambiarEstadoRegistroPredio($event)"
+  (estadoRegistroPredioSelected)="finalizarRegistro()"
+  ></app-registrar-gasto-predio>
 </div>

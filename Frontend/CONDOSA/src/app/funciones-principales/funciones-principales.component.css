@@ -201,7 +201,10 @@ li.selected {
     display: flex;
     height: 60px;
     width: 250px;
+    /*250*/
     align-items: center;
+      
+    
 }
 
 .tabulador-izq {
