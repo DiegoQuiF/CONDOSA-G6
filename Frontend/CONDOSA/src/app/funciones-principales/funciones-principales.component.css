@@ -48,6 +48,7 @@
 .combobox-recuadro {
     position: absolute;
     display: none;
+    width: 260px;
     margin-top: 10px;
     padding: 10px;
     border-radius: 7px;
@@ -145,6 +146,7 @@ li.selected {
 .combobox-recuadro1 {
     position: absolute;
     display: none;
+    width: 260px;
     margin-top: 10px;
     padding: 10px;
     border-radius: 7px;
@@ -291,7 +293,7 @@ li.selected {
 }
 
 .tabla-principal th {
-    background-color: #f2f2f2;
+    background-color: #ffffffac;
     font-weight: bold;
 }
 
@@ -310,3 +312,89 @@ li.selected {
 }
 
 /**/
+
+
+
+.subsection-0 {
+    align-items: start;
+    margin-top: 1rem;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    background: rgba(109, 109, 109, 0.638);
+    backdrop-filter: blur(2px);
+    border-radius: 10px 10px 0px 0px;
+    width: 100%;
+}
+
+.mp-0 {
+    margin: 0;
+    padding: 0;
+}
+.text-0 {
+    font-size: 1rem;
+}
+.text-1 {
+    font-size: 1.15rem;
+}
+.text-2 {
+    font-size: 1.30rem;
+}
+.text-3 {
+    font-size: 1.45rem;
+}
+.text-4 {
+    font-size: 1.6rem;
+}
+.tab-0 {
+    margin-left: 0.5rem;
+}
+.tab-1 {
+    margin-left: 1rem;
+}
+.tab-2 {
+    margin-left: 1.5rem;
+}
+.tab-3 {
+    margin-left: 2rem;
+}
+.tab-4 {
+    margin-left: 2.5rem;
+}
+.color-b {
+    color: #fff;
+}
+.color-n {
+    color: #000;
+}
+
+.flexy {
+    display: flex;
+}
+
+.columna-2 {
+    justify-content: start;
+    align-items: start;
+    display: flex;
+    padding: 0;
+    margin: 0;
+}
+.cont-2 {
+    width: 50%;
+}
+
+.subsection-1 {
+    align-items: start;
+    margin: 0.5rem 0rem 2rem 0rem;
+    background: rgba(255, 255, 255, 0.616);
+    border: 1px solid rgba(255, 255, 255, 0.504);
+    backdrop-filter: blur(2px);
+    border-radius: 0px 0px 10px 10px;
+    width: 100%;
+    min-height: 10px;
+}
+
+.text-center-v {
+    display: flex;
+    height: 60px;
+    width: 35%;
+    align-items: center;
+}
