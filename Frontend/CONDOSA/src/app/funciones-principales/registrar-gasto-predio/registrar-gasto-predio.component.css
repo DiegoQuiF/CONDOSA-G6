@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;800&display=swap');
+
 .seccion-registrarpredio-borde {
   margin-top: 1rem;
   margin-bottom: 1rem;
@@ -35,15 +37,16 @@
 .contenedor-tabla {
   display: flex;
   justify-content: center;
-  height: 400px; /* Altura fija del contenedor */
+  height: 200px; /* Altura fija del contenedor */
+  width: 90%;
   overflow-y: auto; /* Barra de desplazamiento vertical */
   margin-left: auto;
   margin-right: auto;
-  width: 60%;
 }
+
 .tabla-gastos {
-  padding: 10px;
-  margin-top: 20px;
+  padding: 0px;
+  margin-top: 0px;
 }
 
 .tabla-gastos table {
@@ -51,10 +54,17 @@
   border-collapse: collapse;
 }
 
-.tabla-gastos th,
-.tabla-gastos td {
+.tabla-gastos th {
   padding: 8px;
   text-align: center;
+  border-bottom: 1px solid #ddd;
+  border-right: 1px solid #ddd; /* Agregar línea vertical */
+}
+
+.tabla-gastos td {
+  padding: 6px;
+  text-align: left;
+  background-color: #ffffff2d;
   border-bottom: 1px solid #ddd;
   border-right: 1px solid #ddd; /* Agregar línea vertical */
 }
@@ -64,7 +74,7 @@
   border-right: none; /* Eliminar línea vertical en la última columna */
 }
 .tabla-gastos th {
-  background-color: #f2f2f2;
+  background-color: #ffffff83;
   font-weight: bold;
 }
 
@@ -89,4 +99,88 @@
   cursor: pointer;
   outline: none;
   margin-right: 200px; /* Ajusta la separación a 10px desde el borde derecho */
+}
+
+.subsection-0 {
+  align-items: start;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  background: rgba(109, 109, 109, 0.638);
+  backdrop-filter: blur(2px);
+  border-radius: 10px 10px 0px 0px;
+  width: 100%;
+}
+
+.mp-0 {
+  margin: 0;
+  padding: 0;
+}
+.text-0 {
+  font-size: 1rem;
+}
+.text-1 {
+  font-size: 1.15rem;
+}
+.text-2 {
+  font-size: 1.30rem;
+}
+.text-3 {
+  font-size: 1.45rem;
+}
+.text-4 {
+  font-size: 1.6rem;
+}
+.tab-0 {
+  margin-left: 0.5rem;
+}
+.tab-1 {
+  margin-left: 1rem;
+}
+.tab-2 {
+  margin-left: 1.5rem;
+}
+.tab-3 {
+  margin-left: 2rem;
+}
+.tab-4 {
+  margin-left: 2.5rem;
+}
+.color-b {
+  color: #fff;
+}
+.color-n {
+  color: #000;
+}
+
+.flexy {
+  display: flex;
+}
+
+.columna-2 {
+  justify-content: start;
+  align-items: start;
+  display: flex;
+  padding: 0;
+  margin: 0;
+}
+.cont-2 {
+  width: 50%;
+}
+
+.subsection-1 {
+  align-items: start;
+  margin: 0.5rem 0rem 2rem 0rem;
+  background: rgba(255, 255, 255, 0.616);
+  border: 1px solid rgba(255, 255, 255, 0.504);
+  backdrop-filter: blur(2px);
+  border-radius: 0px 0px 10px 10px;
+  width: 100%;
+  min-height: 10px;
+}
+
+.text-center-v {
+  display: flex;
+  height: 60px;
+  width: 35%;
+  align-items: center;
 }

@@ -279,10 +279,17 @@ li.selected {
     border-collapse: collapse;
 }
 
-.tabla-principal th,
+.tabla-principal th {
+    padding: 8px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    border-right: 1px solid #ddd; /* Agregar línea vertical */
+}
+
 .tabla-principal td {
     padding: 8px;
     text-align: center;
+    background: #ffffff2e;
     border-bottom: 1px solid #ddd;
     border-right: 1px solid #ddd; /* Agregar línea vertical */
 }
