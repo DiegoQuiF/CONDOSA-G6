@@ -1,12 +1,38 @@
 import { Component, OnInit } from '@angular/core';
 import { Registro_Casa } from '../models/registro_casa';
 
+//PREDIOS
+import { Predio } from './../models/predio'
+import { PredioService } from './../services/predio.service';
+
+
 @Component({
   selector: 'app-funciones-principales',
   templateUrl: './funciones-principales.component.html',
   styleUrls: ['./funciones-principales.component.css']
 })
 export class FuncionesPrincipalesComponent implements OnInit {
+  predioArray:Predio[] = [];
+  filteredPredios:Predio[] = [];
+  searchPredios:String = '';
+  selectedItemPredio:String = 'Seleccione';
+  isActivePredios: boolean = false;
+
+  periodoArray:Predio[] = [];
+  filteredPeriodos:Predio[] = [];
+  searchPeriodos:String = '';
+  selectedItemPeriodo:String = 'Seleccione';
+  isActivePeriodo: boolean = false;
+
+  mostrarRegistrarGPredios: boolean = false;  //PERMITE MOSTRAR EL PANEL DE REGISTRO DE GASTOS DE PREDIO
+  mostrarRegistrarGCasa: boolean = false;   //PERMITE MOSTRAR EL PANEL DE REGISTRO DE GASTOS DE CASA
+
+  cuadradoColor: string = 'red';    //COLOR SEMAFORO DE LA CASA
+
+  constructor(private predioService:PredioService){}
+
+
+
 
 
   datosTabla: Array<Registro_Casa> = new Array<Registro_Casa>(
@@ -31,86 +57,18 @@ export class FuncionesPrincipalesComponent implements OnInit {
     new Registro_Casa('19', 'C', 'Laura Ramírez', 'Residencial', '100', '15', '115', '10%', 'no finalizado', '5'),
     new Registro_Casa('20', 'B', 'Pedro Martínez', 'Comercial', '90', '12', '102', '9%', 'no finalizado', '5')
   );
-
-  //ATRIBUTOS PARA EL BUSCADOR DE TEXTO DE PREDIOS Y PERIODOS. 
-
-  predios = [
-    "Condominio Las Rosas",
-    "Mirador del Valle",
-    "Paseo del Río",
-    "Brisas del Mar",
-    "La Hacienda",
-    "Altos del Cielo",
-    "Monte Verde",
-    "Los Pinos",
-    "Sol Naciente",
-    "Vista Hermosa",
-    "El Paraíso",
-    "Amanecer Dorado",
-    "El Oasis",
-    "Rincón del Lago"
-  ];
+  
   meses = ["Enero-23", "Febrero-23", "Marzo-23", "Abril-23"];
-  selectedItemPredios: string = '';
   selectedItemMeses: string = '';
-
-  searchValuePredios: string = '';
   searchValueMeses: string = '';
-
-
-  filteredItemsPredios: string[] = [];
   filteredItemsMeses: string[] = [];
-
-  isActivePredios: boolean = false;
   isActiveMeses: boolean = false;
-
-  //Atributos de este espacio del predio 
-  idPredioSeleccionado:string='4';
   estadoRegistroPredioSelected:string='no finalizado';
-
-  //solo hay 2 estados, no finalizado y finalizado. 
-
-
-  //Datos del predio
   presidente ="Ávalos Cuadros, Juan Carlos";
-
-  //ATRIBUTOS Funcionalidades
-
-  //REGISTRAR GASTOS PREDIOS 
-  mostrarRegistrarGPredios: boolean = false;
-
-  //REGISTRAR GASTOS PREDIOS 
-  mostrarRegistrarGCasa: boolean = false;
-  //ATRIBUTOS PARA EL SEMAFORO DE CASA
-  cuadradoColor: string = 'red';
-  //
-
-
-
-  constructor() { }
-
-  ngOnInit() {
-    //METODOS PARA LOS BUSCADORES DE PREDIO Y PERIODO
-    this.filteredItemsPredios = this.predios;
-    this.selectedItemPredios = this.predios[0];
-
-    this.filteredItemsMeses = this.meses;
-    this.selectedItemMeses = this.meses[0];
-    //
-  }
-  //METODOS PARA LOS BUSCADORES DE PREDIO Y PERIODO
-  toggleActivePredios(): void {
-    this.isActivePredios = !this.isActivePredios;
-  }
-
+  
   toggleActiveMeses(): void {
     console.log("se detecta el click");
     this.isActiveMeses = !this.isActiveMeses;
-  }
-
-  selectItemPredios(item: string): void {
-    this.selectedItemPredios = item;
-    this.isActivePredios = false;
   }
 
   selectItemMeses(item: string): void {
@@ -118,15 +76,8 @@ export class FuncionesPrincipalesComponent implements OnInit {
     this.isActiveMeses = false;
   }
 
-  filterItemsPredios(): void {
-    this.filteredItemsPredios = this.predios.filter(item => item.toLowerCase().startsWith(this.searchValuePredios.toLowerCase()));
-  }
-
   filterItemsMeses(): void {
     this.filteredItemsMeses = this.meses.filter(item => item.toLowerCase().startsWith(this.searchValueMeses.toLowerCase()));
-  }
-  closeComboboxPredios(): void {
-    this.isActivePredios = false;
   }
   
   closeComboboxMeses(): void {
@@ -165,5 +116,40 @@ export class FuncionesPrincipalesComponent implements OnInit {
         break;
       }
     }
+  }
+
+
+
+
+
+
+
+  
+  ngOnInit(): void {
+    this.predioService.getPredios()
+    .subscribe(data=>{
+      console.log(data)
+      this.predioArray = data.predios;    //OBTIENE LOS PREDIOS EN predioArray
+      this.filteredPredios = this.predioArray;    //PASA LOS DATOS OBTENIDOS A UN SUBARRAY DE PREDIOS FILTRADOS filteredPredios
+    },
+    error=>console.log(error));
+  }
+
+  //SOBRE LOS PREDIOS
+  selectedPredio(item: Predio): void {    //PERMITE SELECCIONAR EL PREDIO Y CERRAR EL CBOX DE PREDIOS
+    this.selectedItemPredio = item.predio;
+    this.isActivePredios = false;
+  }
+
+  filterPredios(): void {   //PERMITE FILTRAR LOS PREDIOS CON LA BARRA DE BÚSQUEDA
+    this.filteredPredios = this.predioArray.filter(predio => predio.predio.toLowerCase().startsWith(this.searchPredios.toLowerCase()))
+  }
+
+  closeComboboxPredios(): void {    //PERMITE DESACTIVAR EL CBOX DE PREDIOS
+    this.isActivePredios = false;
+  }
+
+  toggleActivePredios(): void {   //PERMITE (PARA EL CBOX DE PREDIOS) ACTIVAR SI ESTÁ DESACTIVADO, DESACTIVAR SI ESTÁ ACTIVADO
+    this.isActivePredios = !this.isActivePredios;
   }
 }

@@ -16,20 +16,20 @@
         <div>
           <div class="envoltura" [ngClass]="{'active': isActivePredios}">
             <div class="select-btn" (click)="toggleActivePredios()">
-              <span>{{selectedItemPredios}}</span>
+              <span>{{selectedItemPredio}}</span>
               <i class="uil uil-angle-down"></i>
             </div>
             <div class="combobox-recuadro">
               <div class="buscar">
                 <i class="uil uil-search"></i>
-                <input type="text" placeholder="Buscar Predio" [(ngModel)]="searchValuePredios"
-                  (keyup)="filterItemsPredios()">
+                <input type="text" placeholder="Buscar Predio" [(ngModel)]="searchPredios"
+                  (keyup)="filterPredios()">
                 <span class="buscador-cerrar" (click)="closeComboboxPredios()">&times;</span>
               </div>
               <ul class="opciones">
-                <li *ngFor="let item of filteredItemsPredios" (click)="selectItemPredios(item)"
-                  [ngClass]="{'selected': item === selectedItemPredios}">
-                  {{item}}
+                <li *ngFor="let predio of filteredPredios" (click)="selectedPredio(predio)"
+                  [ngClass]="{'selected': predio.predio === selectedItemPredio}">
+                  {{predio.predio}}
                 </li>
               </ul>
             </div>
