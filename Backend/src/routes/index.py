@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from src.database.db import db
 from src.services.get.getPredios import getPredios
-from src.services.get.getPresidente import getPresidente
+from src.services.get.getGastos import getGastos
 
 main = Blueprint('index_blueprint', __name__)
 
@@ -17,11 +17,11 @@ def principal():
         return jsonify({'message':'ERROR', 'success':False})
     
 @main.route('/getPredios/<int:id>')
-def presidente(id):
+def gastos(id):
     try:
-        presidente = getPresidente(id)
-        if(len(presidente)>0):
-            return jsonify({'presidentes':presidente, 'message':"SUCCESS", 'success':True})
+        gastos = getGastos(id)
+        if(len(gastos)>0):
+            return jsonify({'gastos':gastos, 'message':"SUCCESS", 'success':True})
         else:
             return jsonify({'message':"NOT FOUND", 'success':True})
     except Exception as error:

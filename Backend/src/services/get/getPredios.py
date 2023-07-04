@@ -5,7 +5,7 @@ def getPredios():
     try:
         conn = connection()
         predios = []
-        inst = "select PR.id_predio, CONCAT(TP.nomre_predio, ' ', PR.descripcion) as predio, CONCAT(PE.apellido_paterno, ' ', PE.apellido_materno, ', ', PE.nombres) as responsable from tipo_predio TP, predio PR, persona PE where TP.id_tipo_predio = PR.id_tipo_predio and PR.id_persona = PE.id_persona;"
+        inst = "select PR.id_predio, CONCAT(TP.nomre_predio, ' ', PR.descripcion) as predio, CONCAT(PE.apellido_paterno, ' ', PE.apellido_materno, ', ', PE.nombres) as responsable from tipo_predio TP, predio PR, persona PE where TP.id_tipo_predio = PR.id_tipo_predio and PR.id_persona = PE.id_persona order by PR.id_predio;"
         with conn.cursor() as cursor:
             cursor.execute(inst)
             for row in cursor.fetchall():

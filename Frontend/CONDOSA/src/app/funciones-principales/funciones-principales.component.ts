@@ -4,6 +4,9 @@ import { Registro_Casa } from '../models/registro_casa';
 //PREDIOS
 import { Predio } from './../models/predio'
 import { PredioService } from './../services/predio.service';
+//GASTOS
+import { Gastos } from './../models/gastos'
+import { GastosService } from '../services/gastos.service';
 
 
 @Component({
@@ -19,8 +22,8 @@ export class FuncionesPrincipalesComponent implements OnInit {
   isActivePredios: boolean = false;
   nomPresidente: String = '';
 
-  periodoArray:Predio[] = [];
-  filteredPeriodos:Predio[] = [];
+  gastoArray:Gastos[] = [];
+  filteredPeriodos:Gastos[] = [];
   searchPeriodos:String = '';
   selectedItemPeriodo:String = 'Seleccione';
   isActivePeriodo: boolean = false;
@@ -31,7 +34,8 @@ export class FuncionesPrincipalesComponent implements OnInit {
   cuadradoColor: string = 'red';    //COLOR SEMAFORO DE LA CASA
 
   constructor(
-    private predioService:PredioService
+    private predioService:PredioService,
+    private gastosService:GastosService
     ){}
 
   
@@ -141,13 +145,24 @@ export class FuncionesPrincipalesComponent implements OnInit {
     error=>console.log(error));
   }
 
+  
   //SOBRE LOS PREDIOS
   selectedPredio(item: Predio): void {    //PERMITE SELECCIONAR EL PREDIO Y CERRAR EL CBOX DE PREDIOS
     this.selectedItemPredio = item.predio;
     this.nomPresidente = item.responsable;
+
+    this.gastosService.getGastos(item.id_predio)
+    .subscribe(data=>{
+      console.log(data)
+      this.gastoArray = data.gastos;    //OBTIENE LOS PREDIOS EN predioArray
+      this.filteredPeriodos = this.gastoArray;    //PASA LOS DATOS OBTENIDOS A UN SUBARRAY DE PREDIOS FILTRADOS filteredPredios
+    },
+    error=>console.log(error));
+
+    this.selectedItemPeriodo = 'Seleccione';
     this.isActivePredios = false;
   }
-
+  
   filterPredios(): void {   //PERMITE FILTRAR LOS PREDIOS CON LA BARRA DE BÚSQUEDA
     this.filteredPredios = this.predioArray.filter(predio => predio.predio.toLowerCase().startsWith(this.searchPredios.toLowerCase()))
   }
@@ -158,5 +173,24 @@ export class FuncionesPrincipalesComponent implements OnInit {
 
   toggleActivePredios(): void {   //PERMITE (PARA EL CBOX DE PREDIOS) ACTIVAR SI ESTÁ DESACTIVADO, DESACTIVAR SI ESTÁ ACTIVADO
     this.isActivePredios = !this.isActivePredios;
+  }
+
+
+  //SOBRE LOS PERIODOS
+  selectedPeriodo(item1: Gastos): void {    //PERMITE SELECCIONAR EL PREDIO Y CERRAR EL CBOX DE PREDIOS
+    this.selectedItemPeriodo = item1.periodo;
+    this.isActivePeriodo = false;
+  }
+
+  filterPeriodos(): void {   //PERMITE FILTRAR LOS PREDIOS CON LA BARRA DE BÚSQUEDA
+    this.filteredPeriodos = this.gastoArray.filter(periodo => periodo.periodo.toLowerCase().startsWith(this.searchPeriodos.toLowerCase()))
+  }
+
+  closeComboboxPeriodos(): void {    //PERMITE DESACTIVAR EL CBOX DE PREDIOS
+    this.isActivePeriodo = false;
+  }
+
+  toggleActivePeriodos(): void {   //PERMITE (PARA EL CBOX DE PREDIOS) ACTIVAR SI ESTÁ DESACTIVADO, DESACTIVAR SI ESTÁ ACTIVADO
+    this.isActivePeriodo = !this.isActivePeriodo;
   }
 }

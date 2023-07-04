@@ -43,22 +43,22 @@
           </b></p>
         </div>
         <div>
-          <div class="envoltura1" [ngClass]="{'active': isActiveMeses}">
-            <div class="combobox-cuerpo1" (click)="toggleActiveMeses()">
-              <span>{{selectedItemMeses}}</span>
+          <div class="envoltura1" [ngClass]="{'active': isActivePeriodo}">
+            <div class="combobox-cuerpo1" (click)="toggleActivePeriodos()">
+              <span>{{selectedItemPeriodo}}</span>
               <i class="uil uil-angle-down"></i>
             </div>
             <div class="combobox-recuadro1">
               <div class="buscar">
                 <i class="uil uil-search"></i>
-                <input type="text" placeholder="Periodo de la cuota" [(ngModel)]="searchValueMeses"
-                  (keyup)="filterItemsMeses()">
-                <span class="buscador-cerrar" (click)="closeComboboxMeses()">&times;</span>
+                <input type="text" placeholder="Periodo de la cuota" [(ngModel)]="searchPeriodos"
+                  (keyup)="filterPeriodos()">
+                <span class="buscador-cerrar" (click)="closeComboboxPeriodos()">&times;</span>
               </div>
               <ul class="opciones1">
-                <li *ngFor="let item of filteredItemsMeses" (click)="selectItemMeses(item)"
-                  [ngClass]="{'selected': item === selectedItemMeses}">
-                  {{item}}
+                <li *ngFor="let periodos of filteredPeriodos" (click)="selectedPeriodo(periodos)"
+                  [ngClass]="{'selected': periodos.periodo === selectedItemPeriodo}">
+                  {{periodos.periodo}}
                 </li>
               </ul>
             </div>
