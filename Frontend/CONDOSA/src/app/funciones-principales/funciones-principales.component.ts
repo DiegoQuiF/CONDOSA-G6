@@ -17,6 +17,7 @@ export class FuncionesPrincipalesComponent implements OnInit {
   searchPredios:String = '';
   selectedItemPredio:String = 'Seleccione';
   isActivePredios: boolean = false;
+  nomPresidente: String = '';
 
   periodoArray:Predio[] = [];
   filteredPeriodos:Predio[] = [];
@@ -29,7 +30,12 @@ export class FuncionesPrincipalesComponent implements OnInit {
 
   cuadradoColor: string = 'red';    //COLOR SEMAFORO DE LA CASA
 
-  constructor(private predioService:PredioService){}
+  constructor(
+    private predioService:PredioService
+    ){}
+
+  
+
 
 
 
@@ -138,6 +144,7 @@ export class FuncionesPrincipalesComponent implements OnInit {
   //SOBRE LOS PREDIOS
   selectedPredio(item: Predio): void {    //PERMITE SELECCIONAR EL PREDIO Y CERRAR EL CBOX DE PREDIOS
     this.selectedItemPredio = item.predio;
+    this.nomPresidente = item.responsable;
     this.isActivePredios = false;
   }
 
