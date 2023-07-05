@@ -101,7 +101,7 @@
   margin-right: 200px; /* Ajusta la separación a 10px desde el borde derecho */
 }
 
-.subsection-0 {
+.subseccion-titulo {
   align-items: start;
   margin-top: 1rem;
   padding: 0.5rem 1rem 0.5rem 1rem;
@@ -167,7 +167,7 @@
   width: 50%;
 }
 
-.subsection-1 {
+.subseccion-1 {
   align-items: start;
   margin: 0.5rem 0rem 2rem 0rem;
   background: rgba(255, 255, 255, 0.616);
