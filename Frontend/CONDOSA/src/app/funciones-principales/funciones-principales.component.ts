@@ -68,33 +68,7 @@ export class FuncionesPrincipalesComponent implements OnInit {
     new Registro_Casa('20', 'B', 'Pedro Martínez', 'Comercial', '90', '12', '102', '9%', 'no finalizado', '5')
   );
   
-  meses = ["Enero-23", "Febrero-23", "Marzo-23", "Abril-23"];
-  selectedItemMeses: string = '';
-  searchValueMeses: string = '';
-  filteredItemsMeses: string[] = [];
-  isActiveMeses: boolean = false;
   estadoRegistroPredioSelected:string='no finalizado';
-  presidente ="Ávalos Cuadros, Juan Carlos";
-  
-  toggleActiveMeses(): void {
-    console.log("se detecta el click");
-    this.isActiveMeses = !this.isActiveMeses;
-  }
-
-  selectItemMeses(item: string): void {
-    this.selectedItemMeses = item;
-    this.isActiveMeses = false;
-  }
-
-  filterItemsMeses(): void {
-    this.filteredItemsMeses = this.meses.filter(item => item.toLowerCase().startsWith(this.searchValueMeses.toLowerCase()));
-  }
-  
-  closeComboboxMeses(): void {
-    this.isActiveMeses = false;
-  }
-
-  //
 
   //METODOS PARA EL SEMAFORO DE CASA.
   cambiarColorCuadrado() {
@@ -134,7 +108,7 @@ export class FuncionesPrincipalesComponent implements OnInit {
 
 
 
-  
+  //AL INICIO
   ngOnInit(): void {
     this.predioService.getPredios()
     .subscribe(data=>{
