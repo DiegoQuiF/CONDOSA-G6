@@ -1,6 +1,6 @@
 <div class="subseccion-titulo">
   <p class="mp-0"><b>
-    Registrar gastos de predio
+    Registrar gastos del predio
   </b></p>
 </div>
 <div class="subseccion-1">
@@ -9,8 +9,8 @@
       <div class="cont-2">
         <div class="text-center-v">
           <div style="margin: 0; padding: 0;">
-            <div class="text-1 mp-0">
-              <p class="text-1 mp-0"><b>Gastos del predio</b></p>
+            <div class="textoPricipal mp-0">
+              <p class="textoPricipal mp-0"><b>GASTOS PREDIO</b></p>
             </div>
           </div>
         </div>
@@ -28,8 +28,8 @@
         <div class="flexy">
           <div class="text-center-v">
             <div style="margin: 0; padding: 0;">
-              <div class="tab-1 text-1 mp-0">
-                <p class="text-1 mp-0"><b>Predio</b></p>
+              <div class="tab-1 textoPricipal mp-0">
+                <p class="textoPricipal mp-0">Predio</p>
               </div>
             </div>
           </div>
@@ -37,8 +37,8 @@
         <div class="flexy">
           <div class="text-center-v">
             <div style="margin: 0; padding: 0;">
-              <div class="tab-1 text-1 mp-0">
-                <p class="text-1 mp-0"><b>Tipo de gasto</b></p>
+              <div class="tab-1 textoPricipal mp-0">
+                <p class="textoPricipal mp-0">Tipo de gasto</p>
               </div>
             </div>
           </div>
@@ -52,12 +52,12 @@
         <div class="flexy">
           <div class="text-center-v">
             <div style="margin: 0; padding: 0;">
-              <div class="tab-1 text-1 mp-0">
-                <p class="text-1 mp-0"><b>Descripción</b></p>
+              <div class="tab-1 textoPricipal mp-0">
+                <p class="textoPricipal mp-0">Descripción</p>
               </div>
             </div>
           </div>
-          <select name="tipogasto" class="form-select" style="width: 35%; height: 40px;">
+          <select name="descrip" class="form-select" style="width: 35%; height: 40px;">
             <option>--seleccione--</option>
             <option *ngFor="let desc of listaDescripcion">
               {{desc}}
@@ -67,8 +67,8 @@
         <div class="flexy">
           <div class="text-center-v">
             <div style="margin: 0; padding: 0;">
-              <div class="tab-1 text-1 mp-0">
-                <p class="text-1 mp-0"><b>Monto total</b></p>
+              <div class="tab-1 textoPricipal mp-0">
+                <p class="textoPricipal mp-0">Monto total</p>
               </div>
             </div>
           </div>
@@ -88,8 +88,8 @@
       <div class="cont-2">
         <div class="text-center-v">
           <div style="margin: 0; padding: 0;">
-            <div class="tab-1 text-1 mp-0">
-              <p class="text-1 mp-0"><b>Gastos registrados</b></p>
+            <div class="tab-1 textoPricipal mp-0">
+              <p class="textoPricipal mp-0">Gastos registrados</p>
             </div>
           </div>
         </div>
@@ -99,7 +99,7 @@
               <table>
                 <thead>
                   <tr>
-                    <th>Tipo Gasto</th>
+                    <th>Descripción</th>
                     <th>Monto</th>
                     <th></th>
                   </tr>

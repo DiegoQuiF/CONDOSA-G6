@@ -1,6 +1,6 @@
 <div class="subseccion-titulo">
   <p class="mp-0"><b>
-      Registrar gastos de predio
+      Registrar gastos de casa
     </b></p>
 </div>
 <div class="subseccion-1">
@@ -8,34 +8,88 @@
     <div class="row">
       <div class="row" style="height: 60vh;">
         <div class="col" style="width: 33.33%;">
-          <div class="row" style="height: 10vh;">
-            <p>FILA1</p>
+          <div class="row" style="height: 10vh; display: flex; align-items: center;">
+            <p class="textoPricipal tabulador-elementosIzq"><b>GASTOS COMUNES</b></p>
           </div>
           <div class="row" style="height: 5vh;">
-            <p>FILA2</p>
+            <p class="textoPricipal tabulador-elementosIzq">GASTOS COMUNES</p>
           </div>
           <div class="row" style="height: 45vh;">
             <p>FILA3</p>
           </div>
         </div>
         <div class="col" style="width: 33.33%;">
-          <div class="row" style="height: 10vh;">
-            <p>FILA1</p>
+          <div class="row" style="height: 10vh; display: flex; align-items: center;">
+            <p class="textoPricipal tabulador-elementosDerc">GASTOS INDIVIDUALES</p>
           </div>
           <div class="row" style="height: 10vh;">
-            <p>FILA2</p>
+            <div class="col-2" style="width: 30%;">
+              <select name="listacasas" class="form-select" style="width: 100%; height: 40px;">
+                <option>--N° Casa--</option>
+                <option *ngFor="let casa of listaCasas">
+                  {{casa}}
+                </option>
+              </select>
+            </div>
+            <div class="col-5" style="width: 35%;">
+              <p class="textoPricipal">Tipos de gasto</p>
+            </div>
+            <div class="col-5" style="width: 35%;">
+              <select name="tipogasto_casas" class="form-select" style="width: 100%; height: 40px;">
+                <option>--seleccione--</option>
+                <option *ngFor="let gasto of listaTipoGastoCasas">
+                  {{gasto}}
+                </option>
+              </select>
+            </div>
           </div>
           <div class="row" style="height: 10vh;">
-            <p>FILA3</p>
+            <div class="col-2" style="width: 30%;">
+            </div>
+            <div class="col-5" style="width: 35%;">
+              <p class="textoPricipal">Descripción</p>
+            </div>
+            <div class="col-5" style="width: 35%;">
+              <select name="desc_casas" class="form-select" style="width: 100%; height: 40px;">
+                <option>--seleccione--</option>
+                <option *ngFor="let desc of listaDescripcionCasas">
+                  {{desc}}
+                </option>
+              </select>
+            </div>
           </div>
           <div class="row" style="height: 10vh;">
-            <p>FILA4</p>
+            <div class="col-2" style="width: 30%;">
+            </div>
+            <div class="col-5" style="width: 35%;">
+              <p class="textoPricipal">Importe total</p>
+            </div>
+            <div class="col-5" style="width: 35%;">
+              <input type="number" name="importe_casa" id="importe_casa" placeholder="S/." class="form-control"
+              style="width: 100%; height: 40px;">
+            </div>
           </div>
-          <div class="row" style="height: 10vh;">
-            <p>FILA5</p>
+          <div class="row" style="height: 5vh;">
+            <div class="col-2" style="width: 30%;">
+            </div>
+            <div class="col-5" style="width: 35%;">
+              <button type="submit" class="btn btn-primary" style="width: 100px; height: 40px">
+                Registrar
+              </button>
+            </div>
+            <div class="col-5" style="width: 35%;">
+            </div>
           </div>
-          <div class="row" style="height: 10vh;">
-            <p>FILA6</p>
+          <div class="row" style="height: 5vh;">
+            <div class="col-2" style="width: 30%;">
+            </div>
+            <div class="col-5" style="width: 35%;">
+              <button type="submit" class="btn btn-primary" style="width: 150px; height: 40px">
+                Asignar del mes anterior
+              </button>
+            </div>
+            <div class="col-5" style="width: 35%;">
+            </div>
           </div>
         </div>
         <div class="col" style="width: 33.33%;">
@@ -52,7 +106,32 @@
             <p class="textoPricipal tabulador-elementosDerc">Gastos registrados de la casa</p>
           </div>
           <div class="row" style="height: 45vh; display: flex; align-items: center;">
-            <p>FILA2</p>
+            <div class="tab-3" style="margin-right: 4rem;">
+              <div class="contenedor-tabla">
+                <div class="tabla-gastos">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Descripción</th>
+                        <th>Monto</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let gasto of gatosRegistrados">
+                        <td>{{ gasto.TipoGasto}}</td>
+                        <td>{{ gasto.Monto }}</td>
+                        <td>
+                          <button type="submit" class="btn btn-primary" style="width: 70px; height: 35px;">
+                            Editar
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

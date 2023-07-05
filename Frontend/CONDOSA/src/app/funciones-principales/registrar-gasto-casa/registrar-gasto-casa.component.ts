@@ -14,8 +14,23 @@ export class RegistrarGastoCasaComponent implements OnInit {
   //DATOS DE LA CASA
   num_casa:string='5';
   
+  listaCasas: any[] = ['101', '102', '103','104','105'];
+  //
+  listaTipoGastoCasas: any[] = ['Gasto genrico', '´Sanciones'];
+  listaDescripcionCasas: any[] = ['Agua', 'Luz y Electricidad'];
   
-
+  gatosRegistrados: any[] = [
+    { TipoGasto: 'Gasto de agua individual', Monto: 30},
+    { TipoGasto: 'Administración y contabilidad ', Monto: 66 },
+    { TipoGasto: 'Teléfono fijo e internet',  Monto: 12.3},
+    { TipoGasto: 'Consumo de Luz Mensual SS-GG -Suministro 1695605',  Monto: 12.3 },
+    { TipoGasto: 'Consumo de Luz Mensual BCI -Suministro 1695613',  Monto: 12.3},
+    { TipoGasto: 'Planilla (portería- áreas comunes- limpieza)', Monto: 30.5},
+    { TipoGasto: 'Administración y contabilidad ', Monto: 66.0 },
+    { TipoGasto: 'Teléfono fijo e internet',  Monto: 12.3},
+    { TipoGasto: 'Maltratar-faltar el respeto al personal',  Monto: 12.3},
+    { TipoGasto: 'Utilizar el estacionamiento como depocito',  Monto: 12.3}
+  ];
   constructor() { }
 
   ngOnInit() {
