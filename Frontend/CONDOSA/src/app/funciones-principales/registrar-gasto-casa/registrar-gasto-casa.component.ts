@@ -12,9 +12,9 @@ export class RegistrarGastoCasaComponent implements OnInit {
   @Output() estadoRegistroNum_Casa=new EventEmitter<string>();
 
   //DATOS DE LA CASA
-  num_casa:string='5';
+  num_casa_selected:string='--N° Casa--';
   
-  listaCasas: any[] = ['101', '102', '103','104','105'];
+  listaCasas: any[] = ['1', '2', '3','4','5'];
   //
   listaTipoGastoCasas: any[] = ['Gasto genrico', '´Sanciones'];
   listaDescripcionCasas: any[] = ['Agua', 'Luz y Electricidad'];
@@ -63,9 +63,14 @@ export class RegistrarGastoCasaComponent implements OnInit {
     this.mostrarRegistroCasa_OUT.emit(item);
   }
   
-  finalizarRegistroCasa(num_casa:string){
-    //Aca iria el metodo para modificar la tabla ESTADO_REGISTRO_PREDIO de l BD
-    this.estadoRegistroNum_Casa.emit(num_casa);
+  finalizarRegistroCasa(){
+    //Aca iria el metodo para modificar la tabla ESTADO_REGISTRO_PREDIO de la BD
+    if(this.num_casa_selected !== '--N° Casa--'){
+      this.estadoRegistroNum_Casa.emit(this.num_casa_selected);
+    }else{
+      alert('Selecciona un numero de casa');
+    }
+    
   }
   
 }

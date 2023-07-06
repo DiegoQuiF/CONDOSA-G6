@@ -46,7 +46,7 @@
           </div>
           <div class="row" style="height: 10vh;">
             <div class="col-2" style="width: 30%;">
-              <select name="listacasas" class="form-select" style="width: 100%; height: 40px;">
+              <select name="listacasas" class="form-select" style="width: 100%; height: 40px;" [(ngModel)]="num_casa_selected">
                 <option>--N° Casa--</option>
                 <option *ngFor="let casa of listaCasas">
                   {{casa}}
@@ -157,8 +157,8 @@
       </div>
       <div class="row" style="height: 10vh; display: flex; justify-content: center; align-items: center;">
         <button type="submit" class="btn btn-primary" style="width: 240px; height: 50px;"
-          (click)="finalizarRegistroCasa('10')">
-          Finalizar registro de predio
+          (click)="finalizarRegistroCasa()">
+          Finalizar registro de casa
         </button>
       </div>
     </div>

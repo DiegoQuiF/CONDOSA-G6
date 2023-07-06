@@ -207,8 +207,8 @@ li.selected {
     width: 250px;
     /*250*/
     align-items: center;
-      
-    
+
+
 }
 
 .tabulador-izq {
@@ -259,13 +259,16 @@ li.selected {
     en el eje transversal (horizontal) dentro del contenedor.*/
 
 }
+
 /* TABLA */
 
 .contenedor-tabla {
     display: flex;
     justify-content: center;
-    height: 300px; /* Altura fija del contenedor */
-    overflow-y: auto; /* Barra de desplazamiento vertical */
+    height: 300px;
+    /* Altura fija del contenedor */
+    overflow-y: auto;
+    /* Barra de desplazamiento vertical */
 }
 
 .tabla-principal {
@@ -285,7 +288,8 @@ li.selected {
     padding: 8px;
     text-align: center;
     border-bottom: 1px solid #ddd;
-    border-right: 1px solid #ddd; /* Agregar línea vertical */
+    border-right: 1px solid #ddd;
+    /* Agregar línea vertical */
 }
 
 .tabla-principal td {
@@ -293,12 +297,14 @@ li.selected {
     text-align: center;
     background: #ffffff2e;
     border-bottom: 1px solid #ddd;
-    border-right: 1px solid #ddd; /* Agregar línea vertical */
+    border-right: 1px solid #ddd;
+    /* Agregar línea vertical */
 }
 
 .tabla-principal th:last-child,
 .tabla-principal td:last-child {
-    border-right: none; /* Eliminar línea vertical en la última columna */
+    border-right: none;
+    /* Eliminar línea vertical en la última columna */
 }
 
 .tabla-principal th {
@@ -309,15 +315,31 @@ li.selected {
 .tabla-principal tbody tr:last-child td {
     border-bottom: none;
 }
+
 /**/
 
-.cuadrado-registro-casa {
+.circulo-registro-casa {
     width: 20px;
     height: 20px;
     background-color: #717171;
     display: inline-block;
     vertical-align: middle;
     margin-right: 5px;
+    border-radius: 50%;
+    /* Hace que el elemento sea un círculo */
+}
+
+.circulo-registro-predio {
+    width: 30px;
+    height: 30px;
+    background-color: #717171;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px;
+    border-radius: 50%;
+    /* Hace que el elemento sea un círculo */
+    margin-left: 10px;
+    /* Añade un margen a la izquierda para crear un tabulador */
 }
 
 /**/
@@ -338,39 +360,51 @@ li.selected {
     margin: 0;
     padding: 0;
 }
+
 .text-0 {
     font-size: 1rem;
 }
+
 .text-1 {
     font-size: 1.15rem;
 }
+
 .text-2 {
     font-size: 1.30rem;
 }
+
 .text-3 {
     font-size: 1.45rem;
 }
+
 .text-4 {
     font-size: 1.6rem;
 }
+
 .tab-0 {
     margin-left: 0.5rem;
 }
+
 .tab-1 {
     margin-left: 1rem;
 }
+
 .tab-2 {
     margin-left: 1.5rem;
 }
+
 .tab-3 {
     margin-left: 2rem;
 }
+
 .tab-4 {
     margin-left: 2.5rem;
 }
+
 .color-b {
     color: #fff;
 }
+
 .color-n {
     color: #000;
 }
@@ -386,6 +420,7 @@ li.selected {
     padding: 0;
     margin: 0;
 }
+
 .cont-2 {
     width: 50%;
 }
