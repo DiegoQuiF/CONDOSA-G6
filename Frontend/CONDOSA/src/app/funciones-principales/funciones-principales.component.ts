@@ -7,6 +7,9 @@ import { PredioService } from './../services/predio.service';
 //GASTOS
 import { Gastos } from './../models/gastos'
 import { GastosService } from '../services/gastos.service';
+//CASAS
+import { Casas } from '../models/casas';
+import { CasasService } from '../services/casas.service';
 
 
 @Component({
@@ -18,7 +21,7 @@ export class FuncionesPrincipalesComponent implements OnInit {
   predioArray:Predio[] = [];
   filteredPredios:Predio[] = [];
   searchPredios:String = '';
-  selectedItemPredio:String = '--seleccione--';
+  selectedItemPredio:String = 'Seleccione';
   isActivePredios: boolean = false;
   nomPresidente: String = '';
 
@@ -28,6 +31,8 @@ export class FuncionesPrincipalesComponent implements OnInit {
   selectedItemPeriodo:String = 'Seleccione';
   isActivePeriodo: boolean = false;
 
+  casasArray:Casas[] = [];
+
   mostrarRegistrarGPredios: boolean = false;  //PERMITE MOSTRAR EL PANEL DE REGISTRO DE GASTOS DE PREDIO
   mostrarRegistrarGCasa: boolean = false;   //PERMITE MOSTRAR EL PANEL DE REGISTRO DE GASTOS DE CASA
 
@@ -35,7 +40,8 @@ export class FuncionesPrincipalesComponent implements OnInit {
 
   constructor(
     private predioService:PredioService,
-    private gastosService:GastosService
+    private gastosService:GastosService,
+    private casasService:CasasService
     ){}
 
   
@@ -133,6 +139,13 @@ export class FuncionesPrincipalesComponent implements OnInit {
     },
     error=>console.log(error));
 
+    this.casasService.getCasas(item.id_predio)
+    .subscribe(data=>{
+      console.log(data)
+      this.casasArray = data.casas;
+    },
+    error=>console.log(error));
+    
     this.selectedItemPeriodo = 'Seleccione';
     this.isActivePredios = false;
   }

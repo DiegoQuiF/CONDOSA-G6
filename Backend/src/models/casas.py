@@ -29,6 +29,8 @@ class Casas(db.Model):
 
     def to_json(self):
         return {
+            'id_indice': self.id_indice,
+            'id_predio': self.id_predio,
             'id_casa': self.id_casa,
             'mdu': self.mdu,
             'numero': self.numero,

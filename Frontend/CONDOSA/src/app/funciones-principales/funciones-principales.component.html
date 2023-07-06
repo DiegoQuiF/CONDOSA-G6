@@ -129,25 +129,29 @@
         <table>
           <thead>
             <tr>
-              <th>Nro. Casa/habitación</th>
-              <th>Bloque</th>
-              <th>Propietario</th>
-              <th>Categoría</th>
-              <th>Área casa(m2)</th>
-              <th>Cochera1(m2)</th>
-              <th>Área total</th>
-              <th>% Participación</th>
-              <th>Estado</th> <!-- Nueva columna -->
+              <th>indice</th>
+              <th>Número de casa</th>
+              <th>MDU</th>
+              <th>Piso</th>
+              <th>Estado</th>
+              <th>Responsable</th>
+              <th>Área casa (m2)</th>
+              <th>Área cochera (m2)</th>
+              <th>Área total (m2)</th>
+              <th>Participación (%)</th>
+              <th>Estado</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let dato of datosTabla">
-              <td>{{ dato.num_casa}}</td>
-              <td>{{ dato.bloque }}</td>
-              <td>{{ dato.propietario }}</td>
-              <td>{{ dato.categoria }}</td>
+            <tr *ngFor="let dato of casasArray">
+              <td>{{ dato.id_indice }}</td>
+              <td>{{ dato.numero }}</td>
+              <td>{{ dato.mdu }}</td>
+              <td>{{ dato.piso }}</td>
+              <td>{{ dato.estado }}</td>
+              <td>{{ dato.responsable }}</td>
               <td>{{ dato.area_casa }}</td>
-              <td>{{ dato.cochera }}</td>
+              <td>{{ dato.area_cochera }}</td>
               <td>{{ dato.area_total }}</td>
               <td>{{ dato.participacion }}</td>
               <td>
