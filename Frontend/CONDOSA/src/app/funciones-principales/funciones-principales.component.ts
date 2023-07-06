@@ -1,15 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Registro_Casa } from '../models/registro_casa';
 
-//PREDIOS
+//MODELOS
 import { Predio } from './../models/predio'
-import { PredioService } from './../services/predio.service';
-//GASTOS
 import { Gastos } from './../models/gastos'
-import { GastosService } from '../services/gastos.service';
-//CASAS
 import { Casas } from '../models/casas';
-import { CasasService } from '../services/casas.service';
+//SERVICIO BACKEND
+import { ConnBackendService } from '../services/conn-backend.service';
 
 
 @Component({
@@ -17,6 +14,7 @@ import { CasasService } from '../services/casas.service';
   templateUrl: './funciones-principales.component.html',
   styleUrls: ['./funciones-principales.component.css']
 })
+
 export class FuncionesPrincipalesComponent implements OnInit {
   predioArray:Predio[] = [];
   filteredPredios:Predio[] = [];
@@ -38,11 +36,7 @@ export class FuncionesPrincipalesComponent implements OnInit {
 
   cuadradoColor: string = 'red';    //COLOR SEMAFORO DE LA CASA
 
-  constructor(
-    private predioService:PredioService,
-    private gastosService:GastosService,
-    private casasService:CasasService
-    ){}
+  constructor(private connBackend:ConnBackendService){}
 
   
 
@@ -116,7 +110,7 @@ export class FuncionesPrincipalesComponent implements OnInit {
 
   //AL INICIO
   ngOnInit(): void {
-    this.predioService.getPredios()
+    this.connBackend.getPredios()
     .subscribe(data=>{
       console.log(data)
       this.predioArray = data.predios;    //OBTIENE LOS PREDIOS EN predioArray
@@ -131,7 +125,7 @@ export class FuncionesPrincipalesComponent implements OnInit {
     this.selectedItemPredio = item.predio;
     this.nomPresidente = item.responsable;
 
-    this.gastosService.getGastos(item.id_predio)
+    this.connBackend.getGastos(item.id_predio)
     .subscribe(data=>{
       console.log(data)
       this.gastoArray = data.gastos;    //OBTIENE LOS PREDIOS EN predioArray
@@ -139,7 +133,7 @@ export class FuncionesPrincipalesComponent implements OnInit {
     },
     error=>console.log(error));
 
-    this.casasService.getCasas(item.id_predio)
+    this.connBackend.getCasas(item.id_predio)
     .subscribe(data=>{
       console.log(data)
       this.casasArray = data.casas;

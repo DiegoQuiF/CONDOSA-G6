@@ -3,6 +3,8 @@ from src.database.db import db
 from src.services.get.getPredios import getPredios
 from src.services.get.getGastos import getGastos
 from src.services.get.getTablaCasas import getTablaCasas
+from src.services.get.getTipoGastos import getTipoGastos
+from src.services.get.getDescripGastos import getDescripGastos
 
 main = Blueprint('index_blueprint', __name__)
 
@@ -34,6 +36,28 @@ def casas(id):
         casas = getTablaCasas(id)
         if(len(casas)>0):
             return jsonify({'casas':casas, 'message':"SUCCESS", 'success':True})
+        else:
+            return jsonify({'message':"NOT FOUND", 'success':True})
+    except Exception as error:
+        return jsonify({'message':'ERROR', 'success':False})
+
+@main.route('/getTipoGastosComunes')
+def tipoGastosComunes():
+    try:
+        tipoGastos = getTipoGastos()
+        if(len(tipoGastos) > 0):
+            return jsonify({'tipoGastos':tipoGastos, 'message':"SUCCESS", 'success':True})
+        else:
+            return jsonify({'message':"NOT FOUND", 'success':True})
+    except Exception as error:
+        return jsonify({'message':'ERROR', 'success':False})
+    
+@main.route('/getTipoGastosComunes/<int:id>')
+def descripGastos(id):
+    try:
+        tipoGastos = getDescripGastos(id)
+        if(len(tipoGastos) > 0):
+            return jsonify({'tipoGastos':tipoGastos, 'message':"SUCCESS", 'success':True})
         else:
             return jsonify({'message':"NOT FOUND", 'success':True})
     except Exception as error:
