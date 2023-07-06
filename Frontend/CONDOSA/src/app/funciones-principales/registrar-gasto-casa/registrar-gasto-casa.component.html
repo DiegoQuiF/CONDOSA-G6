@@ -8,19 +8,41 @@
     <div class="row">
       <div class="row" style="height: 60vh;">
         <div class="col" style="width: 33.33%;">
-          <div class="row" style="height: 10vh; display: flex; align-items: center;">
+          <div class="row" style="height: 5vh; display: flex; align-items: center;">
             <p class="textoPricipal tabulador-elementosIzq"><b>GASTOS COMUNES</b></p>
           </div>
           <div class="row" style="height: 5vh;">
-            <p class="textoPricipal tabulador-elementosIzq">GASTOS COMUNES</p>
+            <p class="textoPricipal tabulador-elementosIzq">Gastos asignados al predio de las casas</p>
           </div>
-          <div class="row" style="height: 45vh;">
-            <p>FILA3</p>
+          <div class="row" style="height: 45vh; display: flex; align-items: center;">
+            <div class="contenedor-tabla">
+              <div class="tabla-gastos">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Descripción</th>
+                      <th>Monto</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let gasto of gatosRegistradosPredio">
+                      <td>{{ gasto.TipoGasto}}</td>
+                      <td>{{ gasto.Monto }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="row" style="height: 5vh; ">
+            <button type="submit" class="btn btn-primary tabulador-elementosIzq" style="width: 220px; height: 40px">
+              Registrar gastos comunes
+            </button>
           </div>
         </div>
         <div class="col" style="width: 33.33%;">
           <div class="row" style="height: 10vh; display: flex; align-items: center;">
-            <p class="textoPricipal tabulador-elementosDerc">GASTOS INDIVIDUALES</p>
+            <p class="textoPricipal tabulador-elementosDerc"><b>GASTOS INDIVIDUALES</b></p>
           </div>
           <div class="row" style="height: 10vh;">
             <div class="col-2" style="width: 30%;">
@@ -66,7 +88,7 @@
             </div>
             <div class="col-5" style="width: 35%;">
               <input type="number" name="importe_casa" id="importe_casa" placeholder="S/." class="form-control"
-              style="width: 100%; height: 40px;">
+                style="width: 100%; height: 40px;">
             </div>
           </div>
           <div class="row" style="height: 5vh;">
@@ -84,7 +106,7 @@
             <div class="col-2" style="width: 30%;">
             </div>
             <div class="col-5" style="width: 35%;">
-              <button type="submit" class="btn btn-primary" style="width: 150px; height: 40px">
+              <button type="submit" class="btn btn-primary" style="width: 250px; height: 40px">
                 Asignar del mes anterior
               </button>
             </div>
@@ -106,30 +128,28 @@
             <p class="textoPricipal tabulador-elementosDerc">Gastos registrados de la casa</p>
           </div>
           <div class="row" style="height: 45vh; display: flex; align-items: center;">
-            <div class="tab-3" style="margin-right: 4rem;">
-              <div class="contenedor-tabla">
-                <div class="tabla-gastos">
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>Descripción</th>
-                        <th>Monto</th>
-                        <th></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr *ngFor="let gasto of gatosRegistrados">
-                        <td>{{ gasto.TipoGasto}}</td>
-                        <td>{{ gasto.Monto }}</td>
-                        <td>
-                          <button type="submit" class="btn btn-primary" style="width: 70px; height: 35px;">
-                            Editar
-                          </button>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+            <div class="contenedor-tabla">
+              <div class="tabla-gastos">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Descripción</th>
+                      <th>Monto</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let gasto of gatosRegistradosCasa">
+                      <td>{{ gasto.TipoGasto}}</td>
+                      <td>{{ gasto.Monto }}</td>
+                      <td>
+                        <button type="submit" class="btn btn-primary" style="width: 70px; height: 35px;">
+                          Editar
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>

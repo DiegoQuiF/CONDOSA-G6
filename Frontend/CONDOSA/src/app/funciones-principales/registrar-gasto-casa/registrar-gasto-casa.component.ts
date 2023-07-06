@@ -19,7 +19,7 @@ export class RegistrarGastoCasaComponent implements OnInit {
   listaTipoGastoCasas: any[] = ['Gasto genrico', '´Sanciones'];
   listaDescripcionCasas: any[] = ['Agua', 'Luz y Electricidad'];
   
-  gatosRegistrados: any[] = [
+  gatosRegistradosCasa: any[] = [
     { TipoGasto: 'Gasto de agua individual', Monto: 30},
     { TipoGasto: 'Administración y contabilidad ', Monto: 66 },
     { TipoGasto: 'Teléfono fijo e internet',  Monto: 12.3},
@@ -31,6 +31,29 @@ export class RegistrarGastoCasaComponent implements OnInit {
     { TipoGasto: 'Maltratar-faltar el respeto al personal',  Monto: 12.3},
     { TipoGasto: 'Utilizar el estacionamiento como depocito',  Monto: 12.3}
   ];
+
+  gatosRegistradosPredio: any[] = [
+    { TipoGasto: 'Planilla (portería- áreas comunes- limpieza)', Monto: 305},
+    { TipoGasto: 'Administración y contabilidad ', Monto: 660 },
+    { TipoGasto: 'Teléfono fijo e internet',  Monto: 123},
+    { TipoGasto: 'Consumo de Luz Mensual SS-GG -Suministro 1695605',  Monto: 123 },
+    { TipoGasto: 'Consumo de Luz Mensual BCI -Suministro 1695613',  Monto: 123},
+    { TipoGasto: 'Planilla (portería- áreas comunes- limpieza)', Monto: 305},
+    { TipoGasto: 'Administración y contabilidad ', Monto: 660 },
+    { TipoGasto: 'Teléfono fijo e internet',  Monto: 123},
+    { TipoGasto: 'Consumo de Luz Mensual SS-GG -Suministro 1695605',  Monto: 123 },
+    { TipoGasto: 'Consumo de Luz Mensual BCI -Suministro 1695613',  Monto: 123},
+    { TipoGasto: 'Planilla (portería- áreas comunes- limpieza)', Monto: 305},
+    { TipoGasto: 'Administración y contabilidad ', Monto: 660 },
+    { TipoGasto: 'Teléfono fijo e internet',  Monto: 123},
+    { TipoGasto: 'Consumo de Luz Mensual SS-GG -Suministro 1695605',  Monto: 123 },
+    { TipoGasto: 'Consumo de Luz Mensual BCI -Suministro 1695613',  Monto: 123},
+    { TipoGasto: 'Planilla (portería- áreas comunes- limpieza)', Monto: 305},
+    { TipoGasto: 'Administración y contabilidad ', Monto: 660 },
+    { TipoGasto: 'Teléfono fijo e internet',  Monto: 123},
+    { TipoGasto: 'Consumo de Luz Mensual SS-GG -Suministro 1695605',  Monto: 123 },
+    { TipoGasto: 'Consumo de Luz Mensual BCI -Suministro 1695613',  Monto: 123}
+  ]; 
   constructor() { }
 
   ngOnInit() {
