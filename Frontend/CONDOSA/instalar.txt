@@ -1,0 +1,4 @@
+Cuando descarguen el proyecto, ejecuten en la terminal de vs code:
+npm install
+Luego ya pueden compilar el proyecto con normalidad usando
+ng serve -o

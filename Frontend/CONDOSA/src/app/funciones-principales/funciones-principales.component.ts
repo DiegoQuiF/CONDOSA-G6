@@ -18,7 +18,7 @@ export class FuncionesPrincipalesComponent implements OnInit {
   predioArray:Predio[] = [];
   filteredPredios:Predio[] = [];
   searchPredios:String = '';
-  selectedItemPredio:String = 'Seleccione';
+  selectedItemPredio:String = '--seleccione--';
   isActivePredios: boolean = false;
   nomPresidente: String = '';
 
@@ -69,7 +69,7 @@ export class FuncionesPrincipalesComponent implements OnInit {
   );
   
   estadoRegistroPredioSelected:string='no finalizado';
-
+  id_predio_selected='1';  
   //METODOS PARA EL SEMAFORO DE CASA.
   cambiarColorCuadrado() {
     this.cuadradoColor = 'green';
