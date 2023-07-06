@@ -43,9 +43,9 @@
             </div>
           </div>
           <select name="tipogasto" class="form-select" style="width: 35%; height: 40px;">
-            <option>--seleccione--</option>
-            <option *ngFor="let gasto of listaTipoGasto">
-              {{gasto}}
+            <option>Seleccione</option>
+            <option *ngFor="let tGasto of tipoGastoArray">
+              {{tGasto.descripcion}}
             </option>
           </select>
         </div>
@@ -58,9 +58,9 @@
             </div>
           </div>
           <select name="descrip" class="form-select" style="width: 35%; height: 40px;">
-            <option>--seleccione--</option>
-            <option *ngFor="let desc of listaDescripcion">
-              {{desc}}
+            <option>Seleccione</option>
+            <option *ngFor="let dGasto of descripGastoArray">
+              {{dGasto.descripcion}}
             </option>
           </select>
         </div>

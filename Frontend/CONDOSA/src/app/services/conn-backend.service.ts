@@ -21,4 +21,12 @@ export class ConnBackendService {
   getCasas(id:string):Observable<any>{
     return this.http.get(`${this.BASE_URL}/getPredios/${id}/getCasas`);
   }
+
+  getTipoGastos():Observable<any>{
+    return this.http.get(`${this.BASE_URL}/getTipoGastosComunes`);
+  }
+
+  getDescripGastos(id:string):Observable<any>{
+    return this.http.get(`${this.BASE_URL}/getTipoGastosComunes/${id}`);
+  }
 }

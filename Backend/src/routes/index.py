@@ -46,7 +46,7 @@ def tipoGastosComunes():
     try:
         tipoGastos = getTipoGastos()
         if(len(tipoGastos) > 0):
-            return jsonify({'tipoGastos':tipoGastos, 'message':"SUCCESS", 'success':True})
+            return jsonify({'tipoGastosComunes':tipoGastos, 'message':"SUCCESS", 'success':True})
         else:
             return jsonify({'message':"NOT FOUND", 'success':True})
     except Exception as error:
@@ -57,7 +57,7 @@ def descripGastos(id):
     try:
         tipoGastos = getDescripGastos(id)
         if(len(tipoGastos) > 0):
-            return jsonify({'tipoGastos':tipoGastos, 'message':"SUCCESS", 'success':True})
+            return jsonify({'descripGastosComunes':tipoGastos, 'message':"SUCCESS", 'success':True})
         else:
             return jsonify({'message':"NOT FOUND", 'success':True})
     except Exception as error:

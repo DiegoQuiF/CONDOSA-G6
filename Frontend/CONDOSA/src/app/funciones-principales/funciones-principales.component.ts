@@ -5,6 +5,8 @@ import { Registro_Casa } from '../models/registro_casa';
 import { Predio } from './../models/predio'
 import { Gastos } from './../models/gastos'
 import { Casas } from '../models/casas';
+import { TipoGastos } from '../models/tipo-gastos';
+import { DescripGastos } from '../models/descrip-gastos';
 //SERVICIO BACKEND
 import { ConnBackendService } from '../services/conn-backend.service';
 
@@ -16,6 +18,9 @@ import { ConnBackendService } from '../services/conn-backend.service';
 })
 
 export class FuncionesPrincipalesComponent implements OnInit {
+
+  constructor(private connBackend:ConnBackendService){}
+
   predioArray:Predio[] = [];
   filteredPredios:Predio[] = [];
   searchPredios:String = '';
@@ -35,8 +40,6 @@ export class FuncionesPrincipalesComponent implements OnInit {
   mostrarRegistrarGCasa: boolean = false;   //PERMITE MOSTRAR EL PANEL DE REGISTRO DE GASTOS DE CASA
 
   cuadradoColor: string = 'red';    //COLOR SEMAFORO DE LA CASA
-
-  constructor(private connBackend:ConnBackendService){}
 
   
 
@@ -75,16 +78,7 @@ export class FuncionesPrincipalesComponent implements OnInit {
     this.cuadradoColor = 'green';
   }
   //Ocular o Mostrar el registro para predios true mostrar, y false ocultar
-  cambiarEstadoRegistroPredio(item:boolean){
-    console.log("se cambia a "+ item + "desde el principal");
-    this.mostrarRegistrarGPredios=item;
-  }
-  //Metodo para indicar que ya se termino de regitrar 
-  finalizarRegistroPredio(){
-    this.estadoRegistroPredioSelected='finalizado';
-    //Aca iria el metodo para modificar la tabla ESTADO_REGISTRO_PREDIO de la BD
-    console.log("Se finaliza el registro del predio desde el principal");
-  }
+  
 
   // true mostrar, y false ocultar
   cambiarEstadoRegistroCasa(item:boolean){
@@ -174,4 +168,19 @@ export class FuncionesPrincipalesComponent implements OnInit {
   toggleActivePeriodos(): void {   //PERMITE (PARA EL CBOX DE PREDIOS) ACTIVAR SI ESTÁ DESACTIVADO, DESACTIVAR SI ESTÁ ACTIVADO
     this.isActivePeriodo = !this.isActivePeriodo;
   }
+
+
+  //ESTADOS DEL SUBRECUADRO DE REGISTRO DE GASTOS DEL PREDIO
+  cambiarEstadoRegistroPredio(item:boolean){
+    console.log("se cambia a "+ item + "desde el principal");
+    this.mostrarRegistrarGPredios=item;
+  }
+  
+  finalizarRegistroPredio(){
+    this.estadoRegistroPredioSelected='finalizado';
+    //Aca iria el metodo para modificar la tabla ESTADO_REGISTRO_PREDIO de la BD
+    console.log("Se finaliza el registro del predio desde el principal");
+  }
+
+
 }

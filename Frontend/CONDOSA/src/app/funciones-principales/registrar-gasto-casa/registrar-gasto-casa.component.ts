@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+
 import { Registro_Casa } from 'src/app/models/registro_casa';
 
 @Component({
@@ -53,8 +54,7 @@ export class RegistrarGastoCasaComponent implements OnInit {
     { TipoGasto: 'Teléfono fijo e internet',  Monto: 123},
     { TipoGasto: 'Consumo de Luz Mensual SS-GG -Suministro 1695605',  Monto: 123 },
     { TipoGasto: 'Consumo de Luz Mensual BCI -Suministro 1695613',  Monto: 123}
-  ]; 
-  constructor() { }
+  ];
 
   ngOnInit() {
   }
