@@ -172,6 +172,7 @@
 <div *ngIf="mostrarRegistrarGPredios">
   <app-registrar-gasto-predio (mostrarRegistroPredio_OUT)="cambiarEstadoRegistroPredio($event)"
   (estadoRegistroPredio_OUT)="finalizarRegistroPredio()"
+  [id_predio_IN]="id_predio_selected"
   ></app-registrar-gasto-predio>
 </div>
 <div *ngIf="mostrarRegistrarGCasa">

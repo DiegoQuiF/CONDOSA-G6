@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TipoGastos } from 'src/app/models/tipo-gastos';
 import { DescripGastos } from 'src/app/models/descrip-gastos';
 import { ConnBackendService } from 'src/app/services/conn-backend.service';
@@ -34,7 +34,8 @@ export class RegistrarGastoPredioComponent implements OnInit {
 
   @Output() mostrarRegistroPredio_OUT=new EventEmitter<boolean>();
   @Output() estadoRegistroPredio_OUT=new EventEmitter<string>();
-  
+  @Input() id_predio_IN:String | undefined;
+
   gatosRegistrados: any[] = [
     { TipoGasto: 'Planilla (portería- áreas comunes- limpieza)', Monto: 305},
     { TipoGasto: 'Administración y contabilidad ', Monto: 660 },
@@ -111,4 +112,6 @@ export class RegistrarGastoPredioComponent implements OnInit {
       alert('Seleccione un TIPO DE GASTO.');
     }
   }
+
+
 }   

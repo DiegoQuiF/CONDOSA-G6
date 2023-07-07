@@ -29,6 +29,7 @@ export class FuncionesPrincipalesComponent implements OnInit {
   nomPresidente: String = '';
 
   gastoArray:Gastos[] = [];
+
   filteredPeriodos:Gastos[] = [];
   searchPeriodos:String = '';
   selectedItemPeriodo:String = 'Seleccione';
@@ -83,6 +84,8 @@ export class FuncionesPrincipalesComponent implements OnInit {
       console.log(data)
       this.predioArray = data.predios;    //OBTIENE LOS PREDIOS EN predioArray
       this.filteredPredios = this.predioArray;    //PASA LOS DATOS OBTENIDOS A UN SUBARRAY DE PREDIOS FILTRADOS filteredPredios
+      console.log("LOS PREDIOS OBTENIDOS SON: \n");
+      console.log(this.predioArray);
     },
     error=>console.log(error));
   }
@@ -92,6 +95,7 @@ export class FuncionesPrincipalesComponent implements OnInit {
   selectedPredio(item: Predio): void {    //PERMITE SELECCIONAR EL PREDIO Y CERRAR EL CBOX DE PREDIOS
     this.selectedItemPredio = item.predio;
     this.nomPresidente = item.responsable;
+    this.id_predio_selected=item.id_predio;
 
     this.connBackend.getGastos(item.id_predio)
     .subscribe(data=>{
@@ -177,8 +181,9 @@ export class FuncionesPrincipalesComponent implements OnInit {
   cambiarEstadoRegistroPredio(item:boolean){
     if(this.selectedItemPredio !== 'Seleccione'){
       if(this.selectedItemPeriodo !== 'Seleccione'){
-        console.log("se cambia a "+ item + "desde el principal");
+        console.log("se cambia RPred a "+ item + "desde el principal");
         this.mostrarRegistrarGPredios=item;
+        console.log("las casas que se abriran seran del predio: " +this.id_predio_selected);
       }
       else{
         alert('Seleccione un PERIODO.');
@@ -200,8 +205,9 @@ export class FuncionesPrincipalesComponent implements OnInit {
   cambiarEstadoRegistroCasa(item:boolean){
     if(this.selectedItemPredio !== 'Seleccione'){
       if(this.selectedItemPeriodo !== 'Seleccione'){
-        console.log("se cambia a "+ item + "desde el principal");
+        console.log("se cambia RCasa a "+ item + "desde el principal");
         this.mostrarRegistrarGCasa=item;
+        
       }
       else{
         alert('Seleccione un PERIODO.');
