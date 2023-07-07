@@ -89,8 +89,6 @@ export class RegistrarGastoPredioComponent implements OnInit {
     console.log("Se finaliza del predio de id: "+ this.id_predio_IN)
   }
 
-
-
   selectedTipoGasto(item: TipoGastos): void {    //PERMITE SELECCIONAR EL TIPO DE GASTO Y CERRAR EL CBOX DE PREDIOS
     this.selectedItemTipoGasto = item.descripcion;
     this.connBackend.getDescripGastos(item.id_tipo_gasto)
