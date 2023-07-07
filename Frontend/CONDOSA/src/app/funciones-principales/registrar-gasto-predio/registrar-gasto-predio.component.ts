@@ -79,6 +79,7 @@ export class RegistrarGastoPredioComponent implements OnInit {
   finalizarRegistroPredio(){
     //Aca iria el metodo para modificar la tabla ESTADO_REGISTRO_PREDIO de l BD
     this.estadoRegistroPredio_OUT.emit('finalizado');
+    console.log("Se finaliza del predio de id: "+ this.id_predio_IN)
   }
 
 
