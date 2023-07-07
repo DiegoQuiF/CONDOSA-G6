@@ -35,6 +35,7 @@ export class FuncionesPrincipalesComponent implements OnInit {
   isActivePeriodo: boolean = false;
 
   casasArray:Casas[] = [];
+  datosTabla:Array<Registro_Casa> = new Array<Registro_Casa>();
 
   mostrarRegistrarGPredios: boolean = false;  //PERMITE MOSTRAR EL PANEL DE REGISTRO DE GASTOS DE PREDIO
   mostrarRegistrarGCasa: boolean = false;   //PERMITE MOSTRAR EL PANEL DE REGISTRO DE GASTOS DE CASA
@@ -48,7 +49,7 @@ export class FuncionesPrincipalesComponent implements OnInit {
 
 
 
-  datosTabla: Array<Registro_Casa> = new Array<Registro_Casa>();
+  
   
   estadoRegistroPredioSelected:string='no finalizado';
   id_predio_selected='1';  
@@ -104,34 +105,28 @@ export class FuncionesPrincipalesComponent implements OnInit {
     },
     error=>console.log(error));
 
-    this.connBackend.getCasas(item.id_predio).subscribe(
-      data=>{
-      console.log(data)
-      this.casasArray = data.casas;
-      
-      
-   
-   
-   
-   
-      this.casasArray.forEach(casa => {
-        
-        const registro = new Registro_Casa(
-          casa.area_casa,
-          casa.area_cochera,
-          casa.area_total,
-          casa.estado,
-          casa.id_casa,
-          casa.id_indice,
-          casa.id_predio,
-          casa.mdu,
-          casa.numero,
-          casa.participacion,
-          casa.piso,
-          casa.responsable,
-          "no finalizado"
-        );
-  
+    this.connBackend.getCasas(item.id_predio)
+      .subscribe(
+        data=>{
+        console.log(data)
+        this.casasArray = data.casas;
+        this.datosTabla = new Array<Registro_Casa>();
+        this.casasArray.forEach(casa => {
+          const registro = new Registro_Casa(
+            casa.area_casa,
+            casa.area_cochera,
+            casa.area_total,
+            casa.estado,
+            casa.id_casa,
+            casa.id_indice,
+            casa.id_predio,
+            casa.mdu,
+            casa.numero,
+            casa.participacion,
+            casa.piso,
+            casa.responsable,
+            "no finalizado"
+          );
         // Agregar el objeto a datosTabla
         this.datosTabla.push(registro);
         console.log(this.datosTabla);

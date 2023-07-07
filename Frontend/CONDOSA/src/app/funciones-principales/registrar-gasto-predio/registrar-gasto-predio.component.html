@@ -7,11 +7,9 @@
   <div style="margin: 1rem;">
     <div class="columna-2">
       <div class="cont-2">
-        <div class="text-center-v">
-          <div style="margin: 0; padding: 0;">
-            <div class="textoPricipal mp-0">
-              <p class="textoPricipal mp-0"><b>GASTOS PREDIO</b></p>
-            </div>
+        <div class="text-center-v" style="height: 40;">
+          <div class="textoPricipal mp-0">
+            <p class="textoPricipal mp-0"><b>GASTOS PREDIO</b></p>
           </div>
         </div>
       </div>
@@ -30,6 +28,15 @@
             <div style="margin: 0; padding: 0;">
               <div class="tab-1 textoPricipal mp-0">
                 <p class="textoPricipal mp-0">Predio</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flexy">
+          <div class="text-center-v">
+            <div style="margin: 0; padding: 0;">
+              <div class="tab-1 textoPricipal mp-0">
+                <p class="textoPricipal mp-0">Periodo</p>
               </div>
             </div>
           </div>
@@ -75,27 +82,28 @@
           <input type="number" name="monto_predio" id="monto_predio" placeholder="S/." class="form-control"
             style="width: 35%; height: 40px;">
         </div>
-        <div class="flexy" style="align-items: center; justify-content: left;">
-          <button type="submit" class="btn btn-primary" style="width: 100px; height: 40px">
-            Registrar
-          </button>
+        <div class="flexy" style="align-items: center; justify-content: center;">
+          <div style="width: 100px; height: 40px;">
+            <button type="submit" class="btn btn-primary" style="width: 100px; height: 40px">
+              Registrar
+            </button>
+          </div>
+          <div style="width: 40px; height: 40px;"></div>
+          <div style="width: 200px; height: 40px;">
+            <button type="submit" class="btn btn-primary" style="width: 200px; height: 40px;">
+              Asignar del mes anterior
+            </button>
+          </div>
+          <div style="width: 230px; height: 40px;"></div>
         <br>
         <br>
         <br>
         </div>
-        <div style="width: 50px; height: 40px;">
-          <button type="submit" class="btn btn-primary" style="width: 250px; height: 40px;">
-            Asignar del mes anterior
-          </button>
-        </div>
+        
       </div>
       <div class="cont-2">
         <div class="text-center-v">
-          <div style="margin: 0; padding: 0;">
-            <div class="tab-1 textoPricipal mp-0">
-              <p class="textoPricipal mp-0">Gastos registrados del predio</p>
-            </div>
-          </div>
+          <p class="mp-0 text-1"><b>Gastos registrados del predio</b></p>
         </div>
         <div class="tab-3" style="margin-right: 4rem;">
           <div class="contenedor-tabla">
@@ -104,8 +112,8 @@
                 <thead>
                   <tr>
                     <th>Descripción</th>
-                    <th>Monto</th>
-                    <th></th>
+                    <th>Monto (S/.)</th>
+                    <th>Editar</th>
                   </tr>
                 </thead>
                 <tbody>

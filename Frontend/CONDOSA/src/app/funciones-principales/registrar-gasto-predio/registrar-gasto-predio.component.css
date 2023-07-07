@@ -37,7 +37,7 @@
 .contenedor-tabla {
   display: flex;
   justify-content: center;
-  height: 200px; /* Altura fija del contenedor */
+  height: 230px; /* Altura fija del contenedor */
   width: 90%;
   overflow-y: auto; /* Barra de desplazamiento vertical */
   margin-left: auto;

@@ -1,6 +1,4 @@
 export class Registro_Casa {
-
-    
     area_casa: string;
     area_cochera: string;
     area_total: string;
