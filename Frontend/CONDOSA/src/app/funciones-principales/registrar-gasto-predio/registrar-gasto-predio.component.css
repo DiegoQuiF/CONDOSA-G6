@@ -182,3 +182,170 @@
   width: 35%;
   align-items: center;
 }
+
+
+
+
+.envoltura {
+  width: 400px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.select-btn,
+.opciones li {
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+}
+
+.select-btn {
+  height: 40px;
+  width: 400px;
+  padding: 0 20px;
+  border-radius: 7px;
+  background: #fff;
+  justify-content: space-between;
+}
+
+.select-btn i {
+  transition: transform 0.1s linear;
+}
+
+.envoltura.active .select-btn i {
+  transform: rotate(-180deg);
+}
+
+.combobox-recuadro {
+  position: absolute;
+  display: none;
+  width: 400px;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 7px;
+  background: #fff;
+}
+
+.envoltura.active .combobox-recuadro {
+  display: block;
+}
+
+.combobox-recuadro .opciones {
+  padding: 0;
+  margin: 0;
+  margin-top: 0;
+  max-height: 250px;
+  width: 100%;
+  overflow-y: auto;
+}
+
+.opciones::-webkit-scrollbar {
+  width: 7px;
+}
+
+.opciones::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 25px;
+}
+
+.opciones::-webkit-scrollbar-thumb {
+  background: #8f8f8f;
+  border-radius: 25px;
+}
+
+.opciones li {
+  height: 40px;
+  width: 97%;
+  padding: 0px 10px;
+  border-radius: 5px;
+}
+
+.opciones li:hover,
+li.selected {
+  background: #f2f2f2;
+}
+
+
+
+
+.envoltura1 {
+  width: 400px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.select-btn1,
+.opciones1 li {
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+}
+
+.select-btn1 {
+  min-height: 40px;
+  max-height: 90px;
+  width: 400px;
+  padding: 0 20px;
+  border-radius: 7px;
+  background: #fff;
+  justify-content: space-between;
+}
+
+.select-btn1 i {
+  transition: transform 0.1s linear;
+}
+
+.envoltura1.active .select-btn1 i {
+  transform: rotate(-180deg);
+}
+
+.combobox-recuadro1 {
+  position: absolute;
+  display: none;
+  width: 400px;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 7px;
+  background: #fff;
+}
+
+.envoltura1.active .combobox-recuadro1 {
+  display: block;
+}
+
+.combobox-recuadro1 .opciones1 {
+  padding: 0;
+  margin: 0;
+  margin-top: 0;
+  max-height: 200px;
+  width: 100%;
+  overflow-y: auto;
+}
+
+.opciones1::-webkit-scrollbar {
+  width: 7px;
+}
+
+.opciones1::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 25px;
+}
+
+.opciones1::-webkit-scrollbar-thumb {
+  background: #8f8f8f;
+  border-radius: 25px;
+}
+
+.opciones1 li {
+  min-height: 40px;
+  max-height: 85px;
+  width: 97%;
+  padding: 0px 10px;
+  border-radius: 5px;
+}
+
+.opciones1 li:hover,
+li.selected {
+  background: #f2f2f2;
+}
+

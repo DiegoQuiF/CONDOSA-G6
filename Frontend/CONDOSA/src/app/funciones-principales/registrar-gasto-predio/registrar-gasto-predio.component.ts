@@ -14,9 +14,19 @@ export class RegistrarGastoPredioComponent implements OnInit {
 
   tipoGastoArray:TipoGastos[] = [];
   selectedItemTipoGasto:String = 'Seleccione';
+  isActiveTipoGasto: boolean = false;
+
   descripGastoArray:DescripGastos[] = [];
   selectedItemDescripGasto:String = 'Seleccione';
+  isActiveDescripGasto: boolean = false;
   
+  idPredioCuota:String = '1';     //Mediante el id del predio se debe obtener el nombre del predio
+                                    //Además porque es necesario para hacer los inserts de los gastos que se vayan agregando en este componente
+  idPeriodo:String = '1';         //Tambien se necesita el idGasto que en realidad sirve para obtener el periodo, por eso le puse idPeriodo, se
+                                    //necesita para saber en que periodo se insertará los gastos ingresados de este componente
+  //Por el momento solo muestran dos mensajes
+  predioCuota:String = 'Nombre del predio';
+  periodoCuota:String = 'Periodo del predio';
 
 
 
@@ -72,18 +82,33 @@ export class RegistrarGastoPredioComponent implements OnInit {
 
 
 
-
-  selectedTipoGasto(item: TipoGastos): void {    //PERMITE SELECCIONAR EL PREDIO Y CERRAR EL CBOX DE PREDIOS
+  selectedTipoGasto(item: TipoGastos): void {    //PERMITE SELECCIONAR EL TIPO DE GASTO Y CERRAR EL CBOX DE PREDIOS
     this.selectedItemTipoGasto = item.descripcion;
     this.connBackend.getDescripGastos(item.id_tipo_gasto)
     .subscribe(data=>{
       console.log(data)
-      this.tipoGastoArray = data.descripGastosComunes;
+      this.descripGastoArray = data.descripGastosComunes;
     },
     error=>console.log(error));
+    this.toggleActiveTipoGasto();
   }
 
-  selectedDescripGasto(item: DescripGastos): void {    //PERMITE SELECCIONAR EL PREDIO Y CERRAR EL CBOX DE PREDIOS
+  toggleActiveTipoGasto(): void {   //PERMITE (PARA EL CBOX DE TIPO GASTOS) ACTIVAR SI ESTÁ DESACTIVADO, DESACTIVAR SI ESTÁ ACTIVADO
+    this.isActiveTipoGasto = !this.isActiveTipoGasto;
+  }
+
+
+  selectedDescripGasto(item: DescripGastos): void {    //PERMITE SELECCIONAR LA DESCRIPCION Y CERRAR SU RESPECTIVO CBOX
     this.selectedItemDescripGasto = item.descripcion;
+    this.toggleActiveDescripGasto();
+  }
+
+  toggleActiveDescripGasto(): void {   //PERMITE (PARA EL CBOX DE DESCRIPCION) ACTIVAR SI ESTÁ DESACTIVADO, DESACTIVAR SI ESTÁ ACTIVADO
+    if(this.selectedItemTipoGasto !== "Seleccione"){
+      this.isActiveDescripGasto = !this.isActiveDescripGasto;
+    }
+    else{
+      alert('Seleccione un TIPO DE GASTO.');
+    }
   }
 }   

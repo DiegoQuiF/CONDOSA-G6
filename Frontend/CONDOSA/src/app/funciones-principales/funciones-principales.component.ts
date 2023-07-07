@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Registro_Casa } from '../models/registro_casa';
 
 //MODELOS
@@ -41,7 +41,6 @@ export class FuncionesPrincipalesComponent implements OnInit {
   mostrarRegistrarGCasa: boolean = false;   //PERMITE MOSTRAR EL PANEL DE REGISTRO DE GASTOS DE CASA
 
   cuadradoColor: string = 'red';    //COLOR SEMAFORO DE LA CASA
-
   
 
 
@@ -165,7 +164,12 @@ export class FuncionesPrincipalesComponent implements OnInit {
   }
 
   toggleActivePeriodos(): void {   //PERMITE (PARA EL CBOX DE PREDIOS) ACTIVAR SI ESTÁ DESACTIVADO, DESACTIVAR SI ESTÁ ACTIVADO
-    this.isActivePeriodo = !this.isActivePeriodo;
+    if(this.selectedItemPredio !== "Seleccione"){
+      this.isActivePeriodo = !this.isActivePeriodo;
+    }
+    else{
+      alert('Seleccione un PREDIO antes de seleccionar alguno de los PERIODOS.');
+    }
   }
 
 

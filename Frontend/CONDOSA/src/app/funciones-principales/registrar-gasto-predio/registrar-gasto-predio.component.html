@@ -31,6 +31,11 @@
               </div>
             </div>
           </div>
+          <div class="text-center-v">
+            <p class="text-1 mp-0">
+              {{ predioCuota }}
+            </p>
+          </div>
         </div>
         <div class="flexy">
           <div class="text-center-v">
@@ -39,6 +44,11 @@
                 <p class="textoPricipal mp-0">Periodo</p>
               </div>
             </div>
+          </div>
+          <div class="text-center-v">
+            <p class="text-1 mp-0">
+              {{ periodoCuota }}
+            </p>
           </div>
         </div>
         <div class="flexy">
@@ -49,12 +59,20 @@
               </div>
             </div>
           </div>
-          <select name="tipogasto" class="form-select" style="width: 35%; height: 40px;">
-            <option>Seleccione</option>
-            <option *ngFor="let tGasto of tipoGastoArray">
-              {{tGasto.descripcion}}
-            </option>
-          </select>
+          <div class="envoltura" [ngClass]="{'active': isActiveTipoGasto}">
+            <div class="select-btn" (click)="toggleActiveTipoGasto()">
+              <span>{{selectedItemTipoGasto}}</span>
+              <i class="uil uil-angle-down"></i>
+            </div>
+            <div class="combobox-recuadro">
+              <ul class="opciones">
+                <li *ngFor="let tipoGasto of tipoGastoArray" (click)="selectedTipoGasto(tipoGasto)"
+                  [ngClass]="{'selected': tipoGasto.descripcion === selectedItemTipoGasto}">
+                  {{tipoGasto.descripcion}}
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
         <div class="flexy">
           <div class="text-center-v">
@@ -64,12 +82,20 @@
               </div>
             </div>
           </div>
-          <select name="descrip" class="form-select" style="width: 35%; height: 40px;">
-            <option>Seleccione</option>
-            <option *ngFor="let dGasto of descripGastoArray">
-              {{dGasto.descripcion}}
-            </option>
-          </select>
+          <div class="envoltura1" [ngClass]="{'active': isActiveDescripGasto}">
+            <div class="select-btn1" (click)="toggleActiveDescripGasto()">
+              <span>{{selectedItemDescripGasto}}</span>
+              <i class="uil uil-angle-down"></i>
+            </div>
+            <div class="combobox-recuadro1">
+              <ul class="opciones1">
+                <li *ngFor="let descripGasto of descripGastoArray" (click)="selectedDescripGasto(descripGasto)"
+                  [ngClass]="{'selected': descripGasto.descripcion === selectedItemDescripGasto}">
+                  {{descripGasto.descripcion}}
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
         <div class="flexy">
           <div class="text-center-v">
