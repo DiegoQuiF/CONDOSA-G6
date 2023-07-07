@@ -14,6 +14,10 @@ export class ConnBackendService {
     return this.http.get(`${this.BASE_URL}/getPredios`);
   }
 
+  getPredio(id:string):Observable<any>{
+    return this.http.get(`${this.BASE_URL}/getPredio/${id}`);
+  }
+
   getGastos(id:string):Observable<any>{
     return this.http.get(`${this.BASE_URL}/getPredios/${id}`);
   }

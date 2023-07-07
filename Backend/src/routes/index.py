@@ -5,6 +5,7 @@ from src.services.get.getGastos import getGastos
 from src.services.get.getTablaCasas import getTablaCasas
 from src.services.get.getTipoGastos import getTipoGastos
 from src.services.get.getDescripGastos import getDescripGastos
+from src.services.get.getPredio import getPredio
 
 main = Blueprint('index_blueprint', __name__)
 
@@ -14,6 +15,17 @@ def principal():
         predios = getPredios()
         if(len(predios) > 0):
             return jsonify({'predios':predios, 'message':"SUCCESS", 'success':True})
+        else:
+            return jsonify({'message':"NOT FOUND", 'success':True})
+    except Exception as error:
+        return jsonify({'message':'ERROR', 'success':False})
+    
+@main.route('/getPredio/<int:id>')
+def predio(id):
+    try:
+        predio = getPredio(id)
+        if(len(predio) > 0):
+            return jsonify({'predio':predio, 'message':"SUCCESS", 'success':True})
         else:
             return jsonify({'message':"NOT FOUND", 'success':True})
     except Exception as error:
