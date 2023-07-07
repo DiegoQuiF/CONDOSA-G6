@@ -48,28 +48,7 @@ export class FuncionesPrincipalesComponent implements OnInit {
 
 
 
-  datosTabla: Array<Registro_Casa> = new Array<Registro_Casa>(
-    new Registro_Casa('1', 'A', 'Juan Pérez', 'Residencial', '120', '20', '140', '12%', 'no finalizado', '5'),
-    new Registro_Casa('2', 'B', 'María Gómez', 'Comercial', '80', '10', '90', '8%', 'no finalizado', '5'),
-    new Registro_Casa('3', 'A', 'Carlos López', 'Residencial', '150', '30', '180', '15%', 'no finalizado', '5'),
-    new Registro_Casa('4', 'C', 'Laura Ramírez', 'Residencial', '100', '15', '115', '10%', 'no finalizado', '5'),
-    new Registro_Casa('5', 'B', 'Pedro Martínez', 'Comercial', '90', '12', '102', '9%', 'no finalizado', '5'),
-    new Registro_Casa('6', 'A', 'Juan Pérez', 'Residencial', '120', '20', '140', '12%', 'no finalizado', '5'),
-    new Registro_Casa('7', 'B', 'María Gómez', 'Comercial', '80', '10', '90', '8%', 'no finalizado', '5'),
-    new Registro_Casa('8', 'A', 'Carlos López', 'Residencial', '150', '30', '180', '15%', 'no finalizado', '5'),
-    new Registro_Casa('9', 'C', 'Laura Ramírez', 'Residencial', '100', '15', '115', '10%', 'no finalizado', '5'),
-    new Registro_Casa('10', 'B', 'Pedro Martínez', 'Comercial', '90', '12', '102', '9%', 'no finalizado', '5'),
-    new Registro_Casa('11', 'A', 'Juan Pérez', 'Residencial', '120', '20', '140', '12%', 'no finalizado', '5'),
-    new Registro_Casa('12', 'B', 'María Gómez', 'Comercial', '80', '10', '90', '8%', 'no finalizado', '5'),
-    new Registro_Casa('13', 'A', 'Carlos López', 'Residencial', '150', '30', '180', '15%', 'no finalizado', '5'),
-    new Registro_Casa('14', 'C', 'Laura Ramírez', 'Residencial', '100', '15', '115', '10%', 'no finalizado', '5'),
-    new Registro_Casa('15', 'B', 'Pedro Martínez', 'Comercial', '90', '12', '102', '9%', 'no finalizado', '5'),
-    new Registro_Casa('16', 'A', 'Juan Pérez', 'Residencial', '120', '20', '140', '12%', 'no finalizado', '5'),
-    new Registro_Casa('17', 'B', 'María Gómez', 'Comercial', '80', '10', '90', '8%', 'no finalizado', '5'),
-    new Registro_Casa('18', 'A', 'Carlos López', 'Residencial', '150', '30', '180', '15%', 'no finalizado', '5'),
-    new Registro_Casa('19', 'C', 'Laura Ramírez', 'Residencial', '100', '15', '115', '10%', 'no finalizado', '5'),
-    new Registro_Casa('20', 'B', 'Pedro Martínez', 'Comercial', '90', '12', '102', '9%', 'no finalizado', '5')
-  );
+  datosTabla: Array<Registro_Casa> = new Array<Registro_Casa>();
   
   estadoRegistroPredioSelected:string='no finalizado';
   id_predio_selected='1';  
@@ -87,17 +66,15 @@ export class FuncionesPrincipalesComponent implements OnInit {
   //Metodo para indicar que ya se termino de regitrar 
   finalizarRegistroCasa(num_casa:string){
     //Aca iria el metodo para modificar la tabla ESTADO_REGISTRO_CASA de la BD, usando el num_casa
-    console.log("Se finaliza de la casa: "+  num_casa)
     for (let i = 0; i < this.datosTabla.length; i++) {
-      if (this.datosTabla[i].num_casa === num_casa) {
-        this.datosTabla[i].estado = 'finalizado';
+      console.log("el numero verificando es:"+this.datosTabla[i].numero);
+      if (this.datosTabla[i].numero == num_casa) {
+        this.datosTabla[i].estado_finalizado = 'finalizado';
+        console.log("la participacionde la casa "+ num_casa+" ahora es: "+ this.datosTabla[i].estado_finalizado);
         break;
       }
     }
   }
-
-
-
 
 
 
@@ -127,10 +104,40 @@ export class FuncionesPrincipalesComponent implements OnInit {
     },
     error=>console.log(error));
 
-    this.connBackend.getCasas(item.id_predio)
-    .subscribe(data=>{
+    this.connBackend.getCasas(item.id_predio).subscribe(
+      data=>{
       console.log(data)
       this.casasArray = data.casas;
+      
+      
+   
+   
+   
+   
+      this.casasArray.forEach(casa => {
+        
+        const registro = new Registro_Casa(
+          casa.area_casa,
+          casa.area_cochera,
+          casa.area_total,
+          casa.estado,
+          casa.id_casa,
+          casa.id_indice,
+          casa.id_predio,
+          casa.mdu,
+          casa.numero,
+          casa.participacion,
+          casa.piso,
+          casa.responsable,
+          "no finalizado"
+        );
+  
+        // Agregar el objeto a datosTabla
+        this.datosTabla.push(registro);
+        console.log(this.datosTabla);
+      });
+   
+
     },
     error=>console.log(error));
     

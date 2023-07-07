@@ -15,7 +15,7 @@ export class RegistrarGastoCasaComponent implements OnInit {
   //DATOS DE LA CASA
   num_casa_selected:string='--N° Casa--';
   
-  listaCasas: any[] = ['1', '2', '3','4','5'];
+  listaCasas: any[] = ['20', '21', '22','23','24','25','26','27','28','29','30'];
   //
   listaTipoGastoCasas: any[] = ['Gasto genrico', '´Sanciones'];
   listaDescripcionCasas: any[] = ['Agua', 'Luz y Electricidad'];
@@ -66,6 +66,7 @@ export class RegistrarGastoCasaComponent implements OnInit {
   finalizarRegistroCasa(){
     //Aca iria el metodo para modificar la tabla ESTADO_REGISTRO_PREDIO de la BD
     if(this.num_casa_selected !== '--N° Casa--'){
+      console.log("se manda el numero:"+ this.num_casa_selected)
       this.estadoRegistroNum_Casa.emit(this.num_casa_selected);
     }else{
       alert('Selecciona un numero de casa');

@@ -143,7 +143,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let dato of casasArray">
+            <tr *ngFor="let dato of datosTabla">
               <td>{{ dato.id_indice }}</td>
               <td>{{ dato.numero }}</td>
               <td>{{ dato.mdu }}</td>
@@ -157,8 +157,8 @@
               <td>
                 <div class="circulo-registro-casa"
                   [ngStyle]="{
-                    'background-color': dato.estado === 'finalizado' ? 'green' : 'red',
-                    'box-shadow': dato.estado === 'finalizado' ? '0 0 5px 2px rgba(0, 255, 0, 0.8)' : '0 0 5px 2px rgba(255, 0, 0, 0.8)'
+                    'background-color': dato.estado_finalizado === 'finalizado' ? 'green' : 'red',
+                    'box-shadow': dato.estado_finalizado === 'finalizado' ? '0 0 5px 2px rgba(0, 255, 0, 0.8)' : '0 0 5px 2px rgba(255, 0, 0, 0.8)'
                   }"></div>
               </td>
             </tr>
