@@ -60,10 +60,7 @@ export class FuncionesPrincipalesComponent implements OnInit {
   //Ocular o Mostrar el registro para predios true mostrar, y false ocultar
   
 
-  // true mostrar, y false ocultar
-  cambiarEstadoRegistroCasa(item:boolean){
-    this.mostrarRegistrarGCasa=item;
-  }
+  
   //Metodo para indicar que ya se termino de regitrar 
   finalizarRegistroCasa(num_casa:string){
     //Aca iria el metodo para modificar la tabla ESTADO_REGISTRO_CASA de la BD, usando el num_casa
@@ -174,14 +171,41 @@ export class FuncionesPrincipalesComponent implements OnInit {
 
   //ESTADOS DEL SUBRECUADRO DE REGISTRO DE GASTOS DEL PREDIO
   cambiarEstadoRegistroPredio(item:boolean){
-    console.log("se cambia a "+ item + "desde el principal");
-    this.mostrarRegistrarGPredios=item;
+    if(this.selectedItemPredio !== 'Seleccione'){
+      if(this.selectedItemPeriodo !== 'Seleccione'){
+        console.log("se cambia a "+ item + "desde el principal");
+        this.mostrarRegistrarGPredios=item;
+      }
+      else{
+        alert('Seleccione un PERIODO.');
+      }
+    }
+    else{
+      alert('Seleccione un PREDIO.');
+    }
   }
   
   finalizarRegistroPredio(){
     this.estadoRegistroPredioSelected='finalizado';
     //Aca iria el metodo para modificar la tabla ESTADO_REGISTRO_PREDIO de la BD
     console.log("Se finaliza el registro del predio desde el principal");
+  }
+
+
+  //ESTADOS DEL SUBRECUADRO DE REGISTRO DE GASTOS DE LA CASA
+  cambiarEstadoRegistroCasa(item:boolean){
+    if(this.selectedItemPredio !== 'Seleccione'){
+      if(this.selectedItemPeriodo !== 'Seleccione'){
+        console.log("se cambia a "+ item + "desde el principal");
+        this.mostrarRegistrarGCasa=item;
+      }
+      else{
+        alert('Seleccione un PERIODO.');
+      }
+    }
+    else{
+      alert('Seleccione un PREDIO.');
+    }
   }
 
 

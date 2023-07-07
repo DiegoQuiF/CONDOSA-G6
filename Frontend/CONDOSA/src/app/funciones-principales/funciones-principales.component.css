@@ -265,7 +265,8 @@ li.selected {
 .contenedor-tabla {
     display: flex;
     justify-content: center;
-    height: 300px;
+    min-height: 100px;
+    max-height: 300px;
     /* Altura fija del contenedor */
     overflow-y: auto;
     /* Barra de desplazamiento vertical */
