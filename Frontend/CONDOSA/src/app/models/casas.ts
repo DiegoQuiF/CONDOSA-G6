@@ -11,9 +11,9 @@ export class Casas {
     area_cochera: string;
     area_total: string;
     participacion: string;
-
+    estado_finalizado: string;
     constructor(id_ind:string, id_pre:string, id_cas:string, md:string, num:string, pis:string, est:string,
-        res:string, resp:string, a_cas:string, a_coc:string, a_tot:string, par:string){
+        res:string, resp:string, a_cas:string, a_coc:string, a_tot:string, par:string, estado_finalizado: string){
         this.id_indice = id_ind;
         this.id_predio = id_pre;
         this.id_casa = id_cas;
@@ -26,5 +26,6 @@ export class Casas {
         this.area_cochera = a_coc;
         this.area_total = a_tot;
         this.participacion = par;
+        this.estado_finalizado=estado_finalizado;
     }
 }

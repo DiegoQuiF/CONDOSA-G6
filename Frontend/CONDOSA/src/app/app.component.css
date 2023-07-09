@@ -111,25 +111,3 @@ section {
     border-radius: 10px 10px 0px 0px;
     width: 100%;
 }
-
-/*.barra-superior {
-    background-color: var(--blue-navy);
-    margin: 0;
-    display: flex;
-    align-items: center;
-    padding: 0.5rem;
-}
-
-.barra-superior-titulo {
-    color: #fff;
-    text-decoration: none;
-}
-
-.barra-superior-texto {
-    flex-grow: 1;
-    text-align: center;
-    color: #fff;
-    margin: 0;
-}
-
-*/

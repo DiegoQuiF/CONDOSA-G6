@@ -143,7 +143,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let dato of datosTabla">
+            <tr *ngFor="let dato of casasArray">
               <td>{{ dato.id_indice }}</td>
               <td>{{ dato.numero }}</td>
               <td>{{ dato.mdu }}</td>
@@ -169,13 +169,13 @@
   </div>
 </div>
 
-<div *ngIf="mostrarRegistrarGPredios">
+<div *ngIf="mostrarComp_RegistGastPredios">
   <app-registrar-gasto-predio (mostrarRegistroPredio_OUT)="cambiarEstadoRegistroPredio($event)"
   (estadoRegistroPredio_OUT)="finalizarRegistroPredio()"
   [id_predio_IN]="id_predio_selected"
   ></app-registrar-gasto-predio>
 </div>
-<div *ngIf="mostrarRegistrarGCasa">
+<div *ngIf="mostrarComp_RegistGastCasa">
   <app-registrar-gasto-casa (mostrarRegistroCasa_OUT)="cambiarEstadoRegistroCasa($event)"
   (estadoRegistroNum_Casa)="finalizarRegistroCasa($event)"
   ></app-registrar-gasto-casa>
