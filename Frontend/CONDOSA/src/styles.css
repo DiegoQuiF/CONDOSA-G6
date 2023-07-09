@@ -26,3 +26,10 @@
   font-weight: bold;
 }
 /*TABLA GLOBAL*/
+
+:root {
+  --finalizado-color: green;
+  --no-finalizado-color: red;
+  --box-shadow-finalizado: 0 0 5px 2px rgba(0, 255, 0, 0.8);
+  --box-shadow-no-finalizado: 0 0 5px 2px rgba(255, 0, 0, 0.8);
+}

@@ -1,5 +1,4 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Registro_Casa } from '../models/registro_casa';
 
 //MODELOS
 import { Predio } from './../models/predio'
@@ -21,18 +20,24 @@ export class FuncionesPrincipalesComponent implements OnInit {
 
   constructor(private connBackend: ConnBackendService) { }
 
-  predioArray: Predio[] = [];
-  filteredPredios: Predio[] = [];
+
+  finalizadoColor = getComputedStyle(document.documentElement).getPropertyValue('--finalizado-color');
+  no_finalizadoColor = getComputedStyle(document.documentElement).getPropertyValue('--no-finalizado-color');
+  finalizadoSombra = getComputedStyle(document.documentElement).getPropertyValue('--box-shadow-finalizado');
+  no_finalizadoSombra = getComputedStyle(document.documentElement).getPropertyValue('--box-shadow-no-finalizado');
+  
+  predioArray: Array<Predio> = new Array<Predio>();
+  filteredPredios: Array<Predio> = new Array<Predio>();
   searchPredios: String = '';
-  selectedItemPredio: String = 'Seleccione';
+  selectedItemPredio: String = '--seleccione--';
   isActivePredios: boolean = false;
   nomPresidente: String = '';
 
-  gastoArray: Gastos[] = [];
+  gastoArray: Array<Gastos> = new Array<Gastos>();
 
-  filteredPeriodos: Gastos[] = [];
+  filteredPeriodos: Array<Gastos> = new Array<Gastos>();
   searchPeriodos: String = '';
-  selectedItemPeriodo: String = 'Seleccione';
+  selectedItemPeriodo: String = '--seleccione--';
   isActivePeriodo: boolean = false;
 
   casasArray: Array<Casas> = new Array<Casas>();
@@ -40,29 +45,16 @@ export class FuncionesPrincipalesComponent implements OnInit {
   mostrarComp_RegistGastPredios: boolean = false;  //PERMITE MOSTRAR EL PANEL DE REGISTRO DE GASTOS DE PREDIO
   mostrarComp_RegistGastCasa: boolean = false;   //PERMITE MOSTRAR EL PANEL DE REGISTRO DE GASTOS DE CASA
 
-  cuadradoColor: string = 'red';    //COLOR SEMAFORO DE LA CASA
-
-
-
-
-
-
-
-
-
   estadoRegistroPredioSelected: string = 'no finalizado';
   id_predio_selected = '1';
-  //METODOS PARA EL SEMAFORO DE CASA.
-  cambiarColorCuadrado() {
-    this.cuadradoColor = 'green';
-  }
-  //Ocular o Mostrar el registro para predios true mostrar, y false ocultar
+  
+  
 
 
 
   //Metodo para indicar que ya se termino de regitrar 
   finalizarRegistroCasa(num_casa: string) {
-    //Aca iria el metodo para modificar la tabla ESTADO_REGISTRO_CASA de la BD, usando el num_casa
+    //Aca iria el metodo para modificar la tabla REGISTRO_CASA_ESTADO de la BD, usando el num_casa
     for (let i = 0; i < this.casasArray.length; i++) {
       console.log("el numero verificando es:" + this.casasArray[i].numero);
       if (this.casasArray[i].numero == num_casa) {

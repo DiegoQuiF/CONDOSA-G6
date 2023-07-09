@@ -1,17 +1,16 @@
 <div class="subsection-0 text-2 color-b">
   <p class="mp-0"><b>
-    Seleccione 'PREDIO' y 'PERIODO'
-  </b></p>
+      Seleccione 'PREDIO' y 'PERIODO'
+    </b></p>
 </div>
-
 <div class="subsection-1">
   <div class="columna-2">
     <div class="cont-2">
       <div class="flexy">
         <div class="text-center-v">
           <p class="text-1 tab-1 mp-0"><b>
-            Predio
-          </b></p>
+              Predio
+            </b></p>
         </div>
         <div>
           <div class="envoltura" [ngClass]="{'active': isActivePredios}">
@@ -22,8 +21,7 @@
             <div class="combobox-recuadro">
               <div class="buscar">
                 <i class="uil uil-search"></i>
-                <input type="text" placeholder="Buscar Predio" [(ngModel)]="searchPredios"
-                  (keyup)="filterPredios()">
+                <input type="text" placeholder="Buscar Predio" [(ngModel)]="searchPredios" (keyup)="filterPredios()">
                 <span class="buscador-cerrar" (click)="closeComboboxPredios()">&times;</span>
               </div>
               <ul class="opciones">
@@ -39,8 +37,8 @@
       <div class="flexy">
         <div class="text-center-v">
           <p class="text-1 tab-1 mp-0"><b>
-            Periodo cuota
-          </b></p>
+              Periodo cuota
+            </b></p>
         </div>
         <div>
           <div class="envoltura1" [ngClass]="{'active': isActivePeriodo}">
@@ -68,8 +66,8 @@
       <div class="flexy">
         <div class="text-center-v" style="height: 50px;">
           <p class="text-1 tab-1 mp-0"><b>
-            Responsable predio
-          </b></p>
+              Responsable predio
+            </b></p>
         </div>
         <div class="text-center-v" style="height: 50px; width: 65%;">
           <p style="margin: 0 0 0 10px;">
@@ -83,8 +81,8 @@
         <div style="width: 200px;"></div>
         <div style="display: flex; height: 36px; margin-top: 10px;align-items: center;">
           <p class="text-1 mp-0"><b>
-            Acciones
-          </b></p>
+              Acciones
+            </b></p>
         </div>
       </div>
       <div class="flexy">
@@ -92,10 +90,9 @@
         <div class="tab-1" style="display: flex; height: 60px; align-items: center;">
           <div class="col d-flex justify-content-center">
             <button type="submit" class="btn btn-primary" (click)="cambiarEstadoRegistroPredio(true)"
-                    style="width: 250px; height: 40px;">Registrar gastos del predio</button>
+              style="width: 250px; height: 40px;">Registrar gastos del predio</button>
           </div>
-          <div class="circulo-registro-predio"
-                  [ngStyle]="{
+          <div class="circulo-registro-predio" [ngStyle]="{
                     'background-color': estadoRegistroPredioSelected === 'finalizado' ? 'green' : 'red',
                     'box-shadow': estadoRegistroPredioSelected === 'finalizado' ? '0 0 5px 2px rgba(0, 255, 0, 0.8)' : '0 0 5px 2px rgba(255, 0, 0, 0.8)'
                   }"></div>
@@ -106,7 +103,7 @@
         <div class="tab-1" style="display: flex; height: 60px; align-items: center;">
           <div class="col d-flex justify-content-center">
             <button type="submit" class="btn btn-primary" (click)="cambiarEstadoRegistroCasa(true)"
-            style="width: 250px; height: 40px;">
+              style="width: 250px; height: 40px;">
               Registrar gastos de casa</button>
           </div>
         </div>
@@ -118,8 +115,8 @@
 
 <div class="subsection-0 text-2 color-b">
   <p class="mp-0"><b>
-    Resumen
-  </b></p>
+      Resumen
+    </b></p>
 </div>
 
 <div class="subsection-1">
@@ -155,11 +152,10 @@
               <td>{{ dato.area_total }}</td>
               <td>{{ dato.participacion }}</td>
               <td>
-                <div class="circulo-registro-casa"
-                  [ngStyle]="{
-                    'background-color': dato.estado_finalizado === 'finalizado' ? 'green' : 'red',
-                    'box-shadow': dato.estado_finalizado === 'finalizado' ? '0 0 5px 2px rgba(0, 255, 0, 0.8)' : '0 0 5px 2px rgba(255, 0, 0, 0.8)'
-                  }"></div>
+                <div class="circulo-registro-casa" [ngStyle]="{
+              'background-color': dato.estado_finalizado === 'finalizado' ? finalizadoColor : no_finalizadoColor,
+              'box-shadow': dato.estado_finalizado === 'finalizado' ? finalizadoSombra : no_finalizadoSombra
+            }"></div>
               </td>
             </tr>
           </tbody>
@@ -171,12 +167,10 @@
 
 <div *ngIf="mostrarComp_RegistGastPredios">
   <app-registrar-gasto-predio (mostrarRegistroPredio_OUT)="cambiarEstadoRegistroPredio($event)"
-  (estadoRegistroPredio_OUT)="finalizarRegistroPredio()"
-  [id_predio_IN]="id_predio_selected"
-  ></app-registrar-gasto-predio>
+    (estadoRegistroPredio_OUT)="finalizarRegistroPredio()"
+    [id_predio_IN]="id_predio_selected"></app-registrar-gasto-predio>
 </div>
 <div *ngIf="mostrarComp_RegistGastCasa">
   <app-registrar-gasto-casa (mostrarRegistroCasa_OUT)="cambiarEstadoRegistroCasa($event)"
-  (estadoRegistroNum_Casa)="finalizarRegistroCasa($event)"
-  ></app-registrar-gasto-casa>
+    (estadoRegistroNum_Casa)="finalizarRegistroCasa($event)"></app-registrar-gasto-casa>
 </div>

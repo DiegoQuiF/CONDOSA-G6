@@ -14,22 +14,22 @@ export class RegistrarGastoPredioComponent implements OnInit {
   constructor(private connBackend: ConnBackendService) { }
 
   tipoGastoArray: Array<TipoGastos> = new Array<TipoGastos>();
-  selectedItemTipoGasto: String = 'Seleccione';
+  selectedItemTipoGasto: String = '--seleccione--';
   isActiveTipoGasto: boolean = false;
 
   descripGastoArray: Array<DescripGastos> = new Array<DescripGastos>();
-  selectedItemDescripGasto: String = 'Seleccione';
+  selectedItemDescripGasto: String = '--seleccione--';
   isActiveDescripGasto: boolean = false;
 
   predioArray: Array<Predio> = new Array<Predio>();
-  nombrePredio: string = 'Nombre del predio';
-  periodoRegistro: string = 'Periodo del predio';
+  nombrePredio: string = '-';
+  periodoRegistro: string = '-';
 
 
   @Output() mostrarRegistroPredio_OUT = new EventEmitter<boolean>();
   @Output() estadoRegistroPredio_OUT = new EventEmitter<string>();
   @Input() id_predio_IN: string = "";
-
+  @Input() prediodo_IN:string ="";
   gatosRegistradosArray: any[] = [
     { TipoGasto: 'Planilla (portería- áreas comunes- limpieza)', Monto: 305 },
     { TipoGasto: 'Administración y contabilidad ', Monto: 660 },
@@ -43,14 +43,14 @@ export class RegistrarGastoPredioComponent implements OnInit {
  
   ngOnInit() {
     
-    //AL INICIO CARGAMOS LOS PREDIOS QUE COINCIDEN C
+    //CARGAMOS LOS DATOS DE LOS PREDIOS CON UN WHERE USANDO EL ID DEL PREDIO Y TOMAMOS EL "predio" DEL RESULTADO
     this.connBackend.getPredio(this.id_predio_IN)
       .subscribe(data => {
         console.log(data)
         this.nombrePredio = data.predio[0].predio;
       },
         error => console.log(error));
-    //AL INICIO CARGAMOS LOS TIPOS DE GASTO  
+    //CARGAMOS LOS TIPOS DE GASTO  EN UN ARRAY
     this.connBackend.getTipoGastos()
       .subscribe(data => {
         console.log(data)

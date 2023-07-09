@@ -1,6 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
-import { Registro_Casa } from 'src/app/models/registro_casa';
 
 @Component({
   selector: 'app-registrar-gasto-casa',
