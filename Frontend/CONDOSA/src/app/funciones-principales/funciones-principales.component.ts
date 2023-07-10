@@ -183,8 +183,9 @@ export class FuncionesPrincipalesComponent implements OnInit {
 
   //ESTADOS DEL SUBRECUADRO DE REGISTRO DE GASTOS DE LA CASA
   cambiarEstadoRegistroCasa(item: boolean) {
-    if (!this.predioSeleccionado) {
-      if (!this.periodoSeleccionado) {
+    console.log("El estado del predioSeleccionado es:"+this.predioSeleccionado)
+    if (this.predioSeleccionado) {
+      if (this.periodoSeleccionado) {
         this.mostrarComp_RegistGastCasa = item;
 
 
