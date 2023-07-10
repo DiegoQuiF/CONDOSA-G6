@@ -15,7 +15,7 @@
         <div>
           <div class="envoltura" [ngClass]="{'active': isActivePredios}">
             <div class="select-btn" (click)="toggleActivePredios()">
-              <span>{{selectedItemPredio}}</span>
+              <span>{{selectedTextPredio}}</span>
               <i class="uil uil-angle-down"></i>
             </div>
             <div class="combobox-recuadro">
@@ -26,7 +26,7 @@
               </div>
               <ul class="opciones">
                 <li *ngFor="let predio of filteredPredios" (click)="selectedPredio(predio)"
-                  [ngClass]="{'selected': predio.predio === selectedItemPredio}">
+                  [ngClass]="{'selected': predio.predio === selectedTextPredio}">
                   {{predio.predio}}
                 </li>
               </ul>
@@ -43,7 +43,7 @@
         <div>
           <div class="envoltura1" [ngClass]="{'active': isActivePeriodo}">
             <div class="combobox-cuerpo1" (click)="toggleActivePeriodos()">
-              <span>{{selectedItemPeriodo}}</span>
+              <span>{{selectedTextPeriodo}}</span>
               <i class="uil uil-angle-down"></i>
             </div>
             <div class="combobox-recuadro1">
@@ -55,7 +55,7 @@
               </div>
               <ul class="opciones1">
                 <li *ngFor="let periodos of filteredPeriodos" (click)="selectedPeriodo(periodos)"
-                  [ngClass]="{'selected': periodos.periodo === selectedItemPeriodo}">
+                  [ngClass]="{'selected': periodos.periodo === selectedTextPeriodo}">
                   {{periodos.periodo}}
                 </li>
               </ul>
@@ -166,7 +166,7 @@
   <app-registrar-gasto-predio (mostrarRegistroPredio_OUT)="cambiarEstadoRegistroPredio($event)"
     (estadoRegistroPredio_OUT)="finalizarRegistroPredio()"
     [id_predio_IN]="id_selectedPredio"
-    [periodo_IN]="selectedItemPeriodo"
+    [periodo_IN]="selectedTextPeriodo"
     
     ></app-registrar-gasto-predio>
 </div>

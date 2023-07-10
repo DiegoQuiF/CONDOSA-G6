@@ -25,19 +25,19 @@ export class FuncionesPrincipalesComponent implements OnInit {
   no_finalizadoColor = getComputedStyle(document.documentElement).getPropertyValue('--no-finalizado-color');
   finalizadoSombra = getComputedStyle(document.documentElement).getPropertyValue('--box-shadow-finalizado');
   no_finalizadoSombra = getComputedStyle(document.documentElement).getPropertyValue('--box-shadow-no-finalizado');
-  
+
   predioArray: Array<Predio> = new Array<Predio>();
   filteredPredios: Array<Predio> = new Array<Predio>();
   searchPredios: string = '';
-  selectedItemPredio: string = '--seleccione--';
+  selectedTextPredio: string = '--seleccione--';
   isActivePredios: boolean = false;
-  
+
 
   gastoArray: Array<Gastos> = new Array<Gastos>();
 
   filteredPeriodos: Array<Gastos> = new Array<Gastos>();
   searchPeriodos: string = '';
-  selectedItemPeriodo: string = '--seleccione--';
+  selectedTextPeriodo: string = '--seleccione--';
   isActivePeriodo: boolean = false;
 
   casasArray: Array<Casas> = new Array<Casas>();
@@ -52,72 +52,41 @@ export class FuncionesPrincipalesComponent implements OnInit {
 
   estadoRegistroPredioSelected: string = 'no finalizado';
   id_selectedPredio = '';
-  
 
 
 
-  //Metodo para indicar que ya se termino de regitrar 
-  finalizarRegistroCasa(num_casa: string) {
-    //Aca iria el metodo para modificar la tabla REGISTRO_CASA_ESTADO de la BD, usando el num_casa
-    for (let i = 0; i < this.casasArray.length; i++) {
-      console.log("el numero verificando es:" + this.casasArray[i].numero);
-      if (this.casasArray[i].numero == num_casa) {
-        this.casasArray[i].estado_finalizado = 'finalizado';
-        console.log("la participacionde la casa " + num_casa + " ahora es: " + this.casasArray[i].estado_finalizado);
-        break;
-      }
-    }
-  }
+
+
 
 
 
 
   //AL INICIO SE OBTIENEN LOS PREDIOS PARA EL COMBO BOX
   ngOnInit(): void {
-    this.connBackend.getPredios()
-      .subscribe(data => {
-        console.log(data)
-        this.predioArray = data.predios;    //OBTIENE LOS PREDIOS EN predioArray
-        this.filteredPredios = this.predioArray;    //PASA LOS DATOS OBTENIDOS A UN SUBARRAY DE PREDIOS FILTRADOS filteredPredios
-      },
-        error => console.log(error));
+    this.getPredios_BD();
   }
 
 
   //SOBRE LOS PREDIOS
   selectedPredio(item: Predio): void {    //PERMITE SELECCIONAR EL PREDIO Y CERRAR EL CBOX DE PREDIOS
-    this.selectedItemPredio = item.predio;
-    this.nomPresidente = item.responsable;
-    
-    this.connBackend.getGastos(item.id_predio)
-      .subscribe(data => {
-        this.gastoArray = data.gastos;    //OBTIENE LOS PREDIOS EN predioArray
-        this.filteredPeriodos = this.gastoArray;    //PASA LOS DATOS OBTENIDOS A UN SUBARRAY DE PREDIOS FILTRADOS filteredPredios
-      },
-        error => console.log(error));
-    this.connBackend.getCasas(item.id_predio)
-      .subscribe(
-        data => {
-          console.log(data)
-          this.casasArray = data.casas;
-          this.casasArray.forEach(casa => {
-            if (casa.estado_finalizado === undefined) {
-              casa.estado_finalizado = "no finalizado";
-            }
-          });
-          console.log(this.casasArray);
-        },
-        error => console.log(error));
-    
-    this.predioSeleccionado=true;
-    if(item.id_predio!=this.id_selectedPredio){
-      this.id_selectedPredio = item.id_predio; 
-      this.selectedItemPeriodo = '--seleccione--';
-      this.periodoSeleccionado=false;
-    }
-    
     this.isActivePredios = false;
+    this.selectedTextPredio = item.predio;
+    this.nomPresidente = item.responsable;
+    this.predioSeleccionado = true;
+
+    if (item.id_predio == this.id_selectedPredio) {
+      this.periodoSeleccionado = true;
+    }else{
+      this.id_selectedPredio = item.id_predio;
+      this.selectedTextPeriodo = '--seleccione--';
+      this.getPeriodos_BD(item);
+      this.periodoSeleccionado = false;
+    }
+
+
   }
+
+
 
   filterPredios(): void {   //PERMITE FILTRAR LOS PREDIOS CON LA BARRA DE BÚSQUEDA
     this.filteredPredios = this.predioArray.filter(predio => predio.predio.toLowerCase().startsWith(this.searchPredios.toLowerCase()))
@@ -134,9 +103,10 @@ export class FuncionesPrincipalesComponent implements OnInit {
 
   //SOBRE LOS PERIODOS
   selectedPeriodo(item1: Gastos): void {    //PERMITE SELECCIONAR EL PREDIO Y CERRAR EL CBOX DE PREDIOS
-    this.selectedItemPeriodo = item1.periodo;3
-    this.predioSeleccionado=true;
+    this.selectedTextPeriodo = item1.periodo; 
+    this.periodoSeleccionado = true;
     this.isActivePeriodo = false;
+    this.actualizarDatosCasas(this.id_selectedPredio,this.selectedTextPeriodo);
   }
 
   filterPeriodos(): void {   //PERMITE FILTRAR LOS PREDIOS CON LA BARRA DE BÚSQUEDA
@@ -148,7 +118,7 @@ export class FuncionesPrincipalesComponent implements OnInit {
   }
 
   toggleActivePeriodos(): void {   //PERMITE (PARA EL CBOX DE PREDIOS) ACTIVAR SI ESTÁ DESACTIVADO, DESACTIVAR SI ESTÁ ACTIVADO
-    if (this.selectedItemPredio !== "--seleccione--") {
+    if (this.selectedTextPredio !== "--seleccione--") {
       this.isActivePeriodo = !this.isActivePeriodo;
     }
     else {
@@ -157,10 +127,17 @@ export class FuncionesPrincipalesComponent implements OnInit {
   }
 
 
+  finalizarRegistroPredio() {
+    this.estadoRegistroPredioSelected = 'finalizado';
+    //Aca iria el metodo para modificar la tabla ESTADO_REGISTRO_PREDIO de la BD
+    console.log("Se finaliza el registro del predio desde el principal");
+  }
+
+
   //ESTADOS DEL SUBRECUADRO DE REGISTRO DE GASTOS DEL PREDIO
   cambiarEstadoRegistroPredio(item: boolean) {
-    if (this.selectedItemPredio !== '--seleccione--') {
-      if (this.selectedItemPeriodo !== '--seleccione--') {
+    if (this.selectedTextPredio !== '--seleccione--') {
+      if (this.selectedTextPeriodo !== '--seleccione--') {
         console.log("se cambia RPred a " + item + "desde el principal");
         this.mostrarComp_RegistGastPredios = item;
         console.log("las casas que se abriran seran del predio: " + this.id_selectedPredio);
@@ -174,12 +151,18 @@ export class FuncionesPrincipalesComponent implements OnInit {
     }
   }
 
-  finalizarRegistroPredio() {
-    this.estadoRegistroPredioSelected = 'finalizado';
-    //Aca iria el metodo para modificar la tabla ESTADO_REGISTRO_PREDIO de la BD
-    console.log("Se finaliza el registro del predio desde el principal");
+  //Metodo para indicar que ya se termino de regitrar 
+  finalizarRegistroCasa(num_casa: string) {
+    //Aca iria el metodo para modificar la tabla REGISTRO_CASA_ESTADO de la BD, usando el num_casa
+    for (let i = 0; i < this.casasArray.length; i++) {
+      console.log("el numero verificando es:" + this.casasArray[i].numero);
+      if (this.casasArray[i].numero == num_casa) {
+        this.casasArray[i].estado_finalizado = 'finalizado';
+        console.log("la participacionde la casa " + num_casa + " ahora es: " + this.casasArray[i].estado_finalizado);
+        break;
+      }
+    }
   }
-
 
   //ESTADOS DEL SUBRECUADRO DE REGISTRO DE GASTOS DE LA CASA
   cambiarEstadoRegistroCasa(item: boolean) {
@@ -194,5 +177,49 @@ export class FuncionesPrincipalesComponent implements OnInit {
     else {
       alert('Seleccione un PREDIO.');
     }
+  }
+
+  actualizarDatosCasas(id_predio:string,periodo:string): void {
+    if (this.predioSeleccionado==true && this.periodoSeleccionado==true) {
+      console.log("Se cumplen las condiciones para getCasas");
+      this.getCasas_BD(id_predio,periodo);
+    }
+  }
+
+
+
+
+  getPredios_BD(): void {
+    this.connBackend.getPredios()
+      .subscribe(data => {
+        console.log(data)
+        this.predioArray = data.predios;    //OBTIENE LOS PREDIOS EN predioArray
+        this.filteredPredios = this.predioArray;    //PASA LOS DATOS OBTENIDOS A UN SUBARRAY DE PREDIOS FILTRADOS filteredPredios
+      },
+        error => console.log(error));
+  }
+  getPeriodos_BD(item: Predio): void {
+    this.connBackend.getGastos(item.id_predio)
+      .subscribe(data => {
+        this.gastoArray = data.gastos;
+        this.filteredPeriodos = this.gastoArray;    //PASA LOS DATOS OBTENIDOS A UN SUBARRAY DE PREDIOS FILTRADOS filteredPredios
+      },
+        error => console.log(error));
+  }
+
+  getCasas_BD(id_predio: string, periodo:string): void {
+    this.connBackend.getCasas(id_predio)
+      .subscribe(
+        data => {
+          console.log(data)
+          this.casasArray = data.casas;
+          this.casasArray.forEach(casa => {
+            if (casa.estado_finalizado === undefined) {
+              casa.estado_finalizado = "no finalizado";
+            }
+          });
+          console.log(this.casasArray);
+        },
+        error => console.log(error));
   }
 }
