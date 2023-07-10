@@ -28,26 +28,30 @@ export class FuncionesPrincipalesComponent implements OnInit {
   
   predioArray: Array<Predio> = new Array<Predio>();
   filteredPredios: Array<Predio> = new Array<Predio>();
-  searchPredios: String = '';
-  selectedItemPredio: String = '--seleccione--';
+  searchPredios: string = '';
+  selectedItemPredio: string = '--seleccione--';
   isActivePredios: boolean = false;
-  nomPresidente: String = '';
+  
 
   gastoArray: Array<Gastos> = new Array<Gastos>();
 
   filteredPeriodos: Array<Gastos> = new Array<Gastos>();
-  searchPeriodos: String = '';
-  selectedItemPeriodo: String = '--seleccione--';
+  searchPeriodos: string = '';
+  selectedItemPeriodo: string = '--seleccione--';
   isActivePeriodo: boolean = false;
 
   casasArray: Array<Casas> = new Array<Casas>();
 
+  nomPresidente: string = '';
+
   mostrarComp_RegistGastPredios: boolean = false;  //PERMITE MOSTRAR EL PANEL DE REGISTRO DE GASTOS DE PREDIO
   mostrarComp_RegistGastCasa: boolean = false;   //PERMITE MOSTRAR EL PANEL DE REGISTRO DE GASTOS DE CASA
 
+  predioSeleccionado: boolean = false;
+  periodoSeleccionado: boolean = false;
+
   estadoRegistroPredioSelected: string = 'no finalizado';
-  id_predio_selected = '1';
-  
+  id_selectedPredio = '';
   
 
 
@@ -75,8 +79,6 @@ export class FuncionesPrincipalesComponent implements OnInit {
         console.log(data)
         this.predioArray = data.predios;    //OBTIENE LOS PREDIOS EN predioArray
         this.filteredPredios = this.predioArray;    //PASA LOS DATOS OBTENIDOS A UN SUBARRAY DE PREDIOS FILTRADOS filteredPredios
-        console.log("LOS PREDIOS OBTENIDOS DEL BACKEND SON: \n");
-        console.log(this.predioArray);
       },
         error => console.log(error));
   }
@@ -86,10 +88,9 @@ export class FuncionesPrincipalesComponent implements OnInit {
   selectedPredio(item: Predio): void {    //PERMITE SELECCIONAR EL PREDIO Y CERRAR EL CBOX DE PREDIOS
     this.selectedItemPredio = item.predio;
     this.nomPresidente = item.responsable;
-    this.id_predio_selected = item.id_predio;
+    
     this.connBackend.getGastos(item.id_predio)
       .subscribe(data => {
-        console.log(data)
         this.gastoArray = data.gastos;    //OBTIENE LOS PREDIOS EN predioArray
         this.filteredPeriodos = this.gastoArray;    //PASA LOS DATOS OBTENIDOS A UN SUBARRAY DE PREDIOS FILTRADOS filteredPredios
       },
@@ -104,12 +105,17 @@ export class FuncionesPrincipalesComponent implements OnInit {
               casa.estado_finalizado = "no finalizado";
             }
           });
-          console.log("se termina de cargar los predios")
           console.log(this.casasArray);
         },
         error => console.log(error));
-
-    this.selectedItemPeriodo = 'Seleccione';
+    
+    this.predioSeleccionado=true;
+    if(item.id_predio!=this.id_selectedPredio){
+      this.id_selectedPredio = item.id_predio; 
+      this.selectedItemPeriodo = '--seleccione--';
+      this.periodoSeleccionado=false;
+    }
+    
     this.isActivePredios = false;
   }
 
@@ -128,7 +134,8 @@ export class FuncionesPrincipalesComponent implements OnInit {
 
   //SOBRE LOS PERIODOS
   selectedPeriodo(item1: Gastos): void {    //PERMITE SELECCIONAR EL PREDIO Y CERRAR EL CBOX DE PREDIOS
-    this.selectedItemPeriodo = item1.periodo;
+    this.selectedItemPeriodo = item1.periodo;3
+    this.predioSeleccionado=true;
     this.isActivePeriodo = false;
   }
 
@@ -141,7 +148,7 @@ export class FuncionesPrincipalesComponent implements OnInit {
   }
 
   toggleActivePeriodos(): void {   //PERMITE (PARA EL CBOX DE PREDIOS) ACTIVAR SI ESTÁ DESACTIVADO, DESACTIVAR SI ESTÁ ACTIVADO
-    if (this.selectedItemPredio !== "Seleccione") {
+    if (this.selectedItemPredio !== "--seleccione--") {
       this.isActivePeriodo = !this.isActivePeriodo;
     }
     else {
@@ -152,11 +159,11 @@ export class FuncionesPrincipalesComponent implements OnInit {
 
   //ESTADOS DEL SUBRECUADRO DE REGISTRO DE GASTOS DEL PREDIO
   cambiarEstadoRegistroPredio(item: boolean) {
-    if (this.selectedItemPredio !== 'Seleccione') {
-      if (this.selectedItemPeriodo !== 'Seleccione') {
+    if (this.selectedItemPredio !== '--seleccione--') {
+      if (this.selectedItemPeriodo !== '--seleccione--') {
         console.log("se cambia RPred a " + item + "desde el principal");
         this.mostrarComp_RegistGastPredios = item;
-        console.log("las casas que se abriran seran del predio: " + this.id_predio_selected);
+        console.log("las casas que se abriran seran del predio: " + this.id_selectedPredio);
       }
       else {
         alert('Seleccione un PERIODO.');
@@ -176,11 +183,9 @@ export class FuncionesPrincipalesComponent implements OnInit {
 
   //ESTADOS DEL SUBRECUADRO DE REGISTRO DE GASTOS DE LA CASA
   cambiarEstadoRegistroCasa(item: boolean) {
-    if (this.selectedItemPredio !== 'Seleccione') {
-      if (this.selectedItemPeriodo !== 'Seleccione') {
-        console.log("se cambia RCasa a " + item + "desde el principal");
+    if (!this.predioSeleccionado) {
+      if (!this.periodoSeleccionado) {
         this.mostrarComp_RegistGastCasa = item;
-
       }
       else {
         alert('Seleccione un PERIODO.');
@@ -190,6 +195,4 @@ export class FuncionesPrincipalesComponent implements OnInit {
       alert('Seleccione un PREDIO.');
     }
   }
-
-
 }

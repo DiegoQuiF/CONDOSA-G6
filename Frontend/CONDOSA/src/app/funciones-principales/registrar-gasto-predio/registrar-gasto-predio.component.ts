@@ -29,7 +29,10 @@ export class RegistrarGastoPredioComponent implements OnInit {
   @Output() mostrarRegistroPredio_OUT = new EventEmitter<boolean>();
   @Output() estadoRegistroPredio_OUT = new EventEmitter<string>();
   @Input() id_predio_IN: string = "";
-  @Input() prediodo_IN:string ="";
+  @Input() periodo_IN:string ="";
+
+
+
   gatosRegistradosArray: any[] = [
     { TipoGasto: 'Planilla (portería- áreas comunes- limpieza)', Monto: 305 },
     { TipoGasto: 'Administración y contabilidad ', Monto: 660 },
@@ -42,7 +45,6 @@ export class RegistrarGastoPredioComponent implements OnInit {
   ];
  
   ngOnInit() {
-    
     //CARGAMOS LOS DATOS DE LOS PREDIOS CON UN WHERE USANDO EL ID DEL PREDIO Y TOMAMOS EL "predio" DEL RESULTADO
     this.connBackend.getPredio(this.id_predio_IN)
       .subscribe(data => {
@@ -92,7 +94,7 @@ export class RegistrarGastoPredioComponent implements OnInit {
   }
 
   toggleActiveDescripGasto(): void {   //PERMITE (PARA EL CBOX DE DESCRIPCION) ACTIVAR SI ESTÁ DESACTIVADO, DESACTIVAR SI ESTÁ ACTIVADO
-    if (this.selectedItemTipoGasto !== "Seleccione") {
+    if (this.selectedItemTipoGasto !== "--seleccione--") {
       this.isActiveDescripGasto = !this.isActiveDescripGasto;
     }
     else {
