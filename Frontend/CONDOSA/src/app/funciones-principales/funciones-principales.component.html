@@ -13,7 +13,7 @@
             </b></p>
         </div>
         <div>
-          <div class="envoltura" [ngClass]="{'active': isActivePredios}">
+          <div class="envoltura" [ngClass]="{'active': isActivePredios, 'disabled': bloquearPredios}">
             <div class="select-btn" (click)="toggleActivePredios()">
               <span>{{selectedTextPredio}}</span>
               <i class="uil uil-angle-down"></i>
@@ -41,7 +41,7 @@
             </b></p>
         </div>
         <div>
-          <div class="envoltura1" [ngClass]="{'active': isActivePeriodo}">
+          <div class="envoltura1" [ngClass]="{'active': isActivePeriodo, 'disabled': bloquearPeriodos}">
             <div class="combobox-cuerpo1" (click)="toggleActivePeriodos()">
               <span>{{selectedTextPeriodo}}</span>
               <i class="uil uil-angle-down"></i>

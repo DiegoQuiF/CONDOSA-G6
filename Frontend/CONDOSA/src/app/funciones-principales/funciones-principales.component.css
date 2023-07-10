@@ -46,6 +46,12 @@
     transform: rotate(-180deg);
 }
 
+.envoltura.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+    /* Otros estilos de deshabilitado */
+}
+
 .combobox-recuadro {
     position: absolute;
     display: none;
@@ -144,7 +150,11 @@ li.selected {
 .envoltura1.active .combobox-cuerpo1 i {
     transform: rotate(-180deg);
 }
-
+.envoltura1.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+    /* Otros estilos de deshabilitado */
+}
 .combobox-recuadro1 {
     position: absolute;
     display: none;
@@ -433,7 +443,7 @@ li.selected {
     border-radius: 0px 0px 10px 10px;
     width: 100%;
     min-height: 10px;
-    
+
 }
 
 .text-center-v {
