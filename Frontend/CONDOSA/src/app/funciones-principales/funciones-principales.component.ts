@@ -47,13 +47,16 @@ export class FuncionesPrincipalesComponent implements OnInit {
   mostrarComp_RegistGastPredios: boolean = false;  //PERMITE MOSTRAR EL PANEL DE REGISTRO DE GASTOS DE PREDIO
   mostrarComp_RegistGastCasa: boolean = false;   //PERMITE MOSTRAR EL PANEL DE REGISTRO DE GASTOS DE CASA
 
-  predioSeleccionado: boolean = false;
-  periodoSeleccionado: boolean = false;
+  predioisSeleccionado: boolean = false;
+  periodoisSeleccionado: boolean = false;
 
 
   bloquearPredios: boolean = false;
   bloquearPeriodos: boolean = false;
 
+  bloquearRegistrarPredio:boolean = false;
+  bloquearRegistrarCasas: boolean =false;
+ 
 
 
   estadoRegistroPredioSelected: string = 'no finalizado';
@@ -69,6 +72,8 @@ export class FuncionesPrincipalesComponent implements OnInit {
 
   //AL INICIO SE OBTIENEN LOS PREDIOS PARA EL COMBO BOX
   ngOnInit(): void {
+
+    //OBTENEMOS LOS PREDIOS DE LA BD PARA EL CBOBOX
     this.getPredios_BD();
   }
 
@@ -80,18 +85,19 @@ export class FuncionesPrincipalesComponent implements OnInit {
 
     this.selectedTextPredio = item.predio;
     this.nomPresidente = item.responsable;
-    this.predioSeleccionado = true;
+    this.predioisSeleccionado = true;
 
     if (item.id_predio == this.id_selectedPredio) {
-      this.periodoSeleccionado = true;
+      this.periodoisSeleccionado = true;
     } else {
       this.casasArray.splice(0, this.casasArray.length);//VACIAMOS LA TABLA
       this.id_selectedPredio = item.id_predio;
       this.selectedTextPeriodo = '--seleccione--';
       this.getPeriodos_BD(item);
-      this.periodoSeleccionado = false;
+      this.periodoisSeleccionado = false;
     }
-
+    console.log("El estado de del predio seleccionado es: "+ item.estado_finalizado)
+    this.estadoRegistroPredioSelected=item.estado_finalizado;
 
   }
 
@@ -116,7 +122,7 @@ export class FuncionesPrincipalesComponent implements OnInit {
 
 
 
-    this.periodoSeleccionado = true;
+    this.periodoisSeleccionado = true;
     if (this.selectedTextPeriodo != item1.periodo) {
       this.selectedTextPeriodo = item1.periodo;
       this.casasArray.splice(0, this.casasArray.length);//VACIAMOS LA TABLA
@@ -144,8 +150,20 @@ export class FuncionesPrincipalesComponent implements OnInit {
 
 
   finalizarRegistroPredio() {
+    console.log("el numero por verificar es:" +this.id_selectedPredio + "y el periodo es: " + this.selectedTextPeriodo);
+    for (let i = 0; i < this.predioArray.length; i++) {
+      console.log("el numero verificando es:" + this.predioArray[i].id_predio);
+      if (this.predioArray[i].id_predio == this.id_selectedPredio ) {
+        this.predioArray[i].estado_finalizado = 'finalizado';
+        console.log("El estaod del id  " + this.id_selectedPredio  + " ahora es: " + this.predioArray[i].estado_finalizado);
+        break;
+      }
+    }
+
     this.estadoRegistroPredioSelected = 'finalizado';
-    //Aca iria el metodo para modificar la tabla ESTADO_REGISTRO_PREDIO de la BD
+
+    //Metodo para modificar la tabla ESTADO_REGISTRO_PREDIO de la BD
+
     console.log("Se finaliza el registro del predio desde el principal");
   }
 
@@ -158,6 +176,9 @@ export class FuncionesPrincipalesComponent implements OnInit {
         this.mostrarComp_RegistGastPredios = item;
         this.bloquearPredios = !this.bloquearPredios;
         this.bloquearPeriodos = !this.bloquearPeriodos;
+
+        this.bloquearRegistrarPredio = !this.bloquearRegistrarPredio;
+        this.bloquearRegistrarCasas=!this.bloquearRegistrarCasas;
       }
       else {
         alert('Seleccione un PERIODO.');
@@ -176,6 +197,8 @@ export class FuncionesPrincipalesComponent implements OnInit {
       if (this.casasArray[i].numero == num_casa) {
         this.casasArray[i].estado_finalizado = 'finalizado';
         console.log("la participacionde la casa " + num_casa + " ahora es: " + this.casasArray[i].estado_finalizado);
+        
+        //Metodo para modificar la tabla ESTADO_REGISTRO_PREDIO de la BD
         break;
       }
     }
@@ -183,12 +206,17 @@ export class FuncionesPrincipalesComponent implements OnInit {
 
   //ESTADOS DEL SUBRECUADRO DE REGISTRO DE GASTOS DE LA CASA
   cambiarEstadoRegistroCasa(item: boolean) {
-    console.log("El estado del predioSeleccionado es:"+this.predioSeleccionado)
-    if (this.predioSeleccionado) {
-      if (this.periodoSeleccionado) {
+    console.log("El estado del predioSeleccionado es:"+this.predioisSeleccionado)
+    
+    if (this.predioisSeleccionado) {
+      if (this.periodoisSeleccionado) {
         this.mostrarComp_RegistGastCasa = item;
 
+        this.bloquearPredios = !this.bloquearPredios;
+        this.bloquearPeriodos = !this.bloquearPeriodos;
 
+        this.bloquearRegistrarPredio = !this.bloquearRegistrarPredio;
+        this.bloquearRegistrarCasas=!this.bloquearRegistrarCasas;
       }
       else {
         alert('Seleccione un PERIODO.');
@@ -200,7 +228,7 @@ export class FuncionesPrincipalesComponent implements OnInit {
   }
 
   actualizarDatosCasas(id_predio: string, periodo: string): void {
-    if (this.predioSeleccionado == true && this.periodoSeleccionado == true) {
+    if (this.predioisSeleccionado == true && this.periodoisSeleccionado == true) {
       console.log("Se cumplen las condiciones para getCasas");
       this.getCasas_BD(id_predio, periodo);
     }
@@ -214,6 +242,12 @@ export class FuncionesPrincipalesComponent implements OnInit {
       .subscribe(data => {
         console.log(data)
         this.predioArray = data.predios;    //OBTIENE LOS PREDIOS EN predioArray
+        this.predioArray.forEach(predio => {
+          if (predio.estado_finalizado === undefined) {
+            predio.estado_finalizado = 'no finalizado';
+            console.log("Se pone no finalizado para: "+ predio.id_predio)
+          }
+        });
         this.filteredPredios = this.predioArray;    //PASA LOS DATOS OBTENIDOS A UN SUBARRAY DE PREDIOS FILTRADOS filteredPredios
       },
         error => console.log(error));
@@ -235,7 +269,7 @@ export class FuncionesPrincipalesComponent implements OnInit {
           this.casasArray = data.casas;
           this.casasArray.forEach(casa => {
             if (casa.estado_finalizado === undefined) {
-              casa.estado_finalizado = "no finalizado";
+              casa.estado_finalizado = 'no finalizado';
             }
           });
           console.log(this.casasArray);

@@ -90,7 +90,8 @@
         <div class="tab-1" style="display: flex; height: 60px; align-items: center;">
           <div class="col d-flex justify-content-center">
             <button type="submit" class="btn btn-primary" (click)="cambiarEstadoRegistroPredio(true)"
-              style="width: 250px; height: 40px;">Registrar gastos del predio</button>
+              style="width: 250px; height: 40px;" [disabled]="bloquearRegistrarPredio">Registrar gastos del
+              predio</button>
           </div>
           <div class="circulo-registro-predio" [ngStyle]="{
                     'background-color': estadoRegistroPredioSelected === 'finalizado' ? 'green' : 'red',
@@ -103,7 +104,7 @@
         <div class="tab-1" style="display: flex; height: 60px; align-items: center;">
           <div class="col d-flex justify-content-center">
             <button type="submit" class="btn btn-primary" (click)="cambiarEstadoRegistroCasa(true)"
-              style="width: 250px; height: 40px;">
+              style="width: 250px; height: 40px;" [disabled]="bloquearRegistrarCasas">
               Registrar gastos de casa</button>
           </div>
         </div>
@@ -164,13 +165,13 @@
 
 <div *ngIf="mostrarComp_RegistGastPredios">
   <app-registrar-gasto-predio (mostrarRegistroPredio_OUT)="cambiarEstadoRegistroPredio($event)"
-    (estadoRegistroPredio_OUT)="finalizarRegistroPredio()"
+    (llamarFinalizarPredio_OUT)="finalizarRegistroPredio()" 
     [id_predio_IN]="id_selectedPredio"
     [periodo_IN]="selectedTextPeriodo"
-    
     ></app-registrar-gasto-predio>
 </div>
 <div *ngIf="mostrarComp_RegistGastCasa">
   <app-registrar-gasto-casa (mostrarRegistroCasa_OUT)="cambiarEstadoRegistroCasa($event)"
-    (estadoRegistroNum_Casa)="finalizarRegistroCasa($event)"></app-registrar-gasto-casa>
+    (numCasaRegistro_OUT)="finalizarRegistroCasa($event)"
+    ></app-registrar-gasto-casa>
 </div>

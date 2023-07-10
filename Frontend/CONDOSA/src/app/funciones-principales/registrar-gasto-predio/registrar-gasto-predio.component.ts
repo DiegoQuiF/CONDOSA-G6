@@ -27,15 +27,17 @@ export class RegistrarGastoPredioComponent implements OnInit {
   nombrePredio: string = '-';
   
   
-  id_predio: string='';
-  periodo: string = '-';
+  
   montoTotal:number = 0;
   id_gasto:string='';
   id_personal:string='';
   id_predio_gastos:string='';
 
+
+  id_predio: string='';
+  periodo: string = '-';
   @Output() mostrarRegistroPredio_OUT = new EventEmitter<boolean>();
-  @Output() estadoRegistroPredio_OUT = new EventEmitter<string>();
+  @Output() llamarFinalizarPredio_OUT = new EventEmitter<string>();
   @Input() id_predio_IN: string = "";
   @Input() periodo_IN: string = "";
 
@@ -69,8 +71,7 @@ export class RegistrarGastoPredioComponent implements OnInit {
 
   finalizarRegistroPredio() {
     //Aca iria el metodo para modificar la tabla ESTADO_REGISTRO_PREDIO de l BD
-    this.estadoRegistroPredio_OUT.emit('finalizado');
-    console.log("Se finaliza del predio de id: " + this.id_predio_IN)
+    this.llamarFinalizarPredio_OUT.emit();
   }
 
   selectedTipoGasto(item: TipoGastos): void {    //PERMITE SELECCIONAR EL TIPO DE GASTO Y CERRAR EL CBOX DE PREDIOS
