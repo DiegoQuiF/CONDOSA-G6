@@ -138,21 +138,21 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let dato of casasArray">
-              <td>{{ dato.id_indice }}</td>
-              <td>{{ dato.numero }}</td>
-              <td>{{ dato.mdu }}</td>
-              <td>{{ dato.piso }}</td>
-              <td>{{ dato.estado }}</td>
-              <td>{{ dato.responsable }}</td>
-              <td>{{ dato.area_casa }}</td>
-              <td>{{ dato.area_cochera }}</td>
-              <td>{{ dato.area_total }}</td>
-              <td>{{ dato.participacion }}</td>
+            <tr *ngFor="let casa of casasArray">
+              <td>{{ casa.id_indice }}</td>
+              <td>{{ casa.numero }}</td>
+              <td>{{ casa.mdu }}</td>
+              <td>{{ casa.piso }}</td>
+              <td>{{ casa.estado }}</td>
+              <td>{{ casa.responsable }}</td>
+              <td>{{ casa.area_casa }}</td>
+              <td>{{ casa.area_cochera }}</td>
+              <td>{{ casa.area_total }}</td>
+              <td>{{ casa.participacion }}</td>
               <td>
                 <div class="circulo-registro-casa" [ngStyle]="{
-              'background-color': dato.estado_finalizado === 'finalizado' ? finalizadoColor : no_finalizadoColor,
-              'box-shadow': dato.estado_finalizado === 'finalizado' ? finalizadoSombra : no_finalizadoSombra
+              'background-color': true === true ? finalizadoColor : no_finalizadoColor,
+              'box-shadow': true === true ? finalizadoSombra : no_finalizadoSombra
             }"></div>
               </td>
             </tr>

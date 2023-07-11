@@ -3,11 +3,9 @@ export class Predio {
     predio: string;
     responsable: string;
 
-    estado_finalizado: string;
-    constructor(id_pre:string, pre:string, per:string, es_fin:string){
+    constructor(id_pre:string, pre:string, per:string,  ){
         this.id_predio = id_pre;
         this.predio = pre;
         this.responsable = per;
-        this.estado_finalizado=es_fin;
-    }
+    }   
 }
