@@ -9,10 +9,11 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 export class RegistrarGastoCasaComponent implements OnInit {
 
   @Output() mostrarRegistroCasa_OUT=new EventEmitter<boolean>();
-  @Output() numCasaRegistro_OUT=new EventEmitter<string>();
+  @Output() idCasaRegistro_OUT=new EventEmitter<string>();
 
   //DATOS DE LA CASA
   num_casa_selected:string='--N° Casa--';
+  id_casa_selected:string='';
   
   listaCasas: any[] = ['20', '21', '22','23','24','25','26','27','28','29','30'];
   //
@@ -66,7 +67,7 @@ export class RegistrarGastoCasaComponent implements OnInit {
     //Aca iria el metodo para modificar la tabla ESTADO_REGISTRO_PREDIO de la BD
     if(this.num_casa_selected !== '--N° Casa--'){
       console.log("se manda el numero:"+ this.num_casa_selected)
-      this.numCasaRegistro_OUT.emit(this.num_casa_selected);
+      this.idCasaRegistro_OUT.emit(this.id_casa_selected);
     }else{
       alert('Selecciona un numero de casa');
     }

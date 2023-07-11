@@ -89,7 +89,7 @@
         <div style="width: 300px;"></div>
         <div class="tab-1" style="display: flex; height: 60px; align-items: center;">
           <div class="col d-flex justify-content-center">
-            <button type="submit" class="btn btn-primary" (click)="cambiarEstadoRegistroPredio(true)"
+            <button type="submit" class="btn btn-primary" (click)="cambiarMostrarRegistroPredio(true)"
               style="width: 250px; height: 40px;" [disabled]="bloquearRegistrarPredio">Registrar gastos del
               predio</button>
           </div>
@@ -103,7 +103,7 @@
         <div style="width: 300px;"></div>
         <div class="tab-1" style="display: flex; height: 60px; align-items: center;">
           <div class="col d-flex justify-content-center">
-            <button type="submit" class="btn btn-primary" (click)="cambiarEstadoRegistroCasa(true)"
+            <button type="submit" class="btn btn-primary" (click)="cambiarMostrarRegistroCasa(true)"
               style="width: 250px; height: 40px;" [disabled]="bloquearRegistrarCasas">
               Registrar gastos de casa</button>
           </div>
@@ -151,8 +151,8 @@
               <td>{{ casa.participacion }}</td>
               <td>
                 <div class="circulo-registro-casa" [ngStyle]="{
-              'background-color': true === true ? finalizadoColor : no_finalizadoColor,
-              'box-shadow': true === true ? finalizadoSombra : no_finalizadoSombra
+              'background-color': verificarFinalizadoCasas(casa.numero) === true ? finalizadoColor : no_finalizadoColor,
+              'box-shadow': verificarFinalizadoCasas(casa.numero) === true ? finalizadoSombra : no_finalizadoSombra
             }"></div>
               </td>
             </tr>
@@ -164,14 +164,14 @@
 </div>
 
 <div *ngIf="mostrarComp_RegistGastPredios">
-  <app-registrar-gasto-predio (mostrarRegistroPredio_OUT)="cambiarEstadoRegistroPredio($event)"
+  <app-registrar-gasto-predio (mostrarRegistroPredio_OUT)="cambiarMostrarRegistroPredio($event)"
     (llamarFinalizarPredio_OUT)="finalizarRegistroPredio()" 
     [id_predio_IN]="id_selectedPredio"
     [periodo_IN]="selectedTextPeriodo"
     ></app-registrar-gasto-predio>
 </div>
 <div *ngIf="mostrarComp_RegistGastCasa">
-  <app-registrar-gasto-casa (mostrarRegistroCasa_OUT)="cambiarEstadoRegistroCasa($event)"
-    (numCasaRegistro_OUT)="finalizarRegistroCasa($event)"
+  <app-registrar-gasto-casa (mostrarRegistroCasa_OUT)="cambiarMostrarRegistroCasa($event)"
+    (idCasaRegistro_OUT)="finalizarRegistroCasa($event)"
     ></app-registrar-gasto-casa>
 </div>

@@ -25,16 +25,16 @@ export class RegistrarGastoPredioComponent implements OnInit {
 
   predioArray: Array<Predio> = new Array<Predio>();
   nombrePredio: string = '-';
-  
-  
-  
-  montoTotal:number = 0;
-  id_gasto:string='';
-  id_personal:string='';
-  id_predio_gastos:string='';
 
 
-  id_predio: string='';
+
+  montoTotal: number = 0;
+  id_gasto: string = '';
+  id_personal: string = '';
+  id_predio_gastos: string = '';
+
+
+  id_predio: string = '';
   periodo: string = '-';
   @Output() mostrarRegistroPredio_OUT = new EventEmitter<boolean>();
   @Output() llamarFinalizarPredio_OUT = new EventEmitter<string>();
@@ -61,7 +61,7 @@ export class RegistrarGastoPredioComponent implements OnInit {
     this.getNombrePredio_BD();
     //CARGAMOS LOS TIPOS DE GASTO  EN UN ARRAY
     this.getTiposGastos_BD();
-    
+
   }
 
   set_mostrarRegistroPredio(item: boolean) {
@@ -80,7 +80,7 @@ export class RegistrarGastoPredioComponent implements OnInit {
       this.selectedItemTipoGasto = item.descripcion;
       this.selectedItemDescripGasto = '--seleccione--';
       this.descripGastoArray.splice(0, this.descripGastoArray.length);
-    } 
+    }
 
     this.getDescripcionesGasto_BD(item);
   }
@@ -104,19 +104,24 @@ export class RegistrarGastoPredioComponent implements OnInit {
     }
   }
 
-  registrarGastoPredio(){
+  registrarGastoPredio() {
+    //Antes de crear la tabla que almacenara el gasto, se tiene que crear la tabla donde se almacenara
+    //todo el gasto del predio en un periodo, esta tabla tendra el importe en 0, conforme 
+    //se añadan filas a Gasto_Predio_Det, el importe del predio gasto ira incrementandose. 
 
-  if("condicion"=="condicion"){
-    this.insertPredioGasto_BD(this.id_predio,this.id_personal,this.periodo,0);
-    
+    //Es en esat parte donde se verificaria que esta tabla, al que se quiere registrar el gasto del 
+    //predio exisrte, sino existe, habra que crearla 1 sola vez (por periodo). 
+    if ("condicion" == "condicion") {
+      this.insertPredioGasto_BD(this.id_predio, this.id_personal, this.periodo, 0);
+
+    }
+    this.insertGastoPredioDetalle_BD(this.id_predio_gastos, this.id_gasto, this.montoTotal);
+
   }
-  this.insertGastoPredioDetalle_BD(this.id_predio_gastos,this.id_gasto,this.montoTotal);
-    
-  }
 
 
 
-  insertPredioGasto_BD(id_predio:string,id_personal:string,periodo:string,importe:number){
+  insertPredioGasto_BD(id_predio: string, id_personal: string, periodo: string, importe: number) {
     /*Codigo para inserta una fila en la tabla PREDIO_GASTOS, 
     recordar que esta tabla es para el total del gasto de un predio en un mes determinado, 
     se debe crear una vez y el importe se debe ir incrementando conforme se ingresen PREDIO_GASTOS_DET */
@@ -124,9 +129,9 @@ export class RegistrarGastoPredioComponent implements OnInit {
   }
 
 
-  insertGastoPredioDetalle_BD(id_predio_gastos:string,id_gasto:string,importe:number):void{
+  insertGastoPredioDetalle_BD(id_predio_gastos: string, id_gasto: string, importe: number): void {
     //Codigo para insertar una fila en la tabla PREDIO_GASTOS_DET, depende recordar que depende de la tabla PREDIO_GASTOS
-    
+
   }
 
   getNombrePredio_BD(): void {
@@ -151,7 +156,7 @@ export class RegistrarGastoPredioComponent implements OnInit {
       .subscribe(data => {
         console.log(data)
         this.descripGastoArray = data.descripGastosComunes;
-        this.id_gasto=data.descripGastosComunes[0].id_gasto;
+        this.id_gasto = data.descripGastosComunes[0].id_gasto;
       },
         error => console.log(error));
   }

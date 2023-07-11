@@ -46,28 +46,28 @@ export class FuncionesPrincipalesComponent implements OnInit {
 
   prediosEstadoArray: Array<RegistroPredioEstado> = new Array<RegistroPredioEstado>(
     new RegistroPredioEstado("1", "1", "finalizado", "Abr-23"),
-    new RegistroPredioEstado("2", "2", "no finalizado", "Jun-23"),
-    new RegistroPredioEstado("3", "3", "no finalizado", "Jun-23"),
-    new RegistroPredioEstado("4", "4", "no finalizado", "Jun-23"),
-    new RegistroPredioEstado("5", "5", "no finalizado", "Jun-23"),
-    new RegistroPredioEstado("6", "6", "no finalizado", "Jun-23"),
-    new RegistroPredioEstado("7", "7", "no finalizado", "Jun-23"),
-    new RegistroPredioEstado("8", "8", "no finalizado", "Jun-23"),
-    new RegistroPredioEstado("9", "9", "no finalizado", "Jun-23"),
-    new RegistroPredioEstado("10", "10", "no finalizado", "Jun-23")
+    new RegistroPredioEstado("2", "1", "no finalizado", "May-23"),
+    new RegistroPredioEstado("3", "1", "no finalizado", "Jun-23"),
+    new RegistroPredioEstado("4", "2", "no finalizado", "Abr-23"),
+    new RegistroPredioEstado("5", "2", "no finalizado", "May-23"),
+    new RegistroPredioEstado("6", "2", "no finalizado", "Jun-23"),
+    new RegistroPredioEstado("7", "3", "no finalizado", "Abr-23"),
+    new RegistroPredioEstado("8", "3", "no finalizado", "May-23"),
+    new RegistroPredioEstado("9", "3", "no finalizado", "Jun-23"),
+    new RegistroPredioEstado("10", "4", "no finalizado", "Abr-23")
   );
 
   casasEstadoArray: Array<RegistroCasaEstado> = new Array<RegistroCasaEstado>(
-    new RegistroCasaEstado("1", "1", "no finalizado", "Jun-23", "20"),
-    new RegistroCasaEstado("2", "2", "no finalizado", "Jun-23", "21"),
-    new RegistroCasaEstado("3", "3", "no finalizado", "Jun-23", "22"),
-    new RegistroCasaEstado("4", "4", "no finalizado", "Jun-23", "23"),
-    new RegistroCasaEstado("5", "5", "no finalizado", "Jun-23", "24"),
-    new RegistroCasaEstado("6", "6", "no finalizado", "Jun-23", "25"),
-    new RegistroCasaEstado("7", "7", "no finalizado", "Jun-23", "26"),
-    new RegistroCasaEstado("8", "8", "no finalizado", "Jun-23", "27"),
-    new RegistroCasaEstado("9", "9", "no finalizado", "Jun-23", "28"),
-    new RegistroCasaEstado("10", "10", "no finalizado", "Jun-23", "29")
+    new RegistroCasaEstado("1", "1", "20", "no finalizado", "Abr-23"),
+    new RegistroCasaEstado("2", "2", "21", "no finalizado", "May-23"),
+    new RegistroCasaEstado("3", "3", "22", "no finalizado", "Jun-23"),
+    new RegistroCasaEstado("4", "4", "23", "no finalizado", "Abr-23"),
+    new RegistroCasaEstado("5", "5", "24", "no finalizado", "May-23"),
+    new RegistroCasaEstado("6", "6", "25", "no finalizado", "Jun-23"),
+    new RegistroCasaEstado("7", "7", "26", "no finalizado", "Abr-23"),
+    new RegistroCasaEstado("8", "8", "27", "no finalizado", "May-23"),
+    new RegistroCasaEstado("9", "9", "28", "no finalizado", "Jun-23"),
+    new RegistroCasaEstado("10", "10", "29", "no finalizado", "Abr-23")
   );
 
 
@@ -87,11 +87,8 @@ export class FuncionesPrincipalesComponent implements OnInit {
   bloquearRegistrarCasas: boolean = false;
 
 
-
-  estadoRegistroPredioSelected: string = 'no finalizado';
+  estadoRegistroPredioSelected: string = '';
   id_selectedPredio = '';
-
-
 
   //AL INICIO SE OBTIENEN LOS PREDIOS PARA EL COMBO BOX
   ngOnInit(): void {
@@ -123,7 +120,6 @@ export class FuncionesPrincipalesComponent implements OnInit {
   }
 
 
-
   filterPredios(): void {   //PERMITE FILTRAR LOS PREDIOS CON LA BARRA DE BÚSQUEDA
     this.filteredPredios = this.predioArray.filter(predio => predio.predio.toLowerCase().startsWith(this.searchPredios.toLowerCase()))
   }
@@ -147,9 +143,14 @@ export class FuncionesPrincipalesComponent implements OnInit {
     if (this.selectedTextPeriodo != item1.periodo) {
       this.selectedTextPeriodo = item1.periodo;
       this.casasArray.splice(0, this.casasArray.length);//VACIAMOS LA TABLA
-      this.actualizarDatosCasas(this.id_selectedPredio, this.selectedTextPeriodo);
+      this.actualizarTablaCasas(this.id_selectedPredio, this.selectedTextPeriodo);
     }
 
+    if (this.verificarFinalizadoPredio()) {
+      this.estadoRegistroPredioSelected = 'finalizado'
+    } else {
+      this.estadoRegistroPredioSelected = 'no finalizado'
+    }
   }
 
   filterPeriodos(): void {   //PERMITE FILTRAR LOS PREDIOS CON LA BARRA DE BÚSQUEDA
@@ -172,9 +173,10 @@ export class FuncionesPrincipalesComponent implements OnInit {
 
   finalizarRegistroPredio() {
     console.log("el numero por verificar es:" + this.id_selectedPredio + "y el periodo es: " + this.selectedTextPeriodo);
-    for (let i = 0; i < this.predioArray.length; i++) {
-      console.log("el numero verificando es:" + this.predioArray[i].id_predio);
-      if (this.prediosEstadoArray[i].id_predio == this.id_selectedPredio) {
+    for (let i = 0; i < this.prediosEstadoArray.length; i++) {
+      console.log("el numero verificando es:" + this.prediosEstadoArray[i].id_predio);
+      if (this.prediosEstadoArray[i].id_predio == this.id_selectedPredio
+        && this.prediosEstadoArray[i].periodo == this.selectedTextPeriodo) {
         this.prediosEstadoArray[i].estado = 'finalizado';
         console.log("El estaod del id  " + this.id_selectedPredio + " ahora es: " + this.prediosEstadoArray[i].estado);
         break;
@@ -183,14 +185,14 @@ export class FuncionesPrincipalesComponent implements OnInit {
 
     this.estadoRegistroPredioSelected = 'finalizado';
 
-    //Metodo para modificar la tabla ESTADO_REGISTRO_PREDIO de la BD
+    //ACA SE COLOCA el Metodo para modificar la tabla ESTADO_REGISTRO_PREDIO de la BD
 
     console.log("Se finaliza el registro del predio desde el principal");
   }
 
 
   //ESTADOS DEL SUBRECUADRO DE REGISTRO DE GASTOS DEL PREDIO
-  cambiarEstadoRegistroPredio(item: boolean) {
+  cambiarMostrarRegistroPredio(item: boolean) {
     if (this.selectedTextPredio !== '--seleccione--') {
       if (this.selectedTextPeriodo !== '--seleccione--') {
 
@@ -212,26 +214,26 @@ export class FuncionesPrincipalesComponent implements OnInit {
 
   //Metodo para indicar que ya se termino de regitrar 
   finalizarRegistroCasa(num_casa: string) {
-    //Aca iria el metodo para modificar la tabla REGISTRO_CASA_ESTADO de la BD, usando el num_casa
+    
     for (let i = 0; i < this.casasEstadoArray.length; i++) {
-      console.log("el numero verificando es:" + this.casasEstadoArray[i].num_casa);
-      if (this.casasEstadoArray[i].num_casa == num_casa&&this.casasEstadoArray[i].periodo == this.selectedTextPeriodo) {
+      
+      if (this.casasEstadoArray[i].num_casa == num_casa 
+        && this.casasEstadoArray[i].periodo == this.selectedTextPeriodo) {
         this.casasEstadoArray[i].estado = 'finalizado';
-        console.log("la participacionde la casa " + num_casa + " ahora es: " + this.casasEstadoArray[i].estado);
-        //Metodo para modificar la tabla ESTADO_REGISTRO_PREDIO de la BD
+        console.log("finalizarRegistroCasa() la participacionde la casa " + num_casa + " ahora es: " + this.casasEstadoArray[i].estado);
+        //ACA SE COLOCA el Metodo para modificar la tabla REGISTRO_CASA_ESTADO de la BD
         break;
       }
     }
   }
 
   //ESTADOS DEL SUBRECUADRO DE REGISTRO DE GASTOS DE LA CASA
-  cambiarEstadoRegistroCasa(item: boolean) {
+  cambiarMostrarRegistroCasa(item: boolean) {
     console.log("El estado del predioSeleccionado es:" + this.predioisSeleccionado)
 
     if (this.predioisSeleccionado) {
       if (this.periodoisSeleccionado) {
         this.mostrarComp_RegistGastCasa = item;
-
         this.bloquearPredios = !this.bloquearPredios;
         this.bloquearPeriodos = !this.bloquearPeriodos;
 
@@ -247,25 +249,50 @@ export class FuncionesPrincipalesComponent implements OnInit {
     }
   }
 
-  actualizarDatosCasas(id_predio: string, periodo: string): void {
+  verificarFinalizadoPredio(): boolean {
+    console.log("\nverificarFinalizadoPredio " +
+      "\nthis.id_selectedPredio es:" + this.id_selectedPredio +
+      "\nthis.id_selectedPredio es:" + this.selectedTextPeriodo
+    )
+    for (let i = 0; i < this.prediosEstadoArray.length; i++) {
+      
+      if (this.prediosEstadoArray[i].id_predio == this.id_selectedPredio
+        && this.prediosEstadoArray[i].periodo == this.selectedTextPeriodo
+        && this.prediosEstadoArray[i].estado == 'finalizado') {
+
+        //ACA SE COLOCA el Método para modificar la tabla ESTADO_REGISTRO_PREDIO de la BD
+        console.log("Se devuelve true en verificarFinalizadoPredio()")
+        return true;
+      }
+    }
+    return false; 
+  }
+
+  verificarFinalizadoCasas(num_casa: string): boolean {
+    for (let i = 0; i < this.casasEstadoArray.length; i++) {
+      if (this.casasEstadoArray[i].num_casa == num_casa
+        && this.casasEstadoArray[i].periodo == this.selectedTextPeriodo
+        && this.casasEstadoArray[i].estado == 'finalizado') {
+
+        //ACA SE COLOCA el Método para modificar la tabla ESTADO_REGISTRO_PREDIO de la BD
+        return true;
+      }
+    }
+    return false;
+  }
+
+  actualizarTablaCasas(id_predio: string, periodo: string): void {
     if (this.predioisSeleccionado == true && this.periodoisSeleccionado == true) {
       console.log("Se cumplen las condiciones para getCasas");
       this.getCasas_BD(id_predio, periodo);
     }
   }
 
-
-
-
   getPredios_BD(): void {
     this.connBackend.getPredios()
       .subscribe(data => {
         console.log(data)
         this.predioArray = data.predios;    //OBTIENE LOS PREDIOS EN predioArray
-        this.predioArray.forEach(predio => {
-          
-
-        });
         this.filteredPredios = this.predioArray;    //PASA LOS DATOS OBTENIDOS A UN SUBARRAY DE PREDIOS FILTRADOS filteredPredios
       },
         error => console.log(error));
@@ -285,9 +312,6 @@ export class FuncionesPrincipalesComponent implements OnInit {
         data => {
           console.log(data)
           this.casasArray = data.casas;
-          this.casasArray.forEach(casa => {
-            
-          });
           console.log(this.casasArray);
         },
         error => console.log(error));

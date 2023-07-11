@@ -7,9 +7,10 @@ export class RegistroCasaEstado {
     constructor(
         id_registro_casa_estado: string,
         id_casa: string,
+        num_casa:string,
         estado: string,
-        periodo: string,
-        num_casa:string
+        periodo: string
+        
     ) {
         this.id_registro_casa_estado = id_registro_casa_estado
         this.id_casa = id_casa
