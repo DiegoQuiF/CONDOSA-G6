@@ -111,7 +111,7 @@ export class RegistrarGastoPredioComponent implements OnInit {
 
     //Es en esat parte donde se verificaria que esta tabla, al que se quiere registrar el gasto del 
     //predio exisrte, sino existe, habra que crearla 1 sola vez (por periodo). 
-    if ("condicion" == "condicion") {
+    if (this.existeTablaPredioGasto(this.periodo,this.id_predio)) {
       this.insertPredioGasto_BD(this.id_predio, this.id_personal, this.periodo, 0);
 
     }
@@ -119,7 +119,10 @@ export class RegistrarGastoPredioComponent implements OnInit {
 
   }
 
-
+  existeTablaPredioGasto(periodo:string,id_predio:string):boolean{
+    
+    return true;
+  }
 
   insertPredioGasto_BD(id_predio: string, id_personal: string, periodo: string, importe: number) {
     /*Codigo para inserta una fila en la tabla PREDIO_GASTOS, 
