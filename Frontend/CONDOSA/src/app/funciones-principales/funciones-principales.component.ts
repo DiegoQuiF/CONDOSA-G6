@@ -1,48 +1,71 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 //MODELOS
-import { Predio } from './../models/predio'
-import { Gastos } from './../models/gastos'
-import { Casas } from '../models/casas';
-import { TipoGastos } from '../models/tipo-gastos';
-import { DescripGastos } from '../models/descrip-gastos';
+import { Predio }                     from './../models/predio'
+import { Gastos }                     from './../models/gastos'
+import { Casas }                      from '../models/casas';
+import { RegistroPredioEstado }       from '../models/registro-predio-estado';
+import { RegistroCasaEstado }         from '../models/registro-casa-estado';
+
 //SERVICIO BACKEND
-import { ConnBackendService } from '../services/conn-backend.service';
-import { RegistroPredioEstado } from '../models/registro-predio-estado';
-import { RegistroCasaEstado } from '../models/registro-casa-estado';
+import { ConnBackendService }         from '../services/conn-backend.service';
+
 
 
 @Component({
-  selector: 'app-funciones-principales',
-  templateUrl: './funciones-principales.component.html',
-  styleUrls: ['./funciones-principales.component.css']
+  selector:     'app-funciones-principales',
+  templateUrl:  './funciones-principales.component.html',
+  styleUrls:   ['./funciones-principales.component.css']
 })
 
 export class FuncionesPrincipalesComponent implements OnInit {
+  constructor(private connBackend: ConnBackendService) { }        //Constructor | Servicio Backend
 
-  constructor(private connBackend: ConnBackendService) { }
+  //VARIABLES DEL PREDIO
+  predioArray:          Array<Predio> = new Array<Predio>();      //Array | Todos los predios
+  filteredPredios:      Array<Predio> = new Array<Predio>();      //Array | Predios filtrados
+  searchPredios:        string = '';                              //Texto | Filtro de predios
+  selectedTextPredio:   string = '--seleccione--';                //Texto | Predio seleccionado
+  nomPresidente:        string = '--seleccione un predio--';      //Texto | Presidente de predio seleccionado
+  
+  
+  //VARIABLES DEL PERIODO
+  gastoArray:           Array<Gastos> = new Array<Gastos>();      //Array | Todos los periodos de gasto
+  filteredPeriodos:     Array<Gastos> = new Array<Gastos>();      //Array | Periodos filtrados
+  searchPeriodos:       string = '';                              //Texto | Filtro de periodo
+  selectedTextPeriodo:  string = '--seleccione--';                //Texto | Periodo seleccionado
+  idSelectedPeriodo:    string = '';                              //Texto | Id del periodo seleccionado
 
 
+  //VARIABLES DE CASAS
+  casasArray:           Array<Casas> = new Array<Casas>();        //Array | Todas las casas de un predio
+
+
+  //COLORES Y SOMBRAS DE COMPONENTES
   finalizadoColor = getComputedStyle(document.documentElement).getPropertyValue('--finalizado-color');
   no_finalizadoColor = getComputedStyle(document.documentElement).getPropertyValue('--no-finalizado-color');
   finalizadoSombra = getComputedStyle(document.documentElement).getPropertyValue('--box-shadow-finalizado');
   no_finalizadoSombra = getComputedStyle(document.documentElement).getPropertyValue('--box-shadow-no-finalizado');
 
-  predioArray: Array<Predio> = new Array<Predio>();
-  filteredPredios: Array<Predio> = new Array<Predio>();
-  searchPredios: string = '';
-  selectedTextPredio: string = '--seleccione--';
-  isActivePredios: boolean = false;
 
 
-  gastoArray: Array<Gastos> = new Array<Gastos>();
-
-  filteredPeriodos: Array<Gastos> = new Array<Gastos>();
-  searchPeriodos: string = '';
-  selectedTextPeriodo: string = '--seleccione--';
   isActivePeriodo: boolean = false;
+  
+  
+  
+  isActivePredios:      boolean = false;
 
-  casasArray: Array<Casas> = new Array<Casas>();
+
+  
+
+  
+
+
+  
+
+  
+
+  
 
   prediosEstadoArray: Array<RegistroPredioEstado> = new Array<RegistroPredioEstado>(
     new RegistroPredioEstado("1", "1", "finalizado", "Abr-23"),
@@ -71,7 +94,7 @@ export class FuncionesPrincipalesComponent implements OnInit {
   );
 
 
-  nomPresidente: string = '';
+  
 
   mostrarComp_RegistGastPredios: boolean = false;  //PERMITE MOSTRAR EL PANEL DE REGISTRO DE GASTOS DE PREDIO
   mostrarComp_RegistGastCasa: boolean = false;   //PERMITE MOSTRAR EL PANEL DE REGISTRO DE GASTOS DE CASA
@@ -133,15 +156,14 @@ export class FuncionesPrincipalesComponent implements OnInit {
   }
 
 
-  //SOBRE LOS PERIODOS
-  selectedPeriodo(item1: Gastos): void {    //PERMITE SELECCIONAR EL PREDIO Y CERRAR EL CBOX DE PREDIOS
-    this.isActivePeriodo = false;//PARA EL SELECCIONADOR
-
-
+  //MÉTODOS DE LOS PREDIOS
+  selectedPeriodo(item1: Gastos): void {            //Set de periodo
+    this.isActivePeriodo = false;
 
     this.periodoisSeleccionado = true;
     if (this.selectedTextPeriodo != item1.periodo) {
       this.selectedTextPeriodo = item1.periodo;
+      this.idSelectedPeriodo = item1.id_predio_gastos;
       this.casasArray.splice(0, this.casasArray.length);//VACIAMOS LA TABLA
       this.actualizarTablaCasas(this.id_selectedPredio, this.selectedTextPeriodo);
     }

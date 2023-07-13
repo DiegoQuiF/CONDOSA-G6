@@ -3,6 +3,7 @@ import { TipoGastos } from 'src/app/models/tipo-gastos';
 import { DescripGastos } from 'src/app/models/descrip-gastos';
 import { ConnBackendService } from 'src/app/services/conn-backend.service';
 import { Predio } from 'src/app/models/predio';
+import { PredioGastosDet } from 'src/app/models/predio-gastos-det';
 
 @Component({
   selector: 'app-registrar-gasto-predio',
@@ -39,9 +40,12 @@ export class RegistrarGastoPredioComponent implements OnInit {
   @Output() mostrarRegistroPredio_OUT = new EventEmitter<boolean>();
   @Output() llamarFinalizarPredio_OUT = new EventEmitter<string>();
   @Input() id_predio_IN: string = "";
+  @Input() predio_IN: string = "";
   @Input() periodo_IN: string = "";
+  @Input() idPeriodo_IN: string = "";
+  @Input() idPredioGastos_IN: string = "";
 
-
+  gastosRegistradosArray: PredioGastosDet[] = [];
 
   gatosRegistradosArray: any[] = [
     { TipoGasto: 'Planilla (portería- áreas comunes- limpieza)', Monto: 305 },
@@ -54,14 +58,16 @@ export class RegistrarGastoPredioComponent implements OnInit {
     { TipoGasto: 'Consumo de Luz Mensual BCI -Suministro 1695613', Monto: 123 }
   ];
 
+  
+
   ngOnInit() {
+    this.nombrePredio = this.predio_IN;
     this.periodo = this.periodo_IN;
     this.id_predio = this.id_predio_IN;
-    //CARGAMOS LOS DATOS DE LOS PREDIOS CON UN WHERE USANDO EL ID DEL PREDIO Y TOMAMOS EL "predio" DEL RESULTADO
-    this.getNombrePredio_BD();
+    this.id_predio_gastos = this.idPredioGastos_IN
     //CARGAMOS LOS TIPOS DE GASTO  EN UN ARRAY
     this.getTiposGastos_BD();
-
+    this.getGastosDet_BD();
   }
 
   set_mostrarRegistroPredio(item: boolean) {
@@ -92,6 +98,7 @@ export class RegistrarGastoPredioComponent implements OnInit {
 
   selectedDescripGasto(item: DescripGastos): void {    //PERMITE SELECCIONAR LA DESCRIPCION Y CERRAR SU RESPECTIVO CBOX
     this.selectedItemDescripGasto = item.descripcion;
+    this.id_gasto = item.id_gasto;
     this.toggleActiveDescripGasto();
   }
 
@@ -104,19 +111,12 @@ export class RegistrarGastoPredioComponent implements OnInit {
     }
   }
 
+
   registrarGastoPredio() {
-    //Antes de crear la tabla que almacenara el gasto, se tiene que crear la tabla donde se almacenara
-    //todo el gasto del predio en un periodo, esta tabla tendra el importe en 0, conforme 
-    //se añadan filas a Gasto_Predio_Det, el importe del predio gasto ira incrementandose. 
-
-    //Es en esat parte donde se verificaria que esta tabla, al que se quiere registrar el gasto del 
-    //predio exisrte, sino existe, habra que crearla 1 sola vez (por periodo). 
-    if (this.existeTablaPredioGasto(this.periodo,this.id_predio)) {
-      this.insertPredioGasto_BD(this.id_predio, this.id_personal, this.periodo, 0);
-
-    }
-    this.insertGastoPredioDetalle_BD(this.id_predio_gastos, this.id_gasto, this.montoTotal);
-
+    this.connBackend.postGastosPredios(this.id_predio_gastos, this.id_gasto, this.montoTotal.toString())
+    .subscribe(data => { console.log(data) }, error => console.log(error));
+    alert('Se ha registrado el gasto...');
+    this.getGastosDet_BD();
   }
 
   existeTablaPredioGasto(periodo:string,id_predio:string):boolean{
@@ -137,15 +137,6 @@ export class RegistrarGastoPredioComponent implements OnInit {
 
   }
 
-  getNombrePredio_BD(): void {
-    this.connBackend.getPredio(this.id_predio_IN)
-      .subscribe(data => {
-        console.log(data)
-        this.nombrePredio = data.predio[0].predio;
-      },
-        error => console.log(error));
-  }
-
   getTiposGastos_BD(): void {
     this.connBackend.getTipoGastos()
       .subscribe(data => {
@@ -154,12 +145,21 @@ export class RegistrarGastoPredioComponent implements OnInit {
       },
         error => console.log(error));
   }
+
+  getGastosDet_BD(): void {
+    this.connBackend.getGastosPredios(this.idPeriodo_IN)
+      .subscribe(data => {
+        console.log(data)
+        this.gastosRegistradosArray = data.gastoPredioDetalle;
+      },
+        error => console.log(error));
+  }
+
   getDescripcionesGasto_BD(item: TipoGastos): void {
     this.connBackend.getDescripGastos(item.id_tipo_gasto)
       .subscribe(data => {
         console.log(data)
         this.descripGastoArray = data.descripGastosComunes;
-        this.id_gasto = data.descripGastosComunes[0].id_gasto;
       },
         error => console.log(error));
   }

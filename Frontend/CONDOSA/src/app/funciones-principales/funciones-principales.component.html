@@ -167,7 +167,10 @@
   <app-registrar-gasto-predio (mostrarRegistroPredio_OUT)="cambiarMostrarRegistroPredio($event)"
     (llamarFinalizarPredio_OUT)="finalizarRegistroPredio()" 
     [id_predio_IN]="id_selectedPredio"
+    [predio_IN]="selectedTextPredio"
     [periodo_IN]="selectedTextPeriodo"
+    [idPeriodo_IN]="idSelectedPeriodo"
+    [idPredioGastos_IN]="idSelectedPeriodo"
     ></app-registrar-gasto-predio>
 </div>
 <div *ngIf="mostrarComp_RegistGastCasa">

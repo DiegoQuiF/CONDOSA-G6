@@ -37,9 +37,9 @@
 .contenedor-tabla {
   display: flex;
   justify-content: center;
-  height: 230px; /* Altura fija del contenedor */
+  max-height: 275px;
   width: 90%;
-  overflow-y: auto; /* Barra de desplazamiento vertical */
+  overflow-y: auto;
   margin-left: auto;
   margin-right: auto;
 }
@@ -58,7 +58,7 @@
   padding: 8px;
   text-align: center;
   border-bottom: 1px solid #ddd;
-  border-right: 1px solid #ddd; /* Agregar línea vertical */
+  border-right: 1px solid #ddd;
 }
 
 .tabla-gastos td {
@@ -66,12 +66,12 @@
   text-align: left;
   background-color: #ffffff2d;
   border-bottom: 1px solid #ddd;
-  border-right: 1px solid #ddd; /* Agregar línea vertical */
+  border-right: 1px solid #ddd;
 }
 
 .tabla-gastos th:last-child,
 .tabla-gastos td:last-child {
-  border-right: none; /* Eliminar línea vertical en la última columna */
+  border-right: none;
 }
 .tabla-gastos th {
   background-color: #ffffff83;
@@ -98,7 +98,7 @@
   font-weight: bold;
   cursor: pointer;
   outline: none;
-  margin-right: 200px; /* Ajusta la separación a 10px desde el borde derecho */
+  margin-right: 200px;
 }
 
 .subseccion-titulo {

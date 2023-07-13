@@ -91,7 +91,7 @@ section {
     display: flex;
     justify-content: center;
     align-items: start;
-    background: url('images/fondoBorroso2.jpg')no-repeat;
+    background: url('images/fondoBorroso.jpg')no-repeat;
     background-position: center;
     background-size: cover;
     min-height: 92.8vh;

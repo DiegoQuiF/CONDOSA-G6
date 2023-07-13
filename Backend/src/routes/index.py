@@ -6,6 +6,8 @@ from src.services.get.getTablaCasas import getTablaCasas
 from src.services.get.getTipoGastos import getTipoGastos
 from src.services.get.getDescripGastos import getDescripGastos
 from src.services.get.getPredio import getPredio
+from src.services.get.getGastosPredio import getGastosPredio
+from src.services.post.postGastosPredio import postGastosPredio
 
 main = Blueprint('index_blueprint', __name__)
 
@@ -74,3 +76,31 @@ def descripGastos(id):
             return jsonify({'message':"NOT FOUND", 'success':True})
     except Exception as error:
         return jsonify({'message':'ERROR', 'success':False})
+    
+@main.route('/getGastosPredios/<int:id>')
+def gastosPredios(id):
+    try:
+        gastosPredios = getGastosPredio(id)
+        if(len(gastosPredios) > 0):
+            return jsonify({'gastoPredioDetalle':gastosPredios, 'message':"SUCCESS", 'success':True})
+        else:
+            return jsonify({'message':"NOT FOUND", 'success':True})
+    except Exception as error:
+        return jsonify({'message':'ERROR', 'success':False})
+    
+@main.route('/insertarGastoPredio', methods = ['POST'])
+def insertar_gasto_predio():
+    try:
+        data = request.get_json()
+        id_predio_gastos = data['id_predio_gastos']
+        id_gasto = data['id_gasto']
+        importe = data['importe']
+        if(postGastosPredio(id_predio_gastos, id_gasto, importe)):
+            return jsonify({'message': data, 'success':True})
+        else:
+            return jsonify({'message':"NOT FOUND", 'success':True})
+    except Exception as error:
+        return jsonify({'message':'ERROR', 'success':False})
+    
+    
+

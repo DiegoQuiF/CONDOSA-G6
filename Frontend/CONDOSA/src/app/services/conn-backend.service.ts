@@ -33,4 +33,17 @@ export class ConnBackendService {
   getDescripGastos(id:string):Observable<any>{
     return this.http.get(`${this.BASE_URL}/getTipoGastosComunes/${id}`);
   }
+
+  getGastosPredios(id:string):Observable<any>{
+    return this.http.get(`${this.BASE_URL}/getGastosPredios/${id}`);
+  }
+
+  postGastosPredios(id_pre_ga:string, id_ga:string, imp:string):Observable<any>{
+    const data = {
+      id_predio_gastos: id_pre_ga,
+      id_gasto: id_ga,
+      importe: imp
+    };
+    return this.http.post(`${this.BASE_URL}/insertarGastoPredio`, data);
+  }
 }
