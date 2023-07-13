@@ -7,6 +7,7 @@ from src.services.get.getTipoGastos import getTipoGastos
 from src.services.get.getDescripGastos import getDescripGastos
 from src.services.get.getPredio import getPredio
 from src.services.get.getGastosPredio import getGastosPredio
+from src.services.get.getGastoRegistrado import getGastosPredioI
 from src.services.post.postGastosPredio import postGastosPredio
 
 main = Blueprint('index_blueprint', __name__)
@@ -83,6 +84,17 @@ def gastosPredios(id):
         gastosPredios = getGastosPredio(id)
         if(len(gastosPredios) > 0):
             return jsonify({'gastoPredioDetalle':gastosPredios, 'message':"SUCCESS", 'success':True})
+        else:
+            return jsonify({'message':"NOT FOUND", 'success':True})
+    except Exception as error:
+        return jsonify({'message':'ERROR', 'success':False})
+
+@main.route('/getGastosPredios/<int:id>/<int:idgasto>')
+def gastosPrediosI(id, idgasto):
+    try:
+        gastosPredios = getGastosPredioI(id, idgasto)
+        if(len(gastosPredios) > 0):
+            return jsonify({'gastoPredioDetalleI':gastosPredios, 'message':"SUCCESS", 'success':True})
         else:
             return jsonify({'message':"NOT FOUND", 'success':True})
     except Exception as error:

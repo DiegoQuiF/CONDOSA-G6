@@ -77,6 +77,7 @@ export class RegistrarGastoPredioComponent implements OnInit {
 
   finalizarRegistroPredio() {
     //Aca iria el metodo para modificar la tabla ESTADO_REGISTRO_PREDIO de l BD
+    this.set_mostrarRegistroPredio(false);
     this.llamarFinalizarPredio_OUT.emit();
   }
 
@@ -85,10 +86,11 @@ export class RegistrarGastoPredioComponent implements OnInit {
     if (this.selectedItemTipoGasto != item.descripcion) {
       this.selectedItemTipoGasto = item.descripcion;
       this.selectedItemDescripGasto = '--seleccione--';
+      this.montoTotal = 0;
       this.descripGastoArray.splice(0, this.descripGastoArray.length);
     }
 
-    this.getDescripcionesGasto_BD(item);
+    this.getDescripcionesGasto_BD(item.id_tipo_gasto);
   }
 
   toggleActiveTipoGasto(): void {   //PERMITE (PARA EL CBOX DE TIPO GASTOS) ACTIVAR SI ESTÁ DESACTIVADO, DESACTIVAR SI ESTÁ ACTIVADO
@@ -97,9 +99,12 @@ export class RegistrarGastoPredioComponent implements OnInit {
 
 
   selectedDescripGasto(item: DescripGastos): void {    //PERMITE SELECCIONAR LA DESCRIPCION Y CERRAR SU RESPECTIVO CBOX
-    this.selectedItemDescripGasto = item.descripcion;
-    this.id_gasto = item.id_gasto;
     this.toggleActiveDescripGasto();
+    if (this.selectedItemDescripGasto != item.descripcion) {
+      this.montoTotal = 0;
+      this.selectedItemDescripGasto = item.descripcion;
+      this.id_gasto = item.id_gasto;
+    }
   }
 
   toggleActiveDescripGasto(): void {   //PERMITE (PARA EL CBOX DE DESCRIPCION) ACTIVAR SI ESTÁ DESACTIVADO, DESACTIVAR SI ESTÁ ACTIVADO
@@ -113,10 +118,26 @@ export class RegistrarGastoPredioComponent implements OnInit {
 
 
   registrarGastoPredio() {
-    this.connBackend.postGastosPredios(this.id_predio_gastos, this.id_gasto, this.montoTotal.toString())
-    .subscribe(data => { console.log(data) }, error => console.log(error));
-    alert('Se ha registrado el gasto...');
-    this.getGastosDet_BD();
+    if(this.gastoRegistrado()){
+      alert('Este gasto ya se encuentra registrado...');
+    }
+    else{
+      this.connBackend.postGastosPredios(this.id_predio_gastos, this.id_gasto, this.montoTotal.toString())
+      .subscribe(data => { console.log(data) }, error => console.log(error));
+      alert('Se ha registrado el gasto...');
+      this.getGastosDet_BD();
+    }
+  }
+
+
+  gastoRegistrado() {
+    const gastoRegistrado = this.gastosRegistradosArray.filter((gasto) => gasto.id_gasto === this.id_gasto);
+    if(gastoRegistrado.length > 0){
+      return true;
+    }
+    else{
+      return false;
+    }
   }
 
   existeTablaPredioGasto(periodo:string,id_predio:string):boolean{
@@ -155,12 +176,21 @@ export class RegistrarGastoPredioComponent implements OnInit {
         error => console.log(error));
   }
 
-  getDescripcionesGasto_BD(item: TipoGastos): void {
-    this.connBackend.getDescripGastos(item.id_tipo_gasto)
+  getDescripcionesGasto_BD(item: string): void {
+    this.connBackend.getDescripGastos(item)
       .subscribe(data => {
         console.log(data)
         this.descripGastoArray = data.descripGastosComunes;
       },
         error => console.log(error));
+  }
+
+
+  editarGasto(item: PredioGastosDet){
+    this.getTiposGastos_BD();
+    this.selectedItemTipoGasto = item.des_gasto;
+    this.getDescripcionesGasto_BD(item.id_tipo_gasto.toString());
+    this.selectedItemDescripGasto = item.descripcion;
+    this.montoTotal = parseFloat(item.importe);
   }
 }   

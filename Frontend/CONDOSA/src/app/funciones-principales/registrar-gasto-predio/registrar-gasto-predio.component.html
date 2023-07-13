@@ -107,7 +107,7 @@
           </div>
           <div class="flexy" style="width: 400px; height: 60px; align-items: center;">
             <input type="number" name="monto_predio" id="monto_predio" placeholder="S/." class="form-control"
-              style="width: 100%; height: 40px;" [(ngModel)]="montoTotal">
+              style="width: 100%; height: 40px;" [(ngModel)]="montoTotal" min="0" max="9999">
           </div>
         </div>
         <div class="flexy" style="align-items: center; justify-content: center;">
@@ -149,7 +149,7 @@
                     <td>{{ gasto.descripcion}}</td>
                     <td>{{ gasto.importe }}</td>
                     <td>
-                      <button type="submit" class="btn btn-primary" style="width: 70px; height: 35px;">
+                      <button type="submit" class="btn btn-primary" style="width: 70px; height: 35px;" (click)="editarGasto(gasto)">
                         Editar
                       </button>
                     </td>
