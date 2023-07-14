@@ -58,4 +58,27 @@ export class ConnBackendService {
     };
     return this.http.put(`${this.BASE_URL}/actualizarGastoPredio`, data);
   }
+
+  getRegistroPredioEstadoI():Observable<any>{
+    return this.http.get(`${this.BASE_URL}/getRegistroPredioEstado`);
+  }
+
+  postRegistroPredioEstado(id_pred:string, id_pers:string, id_est:string, peri:string):Observable<any>{
+    const data = {
+      id_predio : id_pred,
+      id_personal : id_pers,
+      id_estado : id_est,
+      periodo : peri
+    };
+    return this.http.post(`${this.BASE_URL}/insertarGastoPredio`, data);
+  }
+
+  putRegistroPredioEstado(id_est:string, id_pred:string, peri:string){
+    const data = {
+      id_estado : id_est,
+      id_predio : id_pred,
+      periodo : peri
+    };
+    return this.http.put(`${this.BASE_URL}/actualizarRegistroPredioEstado`, data);
+  }
 }
