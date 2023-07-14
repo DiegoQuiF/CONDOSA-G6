@@ -170,10 +170,12 @@
     [id_periodo_IN]="id_selectedPeriodo"
     [predio_IN]="selectedTextPredio"
     [periodo_IN]="selectedTextPeriodo"
+    
     ></app-registrar-gasto-predio>
 </div>
 <div *ngIf="mostrarComp_RegistGastCasa">
   <app-registrar-gasto-casa (mostrarRegistroCasa_OUT)="cambiarMostrarRegistroCasa($event)"
     (idCasaRegistro_OUT)="finalizarRegistroCasa($event)"
+    [casasArray_IN]="casasArray"
     ></app-registrar-gasto-casa>
 </div>

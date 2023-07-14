@@ -1,4 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Casas } from 'src/app/models/casas';
 
 
 @Component({
@@ -10,13 +11,15 @@ export class RegistrarGastoCasaComponent implements OnInit {
 
   @Output() mostrarRegistroCasa_OUT=new EventEmitter<boolean>();
   @Output() idCasaRegistro_OUT=new EventEmitter<string>();
-
+  @Input() casasArray_IN: Casas[] = [];
   //DATOS DE LA CASA
   num_casa_selected:string='--N° Casa--';
   id_casa_selected:string='';
   
-  listaCasas: any[] = ['20', '21', '22','23','24','25','26','27','28','29','30'];
-  //
+  
+
+
+
   listaTipoGastoCasas: any[] = ['Gasto genrico', '´Sanciones'];
   listaDescripcionCasas: any[] = ['Agua', 'Luz y Electricidad'];
   

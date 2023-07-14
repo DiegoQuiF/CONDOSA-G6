@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request
 from src.database.db import db
 from src.services.get.getPredios import getPredios
+from src.services.get.getRegistroPredioEstado import getRegistroPredioEstado
 from src.services.get.getGastos import getGastos
 from src.services.get.getTablaCasas import getTablaCasas
 from src.services.get.getTipoGastos import getTipoGastos
@@ -9,8 +10,9 @@ from src.services.get.getPredio import getPredio
 from src.services.get.getGastosPredio import getGastosPredio
 from src.services.get.getGastoRegistrado import getGastosPredioI
 from src.services.post.postGastosPredio import postGastosPredio
+from src.services.post.postRegistroPredioEstado import postRegistroPredioEstado
 from src.services.put.putGastosPredio import putGastosPredio
-
+from src.services.put.putRegistroPredioEstado import putRegistroPredioEstado
 main = Blueprint('index_blueprint', __name__)
 
 @main.route('/getPredios')
@@ -100,7 +102,9 @@ def gastosPrediosI(id, idgasto):
             return jsonify({'message':"NOT FOUND", 'success':True})
     except Exception as error:
         return jsonify({'message':'ERROR', 'success':False})
-    
+
+
+
 @main.route('/insertarGastoPredio', methods = ['POST'])
 def insertar_gasto_predio():
     try:
@@ -130,3 +134,43 @@ def actualizar_gasto_predio():
     
     
 
+@main.route('/getRegistroPredioEstado')
+def registroPredioEstadoI():
+    try:
+        registros_predios_estados = getRegistroPredioEstado()
+        if(len(registros_predios_estados) > 0):
+            return jsonify({'registros_predios_estados':registros_predios_estados, 'message':"SUCCESS", 'success':True})
+        else:
+            return jsonify({'message':"NOT FOUND", 'success':True})
+    except Exception as error:
+        return jsonify({'message':'ERROR', 'success':False})
+
+@main.route('/insertarRegistroPredioEstado', methods = ['POST'])
+def insertar_registro_predio_estado():
+    try:
+        data = request.get_json()
+        id_predio = data['id_predio']
+        id_personal = data['id_personal']
+        id_estado = data['id_estado']
+        periodo = data['periodo']
+        if(postRegistroPredioEstado(id_predio, id_personal, id_estado, periodo)):
+            return jsonify({'message': data, 'success':True})
+        else:
+            return jsonify({'message':"NOT FOUND", 'success':True})
+    except Exception as error:
+        return jsonify({'message':'ERROR', 'success':False})
+    
+@main.route('/actualizarRegistroPredioEstado', methods = ['PUT'])
+def actualizar_registro_predio_estado():
+    try:
+        data = request.get_json()
+        id_estado = data['id_estado']
+        id_predio = data['id_predio']
+        periodo = data['periodo']
+        if(putRegistroPredioEstado(id_estado, id_predio,periodo)):
+            return jsonify({'message': data, 'success':True})
+        else:
+            return jsonify({'message':"NOT FOUND", 'success':True})
+    except Exception as error:
+        return jsonify({'message':'ERROR', 'success':False})
+    

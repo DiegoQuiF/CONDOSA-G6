@@ -48,8 +48,8 @@
             <div class="col-2" style="width: 30%;">
               <select name="listacasas" class="form-select" style="width: 100%; height: 40px;" [(ngModel)]="num_casa_selected">
                 <option>--N° Casa--</option>
-                <option *ngFor="let casa of listaCasas">
-                  {{casa}}
+                <option *ngFor="let casa of casasArray_IN">
+                  {{casa.numero}}
                 </option>
               </select>
             </div>
