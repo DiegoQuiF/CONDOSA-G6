@@ -22,7 +22,7 @@
               <div class="buscar">
                 <i class="uil uil-search"></i>
                 <input type="text" placeholder="Buscar Predio" [(ngModel)]="searchPredios" (keyup)="filterPredios()">
-                <span class="buscador-cerrar" (click)="closeComboboxPredios()">&times;</span>
+                <span class="buscador-cerrar" (click)="toggleActivePredios()">&times;</span>
               </div>
               <ul class="opciones">
                 <li *ngFor="let predio of filteredPredios" (click)="selectedPredio(predio)"
@@ -51,7 +51,7 @@
                 <i class="uil uil-search"></i>
                 <input type="text" placeholder="Periodo de la cuota" [(ngModel)]="searchPeriodos"
                   (keyup)="filterPeriodos()">
-                <span class="buscador-cerrar" (click)="closeComboboxPeriodos()">&times;</span>
+                <span class="buscador-cerrar" (click)="toggleActivePeriodos()">&times;</span>
               </div>
               <ul class="opciones1">
                 <li *ngFor="let periodos of filteredPeriodos" (click)="selectedPeriodo(periodos)"
@@ -165,12 +165,11 @@
 
 <div *ngIf="mostrarComp_RegistGastPredios">
   <app-registrar-gasto-predio (mostrarRegistroPredio_OUT)="cambiarMostrarRegistroPredio($event)"
-    (llamarFinalizarPredio_OUT)="finalizarRegistroPredio()" 
+    (llamarFinalizarPredio_OUT)="finalizarRegistroPredio()"
     [id_predio_IN]="id_selectedPredio"
+    [id_periodo_IN]="id_selectedPeriodo"
     [predio_IN]="selectedTextPredio"
     [periodo_IN]="selectedTextPeriodo"
-    [idPeriodo_IN]="idSelectedPeriodo"
-    [idPredioGastos_IN]="idSelectedPeriodo"
     ></app-registrar-gasto-predio>
 </div>
 <div *ngIf="mostrarComp_RegistGastCasa">

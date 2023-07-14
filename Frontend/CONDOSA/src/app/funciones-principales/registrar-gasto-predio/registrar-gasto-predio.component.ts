@@ -11,100 +11,70 @@ import { PredioGastosDet } from 'src/app/models/predio-gastos-det';
   styleUrls: ['./registrar-gasto-predio.component.css']
 })
 export class RegistrarGastoPredioComponent implements OnInit {
-
   constructor(private connBackend: ConnBackendService) { }
 
-  tipoGastoArray: Array<TipoGastos> = new Array<TipoGastos>();
-  //Atributos para el cmbobox
-  selectedItemTipoGasto: string = '--seleccione--';
-  isActiveTipoGasto: boolean = false;
+  tipoGastoArray:             Array<TipoGastos> = new Array<TipoGastos>();
+  selectedItemTipoGasto:      string = '--seleccione--';
+  isActiveTipoGasto:          boolean = false;
 
-  descripGastoArray: Array<DescripGastos> = new Array<DescripGastos>();
-  //Atributos para el cmbobox
-  selectedItemDescripGasto: string = '--seleccione--';
-  isActiveDescripGasto: boolean = false;
+  descripGastoArray:          Array<DescripGastos> = new Array<DescripGastos>();
+  selectedItemDescripGasto:   string = '--seleccione--';
+  isActiveDescripGasto:       boolean = false;
 
-  predioArray: Array<Predio> = new Array<Predio>();
-  nombrePredio: string = '-';
+  id_predio: string =         '';
+  id_periodo: string =        '';
+  id_gasto: string =          '';
+  periodo: string =           '';
+  nombrePredio: string =      '';
+  montoTotal: number =        0;
+  botonUR =                   'Registrar';
 
-
-
-  montoTotal: number = 0;
-  id_gasto: string = '';
-  id_personal: string = '';
-  id_predio_gastos: string = '';
-
-
-  id_predio: string = '';
-  periodo: string = '-';
   @Output() mostrarRegistroPredio_OUT = new EventEmitter<boolean>();
   @Output() llamarFinalizarPredio_OUT = new EventEmitter<string>();
-  @Input() id_predio_IN: string = "";
-  @Input() predio_IN: string = "";
-  @Input() periodo_IN: string = "";
-  @Input() idPeriodo_IN: string = "";
-  @Input() idPredioGastos_IN: string = "";
+  @Input() id_predio_IN:    string = "";
+  @Input() id_periodo_IN:   string = "";
+  @Input() predio_IN:       string = "";
+  @Input() periodo_IN:      string = "";
 
   gastosRegistradosArray: PredioGastosDet[] = [];
-
-  gatosRegistradosArray: any[] = [
-    { TipoGasto: 'Planilla (portería- áreas comunes- limpieza)', Monto: 305 },
-    { TipoGasto: 'Administración y contabilidad ', Monto: 660 },
-    { TipoGasto: 'Teléfono fijo e internet', Monto: 123 },
-    { TipoGasto: 'Planilla (portería- áreas comunes- limpieza)', Monto: 305 },
-    { TipoGasto: 'Administración y contabilidad ', Monto: 660 },
-    { TipoGasto: 'Teléfono fijo e internet', Monto: 123 },
-    { TipoGasto: 'Consumo de Luz Mensual SS-GG -Suministro 1695605', Monto: 123 },
-    { TipoGasto: 'Consumo de Luz Mensual BCI -Suministro 1695613', Monto: 123 }
-  ];
-
-  
 
   ngOnInit() {
     this.nombrePredio = this.predio_IN;
     this.periodo = this.periodo_IN;
     this.id_predio = this.id_predio_IN;
-    this.id_predio_gastos = this.idPredioGastos_IN
-    //CARGAMOS LOS TIPOS DE GASTO  EN UN ARRAY
+    this.id_periodo = this.id_periodo_IN;
     this.getTiposGastos_BD();
     this.getGastosDet_BD();
   }
 
-  set_mostrarRegistroPredio(item: boolean) {
-    console.log("se cambia a " + item + "desde el registrar predios");
-    this.mostrarRegistroPredio_OUT.emit(item);
-  }
 
-  finalizarRegistroPredio() {
-    //Aca iria el metodo para modificar la tabla ESTADO_REGISTRO_PREDIO de l BD
-    this.set_mostrarRegistroPredio(false);
-    this.llamarFinalizarPredio_OUT.emit();
-  }
-
-  selectedTipoGasto(item: TipoGastos): void {    //PERMITE SELECCIONAR EL TIPO DE GASTO Y CERRAR EL CBOX DE PREDIOS
+  //SELECCIONABLES (CBO) TIPO DE GASTO
+  selectedTipoGasto(item: TipoGastos): void {
     this.toggleActiveTipoGasto();
     if (this.selectedItemTipoGasto != item.descripcion) {
-      this.selectedItemTipoGasto = item.descripcion;
-      this.selectedItemDescripGasto = '--seleccione--';
-      this.montoTotal = 0;
+      this.selectedItemTipoGasto =      item.descripcion;
+      this.selectedItemDescripGasto =   '--seleccione--';
+      this.montoTotal =                 0;
       this.descripGastoArray.splice(0, this.descripGastoArray.length);
+      this.botonUR = 'Registrar';
     }
-
     this.getDescripcionesGasto_BD(item.id_tipo_gasto);
   }
 
-  toggleActiveTipoGasto(): void {   //PERMITE (PARA EL CBOX DE TIPO GASTOS) ACTIVAR SI ESTÁ DESACTIVADO, DESACTIVAR SI ESTÁ ACTIVADO
-    this.isActiveTipoGasto = !this.isActiveTipoGasto;
+  selectedDescripGasto(item: DescripGastos): void {
+    this.toggleActiveDescripGasto();
+    if (this.selectedItemDescripGasto != item.descripcion) {
+      this.montoTotal =                 0;
+      this.selectedItemDescripGasto =   item.descripcion;
+      this.id_gasto =                   item.id_gasto;
+      this.botonUR = 'Registrar';
+    }
   }
 
 
-  selectedDescripGasto(item: DescripGastos): void {    //PERMITE SELECCIONAR LA DESCRIPCION Y CERRAR SU RESPECTIVO CBOX
-    this.toggleActiveDescripGasto();
-    if (this.selectedItemDescripGasto != item.descripcion) {
-      this.montoTotal = 0;
-      this.selectedItemDescripGasto = item.descripcion;
-      this.id_gasto = item.id_gasto;
-    }
+  //ACTIVAR Y DESACTIVAR CBO
+  toggleActiveTipoGasto(): void {   //PERMITE (PARA EL CBOX DE TIPO GASTOS) ACTIVAR SI ESTÁ DESACTIVADO, DESACTIVAR SI ESTÁ ACTIVADO
+    this.isActiveTipoGasto = !this.isActiveTipoGasto;
   }
 
   toggleActiveDescripGasto(): void {   //PERMITE (PARA EL CBOX DE DESCRIPCION) ACTIVAR SI ESTÁ DESACTIVADO, DESACTIVAR SI ESTÁ ACTIVADO
@@ -117,22 +87,31 @@ export class RegistrarGastoPredioComponent implements OnInit {
   }
 
 
+  //REGISTRO DE GASTOS INDIVIDUALES DE LOS PREDIOS
   registrarGastoPredio() {
-    if(this.gastoRegistrado()){
-      alert('Este gasto ya se encuentra registrado...');
+    if(this.botonUR === 'Registrar'){
+      if(this.gastoRegistrado()){
+        alert('Este gasto ya se encuentra registrado...');
+      }
+      else{
+        this.connBackend.postGastosPredios(this.id_periodo, this.id_gasto, this.montoTotal.toString())
+        .subscribe(data => { console.log(data) }, error => console.log(error));
+        alert('Se ha registrado el gasto...');
+        this.getGastosDet_BD();
+      }
     }
     else{
-      this.connBackend.postGastosPredios(this.id_predio_gastos, this.id_gasto, this.montoTotal.toString())
-      .subscribe(data => { console.log(data) }, error => console.log(error));
-      alert('Se ha registrado el gasto...');
-      this.getGastosDet_BD();
+      alert('Boton cambiado')
+
+      //Acá se llama para hacer el put
+
+      this.botonUR = 'Registrar';
     }
   }
 
-
   gastoRegistrado() {
-    const gastoRegistrado = this.gastosRegistradosArray.filter((gasto) => gasto.id_gasto === this.id_gasto);
-    if(gastoRegistrado.length > 0){
+    const gastoRegistrado01 = this.gastosRegistradosArray.filter((gasto) => gasto.id_gasto === this.id_gasto);
+    if(gastoRegistrado01.length > 0){
       return true;
     }
     else{
@@ -140,24 +119,19 @@ export class RegistrarGastoPredioComponent implements OnInit {
     }
   }
 
-  existeTablaPredioGasto(periodo:string,id_predio:string):boolean{
-    
-    return true;
+
+  //MUESTRA Y FINALIZACIÓN DE ASIGNAR GASTOS AL PREDIO
+  set_mostrarRegistroPredio(item: boolean) {
+    this.mostrarRegistroPredio_OUT.emit(item);
   }
 
-  insertPredioGasto_BD(id_predio: string, id_personal: string, periodo: string, importe: number) {
-    /*Codigo para inserta una fila en la tabla PREDIO_GASTOS, 
-    recordar que esta tabla es para el total del gasto de un predio en un mes determinado, 
-    se debe crear una vez y el importe se debe ir incrementando conforme se ingresen PREDIO_GASTOS_DET */
-
+  finalizarRegistroPredio() {
+    this.set_mostrarRegistroPredio(false);
+    this.llamarFinalizarPredio_OUT.emit();
   }
 
 
-  insertGastoPredioDetalle_BD(id_predio_gastos: string, id_gasto: string, importe: number): void {
-    //Codigo para insertar una fila en la tabla PREDIO_GASTOS_DET, depende recordar que depende de la tabla PREDIO_GASTOS
-
-  }
-
+  //OBTENCIÓN DE DATOS MEDIANTE EL SERVICIO CONNBACKEND
   getTiposGastos_BD(): void {
     this.connBackend.getTipoGastos()
       .subscribe(data => {
@@ -168,7 +142,7 @@ export class RegistrarGastoPredioComponent implements OnInit {
   }
 
   getGastosDet_BD(): void {
-    this.connBackend.getGastosPredios(this.idPeriodo_IN)
+    this.connBackend.getGastosPredios(this.id_periodo)
       .subscribe(data => {
         console.log(data)
         this.gastosRegistradosArray = data.gastoPredioDetalle;
@@ -176,8 +150,8 @@ export class RegistrarGastoPredioComponent implements OnInit {
         error => console.log(error));
   }
 
-  getDescripcionesGasto_BD(item: string): void {
-    this.connBackend.getDescripGastos(item)
+  getDescripcionesGasto_BD(id_gasto_01: string): void {
+    this.connBackend.getDescripGastos(id_gasto_01)
       .subscribe(data => {
         console.log(data)
         this.descripGastoArray = data.descripGastosComunes;
@@ -186,11 +160,14 @@ export class RegistrarGastoPredioComponent implements OnInit {
   }
 
 
+  //EDICIÓN DE GASTOS
   editarGasto(item: PredioGastosDet){
     this.getTiposGastos_BD();
     this.selectedItemTipoGasto = item.des_gasto;
     this.getDescripcionesGasto_BD(item.id_tipo_gasto.toString());
     this.selectedItemDescripGasto = item.descripcion;
+    this.id_gasto = item.id_gasto;
     this.montoTotal = parseFloat(item.importe);
+    this.botonUR = 'Guardar';
   }
 }   

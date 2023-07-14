@@ -27,6 +27,7 @@ export class FuncionesPrincipalesComponent implements OnInit {
   searchPredios:        string = '';                              //Texto | Filtro de predios
   selectedTextPredio:   string = '--seleccione--';                //Texto | Predio seleccionado
   nomPresidente:        string = '--seleccione un predio--';      //Texto | Presidente de predio seleccionado
+  id_selectedPredio =   '';
   
   
   //VARIABLES DEL PERIODO
@@ -34,7 +35,7 @@ export class FuncionesPrincipalesComponent implements OnInit {
   filteredPeriodos:     Array<Gastos> = new Array<Gastos>();      //Array | Periodos filtrados
   searchPeriodos:       string = '';                              //Texto | Filtro de periodo
   selectedTextPeriodo:  string = '--seleccione--';                //Texto | Periodo seleccionado
-  idSelectedPeriodo:    string = '';                              //Texto | Id del periodo seleccionado
+  id_selectedPeriodo =  '';
 
 
   //VARIABLES DE CASAS
@@ -42,31 +43,34 @@ export class FuncionesPrincipalesComponent implements OnInit {
 
 
   //COLORES Y SOMBRAS DE COMPONENTES
-  finalizadoColor = getComputedStyle(document.documentElement).getPropertyValue('--finalizado-color');
-  no_finalizadoColor = getComputedStyle(document.documentElement).getPropertyValue('--no-finalizado-color');
-  finalizadoSombra = getComputedStyle(document.documentElement).getPropertyValue('--box-shadow-finalizado');
+  finalizadoColor =     getComputedStyle(document.documentElement).getPropertyValue('--finalizado-color');
+  no_finalizadoColor =  getComputedStyle(document.documentElement).getPropertyValue('--no-finalizado-color');
+  finalizadoSombra =    getComputedStyle(document.documentElement).getPropertyValue('--box-shadow-finalizado');
   no_finalizadoSombra = getComputedStyle(document.documentElement).getPropertyValue('--box-shadow-no-finalizado');
 
-
-
-  isActivePeriodo: boolean = false;
   
-  
-  
+  //SELECCIONABLE
+  isActivePeriodo:      boolean = false;
   isActivePredios:      boolean = false;
 
 
+  //REGISTRO DE GASTOS DE PREDIOS Y CASAS
+  mostrarComp_RegistGastPredios:  boolean = false;
+  mostrarComp_RegistGastCasa:     boolean = false;
   
 
-  
+  //ESTADO DE BOTONES Y CBO
+  bloquearPredios:          boolean = false;
+  bloquearPeriodos:         boolean = false;
+  bloquearRegistrarPredio:  boolean = false;
+  bloquearRegistrarCasas:   boolean = false;
 
 
-  
+  //ESTADOS DE REGISTRO
+  estadoRegistroPredioSelected: string = '';
 
-  
 
-  
-
+  //TABLAS TEMPORALES
   prediosEstadoArray: Array<RegistroPredioEstado> = new Array<RegistroPredioEstado>(
     new RegistroPredioEstado("1", "1", "finalizado", "Abr-23"),
     new RegistroPredioEstado("2", "1", "no finalizado", "May-23"),
@@ -92,95 +96,52 @@ export class FuncionesPrincipalesComponent implements OnInit {
     new RegistroCasaEstado("9", "9", "28", "no finalizado", "Jun-23"),
     new RegistroCasaEstado("10", "10", "29", "no finalizado", "Abr-23")
   );
-
-
+  
   
 
-  mostrarComp_RegistGastPredios: boolean = false;  //PERMITE MOSTRAR EL PANEL DE REGISTRO DE GASTOS DE PREDIO
-  mostrarComp_RegistGastCasa: boolean = false;   //PERMITE MOSTRAR EL PANEL DE REGISTRO DE GASTOS DE CASA
-
-  predioisSeleccionado: boolean = false;
-  periodoisSeleccionado: boolean = false;
-
-
-  bloquearPredios: boolean = false;
-  bloquearPeriodos: boolean = false;
-
-  bloquearRegistrarPredio: boolean = false;
-  bloquearRegistrarCasas: boolean = false;
-
-
-  estadoRegistroPredioSelected: string = '';
-  id_selectedPredio = '';
-
-  //AL INICIO SE OBTIENEN LOS PREDIOS PARA EL COMBO BOX
+  //INICIO DEL COMPONENTE
   ngOnInit(): void {
-
-    //OBTENEMOS LOS PREDIOS DE LA BD PARA EL CBOBOX
     this.getPredios_BD();
   }
 
 
-  //SOBRE LOS PREDIOS
-  selectedPredio(item: Predio): void {    //PERMITE SELECCIONAR EL PREDIO Y CERRAR EL CBOX DE PREDIOS
-    this.isActivePredios = false;//PARA EL SELECCIONADOR
-
-
-    this.selectedTextPredio = item.predio;
-    this.nomPresidente = item.responsable;
-    this.predioisSeleccionado = true;
-
-    if (item.id_predio == this.id_selectedPredio) {
-      this.periodoisSeleccionado = true;
-    } else {
-      this.casasArray.splice(0, this.casasArray.length);//VACIAMOS LA TABLA
-      this.id_selectedPredio = item.id_predio;
-      this.selectedTextPeriodo = '--seleccione--';
+  //OPERACIONES DE LOS SELECCIONADORES (CBO) DE PREDIO Y PERIODO
+  selectedPredio(item: Predio): void {
+    this.toggleActivePredios();
+    if(this.selectedTextPredio != item.predio) {
+      this.selectedTextPredio =   item.predio;
+      this.nomPresidente =        item.responsable;
+      this.id_selectedPredio =    item.id_predio;
+      
+      this.selectedTextPeriodo =  '--seleccione--';
+      this.id_selectedPeriodo =   '';
       this.getPeriodos_BD(item);
-      this.periodoisSeleccionado = false;
+      this.getCasas_BD(this.id_selectedPredio);
     }
+  }
 
+  selectedPeriodo(item: Gastos): void {
+    this.toggleActivePeriodos();
+    if(this.selectedTextPeriodo != item.periodo){
+      this.selectedTextPeriodo =  item.periodo;
+      this.id_selectedPeriodo =   item.id_predio_gastos;
+    }
   }
 
 
-  filterPredios(): void {   //PERMITE FILTRAR LOS PREDIOS CON LA BARRA DE BÚSQUEDA
+  //FILTROS DE BÚSQUEDA
+  filterPredios(): void {           //Filtrar predios búsqueda
     this.filteredPredios = this.predioArray.filter(predio => predio.predio.toLowerCase().startsWith(this.searchPredios.toLowerCase()))
-  }
-
-  closeComboboxPredios(): void {    //PERMITE DESACTIVAR EL CBOX DE PREDIOS
-    this.isActivePredios = false;
-  }
-
-  toggleActivePredios(): void {   //PERMITE (PARA EL CBOX DE PREDIOS) ACTIVAR SI ESTÁ DESACTIVADO, DESACTIVAR SI ESTÁ ACTIVADO
-    this.isActivePredios = !this.isActivePredios;
-  }
-
-
-  //MÉTODOS DE LOS PREDIOS
-  selectedPeriodo(item1: Gastos): void {            //Set de periodo
-    this.isActivePeriodo = false;
-
-    this.periodoisSeleccionado = true;
-    if (this.selectedTextPeriodo != item1.periodo) {
-      this.selectedTextPeriodo = item1.periodo;
-      this.idSelectedPeriodo = item1.id_predio_gastos;
-      this.casasArray.splice(0, this.casasArray.length);//VACIAMOS LA TABLA
-      this.actualizarTablaCasas(this.id_selectedPredio, this.selectedTextPeriodo);
-    }
-
-    if (this.verificarFinalizadoPredio()) {
-      this.estadoRegistroPredioSelected = 'finalizado'
-    } else {
-      this.estadoRegistroPredioSelected = 'no finalizado'
-    }
   }
 
   filterPeriodos(): void {   //PERMITE FILTRAR LOS PREDIOS CON LA BARRA DE BÚSQUEDA
     this.filteredPeriodos = this.gastoArray.filter(periodo => periodo.periodo.toLowerCase().startsWith(this.searchPeriodos.toLowerCase()))
   }
 
-  closeComboboxPeriodos(): void {    //PERMITE DESACTIVAR EL CBOX DE PREDIOS
-    this.isActivePeriodo = false;
+
+  //ACTIVE-DESACTIVE SELECTORES (CBO)
+  toggleActivePredios(): void {
+    this.isActivePredios = !this.isActivePredios;
   }
 
   toggleActivePeriodos(): void {   //PERMITE (PARA EL CBOX DE PREDIOS) ACTIVAR SI ESTÁ DESACTIVADO, DESACTIVAR SI ESTÁ ACTIVADO
@@ -193,37 +154,26 @@ export class FuncionesPrincipalesComponent implements OnInit {
   }
 
 
+  //CONTROLADORES DE REGISTROS DE GASTOS DE PREDIO Y CASA
   finalizarRegistroPredio() {
-    console.log("el numero por verificar es:" + this.id_selectedPredio + "y el periodo es: " + this.selectedTextPeriodo);
-    for (let i = 0; i < this.prediosEstadoArray.length; i++) {
-      console.log("el numero verificando es:" + this.prediosEstadoArray[i].id_predio);
-      if (this.prediosEstadoArray[i].id_predio == this.id_selectedPredio
-        && this.prediosEstadoArray[i].periodo == this.selectedTextPeriodo) {
-        this.prediosEstadoArray[i].estado = 'finalizado';
-        console.log("El estaod del id  " + this.id_selectedPredio + " ahora es: " + this.prediosEstadoArray[i].estado);
-        break;
-      }
+    const filteredArray = this.prediosEstadoArray.filter(predio => {
+      return predio.id_predio === this.id_selectedPredio &&
+             predio.periodo === this.selectedTextPeriodo;
+    });
+    if (filteredArray.length > 0) {
+      filteredArray[0].estado = 'finalizado';
     }
-
     this.estadoRegistroPredioSelected = 'finalizado';
-
-    //ACA SE COLOCA el Metodo para modificar la tabla ESTADO_REGISTRO_PREDIO de la BD
-
-    console.log("Se finaliza el registro del predio desde el principal");
   }
 
-
-  //ESTADOS DEL SUBRECUADRO DE REGISTRO DE GASTOS DEL PREDIO
   cambiarMostrarRegistroPredio(item: boolean) {
     if (this.selectedTextPredio !== '--seleccione--') {
       if (this.selectedTextPeriodo !== '--seleccione--') {
-
-        this.mostrarComp_RegistGastPredios = item;
-        this.bloquearPredios = !this.bloquearPredios;
-        this.bloquearPeriodos = !this.bloquearPeriodos;
-
-        this.bloquearRegistrarPredio = !this.bloquearRegistrarPredio;
-        this.bloquearRegistrarCasas = !this.bloquearRegistrarCasas;
+        this.mostrarComp_RegistGastPredios =    item;
+        this.bloquearPredios =                  !this.bloquearPredios;
+        this.bloquearPeriodos =                 !this.bloquearPeriodos;
+        this.bloquearRegistrarPredio =          !this.bloquearRegistrarPredio;
+        this.bloquearRegistrarCasas =           !this.bloquearRegistrarCasas;
       }
       else {
         alert('Seleccione un PERIODO.');
@@ -234,11 +184,8 @@ export class FuncionesPrincipalesComponent implements OnInit {
     }
   }
 
-  //Metodo para indicar que ya se termino de regitrar 
   finalizarRegistroCasa(num_casa: string) {
-    
     for (let i = 0; i < this.casasEstadoArray.length; i++) {
-      
       if (this.casasEstadoArray[i].num_casa == num_casa 
         && this.casasEstadoArray[i].periodo == this.selectedTextPeriodo) {
         this.casasEstadoArray[i].estado = 'finalizado';
@@ -249,18 +196,14 @@ export class FuncionesPrincipalesComponent implements OnInit {
     }
   }
 
-  //ESTADOS DEL SUBRECUADRO DE REGISTRO DE GASTOS DE LA CASA
   cambiarMostrarRegistroCasa(item: boolean) {
-    console.log("El estado del predioSeleccionado es:" + this.predioisSeleccionado)
-
-    if (this.predioisSeleccionado) {
-      if (this.periodoisSeleccionado) {
-        this.mostrarComp_RegistGastCasa = item;
-        this.bloquearPredios = !this.bloquearPredios;
-        this.bloquearPeriodos = !this.bloquearPeriodos;
-
-        this.bloquearRegistrarPredio = !this.bloquearRegistrarPredio;
-        this.bloquearRegistrarCasas = !this.bloquearRegistrarCasas;
+    if (this.selectedTextPredio !== '--seleccione--') {
+      if (this.selectedTextPeriodo !== '--seleccione--') {
+        this.mostrarComp_RegistGastCasa =       item;
+        this.bloquearPredios =                  !this.bloquearPredios;
+        this.bloquearPeriodos =                 !this.bloquearPeriodos;
+        this.bloquearRegistrarPredio =          !this.bloquearRegistrarPredio;
+        this.bloquearRegistrarCasas =           !this.bloquearRegistrarCasas;
       }
       else {
         alert('Seleccione un PERIODO.');
@@ -277,11 +220,9 @@ export class FuncionesPrincipalesComponent implements OnInit {
       "\nthis.id_selectedPredio es:" + this.selectedTextPeriodo
     )
     for (let i = 0; i < this.prediosEstadoArray.length; i++) {
-      
       if (this.prediosEstadoArray[i].id_predio == this.id_selectedPredio
         && this.prediosEstadoArray[i].periodo == this.selectedTextPeriodo
         && this.prediosEstadoArray[i].estado == 'finalizado') {
-
         //ACA SE COLOCA el Método para modificar la tabla ESTADO_REGISTRO_PREDIO de la BD
         console.log("Se devuelve true en verificarFinalizadoPredio()")
         return true;
@@ -295,7 +236,6 @@ export class FuncionesPrincipalesComponent implements OnInit {
       if (this.casasEstadoArray[i].num_casa == num_casa
         && this.casasEstadoArray[i].periodo == this.selectedTextPeriodo
         && this.casasEstadoArray[i].estado == 'finalizado') {
-
         //ACA SE COLOCA el Método para modificar la tabla ESTADO_REGISTRO_PREDIO de la BD
         return true;
       }
@@ -303,32 +243,28 @@ export class FuncionesPrincipalesComponent implements OnInit {
     return false;
   }
 
-  actualizarTablaCasas(id_predio: string, periodo: string): void {
-    if (this.predioisSeleccionado == true && this.periodoisSeleccionado == true) {
-      console.log("Se cumplen las condiciones para getCasas");
-      this.getCasas_BD(id_predio, periodo);
-    }
-  }
 
+  //OBTENCIÓN DE DATOS MEDIANTE EL SERVICIO CONNBACKEND
   getPredios_BD(): void {
     this.connBackend.getPredios()
       .subscribe(data => {
         console.log(data)
-        this.predioArray = data.predios;    //OBTIENE LOS PREDIOS EN predioArray
-        this.filteredPredios = this.predioArray;    //PASA LOS DATOS OBTENIDOS A UN SUBARRAY DE PREDIOS FILTRADOS filteredPredios
-      },
-        error => console.log(error));
-  }
-  getPeriodos_BD(item: Predio): void {
-    this.connBackend.getGastos(item.id_predio)
-      .subscribe(data => {
-        this.gastoArray = data.gastos;
-        this.filteredPeriodos = this.gastoArray;    //PASA LOS DATOS OBTENIDOS A UN SUBARRAY DE PREDIOS FILTRADOS filteredPredios
+        this.predioArray = data.predios;
+        this.filteredPredios = this.predioArray;
       },
         error => console.log(error));
   }
 
-  getCasas_BD(id_predio: string, periodo: string): void {
+  getPeriodos_BD(item: Predio): void {
+    this.connBackend.getGastos(item.id_predio)
+      .subscribe(data => {
+        this.gastoArray = data.gastos;
+        this.filteredPeriodos = this.gastoArray;
+      },
+        error => console.log(error));
+  }
+
+  getCasas_BD(id_predio: string): void {
     this.connBackend.getCasas(id_predio)
       .subscribe(
         data => {
