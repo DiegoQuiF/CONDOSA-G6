@@ -28,6 +28,7 @@ export class RegistrarGastoPredioComponent implements OnInit {
   nombrePredio: string =      '';
   montoTotal: number =        0;
   botonUR =                   'Registrar';
+  id_gasto_especifico: string = '';
 
   @Output() mostrarRegistroPredio_OUT = new EventEmitter<boolean>();
   @Output() llamarFinalizarPredio_OUT = new EventEmitter<string>();
@@ -101,11 +102,11 @@ export class RegistrarGastoPredioComponent implements OnInit {
       }
     }
     else{
-      alert('Boton cambiado')
-
-      //Acá se llama para hacer el put
-
+      this.connBackend.putGastosPredios(this.id_gasto_especifico, this.montoTotal.toString())
+      .subscribe(data => { console.log(data) }, error => console.log(error));
+      alert('Se ha actualizado el gasto...');
       this.botonUR = 'Registrar';
+      this.getGastosDet_BD();
     }
   }
 
@@ -168,6 +169,7 @@ export class RegistrarGastoPredioComponent implements OnInit {
     this.selectedItemDescripGasto = item.descripcion;
     this.id_gasto = item.id_gasto;
     this.montoTotal = parseFloat(item.importe);
+    this.id_gasto_especifico = item.id_predio_gastos_det;
     this.botonUR = 'Guardar';
   }
 }   

@@ -50,4 +50,12 @@ export class ConnBackendService {
     };
     return this.http.post(`${this.BASE_URL}/insertarGastoPredio`, data);
   }
+
+  putGastosPredios(id_pre_ga_det:string, imp:string){
+    const data = {
+      id_predio_gastos_det: id_pre_ga_det,
+      importe: imp
+    };
+    return this.http.put(`${this.BASE_URL}/actualizarGastoPredio`, data);
+  }
 }

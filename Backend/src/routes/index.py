@@ -9,6 +9,7 @@ from src.services.get.getPredio import getPredio
 from src.services.get.getGastosPredio import getGastosPredio
 from src.services.get.getGastoRegistrado import getGastosPredioI
 from src.services.post.postGastosPredio import postGastosPredio
+from src.services.put.putGastosPredio import putGastosPredio
 
 main = Blueprint('index_blueprint', __name__)
 
@@ -108,6 +109,19 @@ def insertar_gasto_predio():
         id_gasto = data['id_gasto']
         importe = data['importe']
         if(postGastosPredio(id_predio_gastos, id_gasto, importe)):
+            return jsonify({'message': data, 'success':True})
+        else:
+            return jsonify({'message':"NOT FOUND", 'success':True})
+    except Exception as error:
+        return jsonify({'message':'ERROR', 'success':False})
+    
+@main.route('/actualizarGastoPredio', methods = ['PUT'])
+def actualizar_gasto_predio():
+    try:
+        data = request.get_json()
+        id_predio_gastos_det = data['id_predio_gastos_det']
+        importe = data['importe']
+        if(putGastosPredio(id_predio_gastos_det, importe)):
             return jsonify({'message': data, 'success':True})
         else:
             return jsonify({'message':"NOT FOUND", 'success':True})
