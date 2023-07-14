@@ -70,7 +70,7 @@ export class ConnBackendService {
       id_estado : id_est,
       periodo : peri
     };
-    return this.http.post(`${this.BASE_URL}/insertarGastoPredio`, data);
+    return this.http.post(`${this.BASE_URL}/insertarRegistroPredioEstado`, data);
   }
 
   putRegistroPredioEstado(id_est:string, id_pred:string, peri:string){
